@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "35713359183ED5C000E7E8D1"
+               BlueprintIdentifier = "357137FC18456E7000E7E8D1"
                BuildableName = "CIU196Group1.app"
                BlueprintName = "CIU196Group1"
                ReferencedContainer = "container:CIU196Group1.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3571337D183ED5C000E7E8D1"
+               BlueprintIdentifier = "3571382018456E7100E7E8D1"
                BuildableName = "CIU196Group1Tests.xctest"
                BlueprintName = "CIU196Group1Tests"
                ReferencedContainer = "container:CIU196Group1.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "35713359183ED5C000E7E8D1"
+            BlueprintIdentifier = "357137FC18456E7000E7E8D1"
             BuildableName = "CIU196Group1.app"
             BlueprintName = "CIU196Group1"
             ReferencedContainer = "container:CIU196Group1.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "35713359183ED5C000E7E8D1"
+            BlueprintIdentifier = "357137FC18456E7000E7E8D1"
             BuildableName = "CIU196Group1.app"
             BlueprintName = "CIU196Group1"
             ReferencedContainer = "container:CIU196Group1.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "35713359183ED5C000E7E8D1"
+            BlueprintIdentifier = "357137FC18456E7000E7E8D1"
             BuildableName = "CIU196Group1.app"
             BlueprintName = "CIU196Group1"
             ReferencedContainer = "container:CIU196Group1.xcodeproj">
