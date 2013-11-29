@@ -212,7 +212,7 @@
         <!--NewGame View Controller-->
         <scene sceneID="PyY-4u-e95">
             <objects>
-                <viewController id="qTt-mj-Nwa" userLabel="NewGame View Controller" sceneMemberID="viewController">
+                <viewController id="qTt-mj-Nwa" userLabel="NewGame View Controller" customClass="NewGameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XEn-Wv-lCl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -249,6 +249,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Game" id="bd0-3E-Qiq"/>
+                    <connections>
+                        <outlet property="sessionIdLabel" destination="mjH-02-OPm" id="l9R-ax-Sau"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLN-9D-Enb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
