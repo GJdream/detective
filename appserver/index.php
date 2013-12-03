@@ -1,17 +1,22 @@
 <?php
 
-function addUser($username) {
-	echo "hello ".$username;
-
-	$con = mysqli_connect("localhost", "root", "root");
-}
-
 function newSession() {
 	$con = mysqli_connect("localhost", "root", "root");
 	if ($con) {
 		mysqli_select_db($con, "appserver");
-		if ($result = $con->query("INSERT INTO sessions(userID) VALUES (0);")) {
-			echo ($con->insert_id);
+
+		
+		$result = $con->query("SELECT max(sessionID) from sessions");
+
+		$row = $result->fetch_array();
+		$maxsession = $row[0];
+		$newsession = $maxsession+1;
+
+		if ($con->query("INSERT INTO sessions(sessionID) VALUES(".$newsession.")")) {
+			echo $newsession;
+		}
+		else {
+			echo $con->error;
 		}
 	}
 
@@ -26,36 +31,51 @@ function addPlayerToSession($sessionid) {
 	if ($con) {
 		mysqli_select_db($con, "appserver");
 
-		$query = "SELECT * FROM sessions WHERE sessionID = ".$sessionid;
-		if ($stmt = $con->prepare($query)) {
+		$stmt = $con->prepare("SELECT sessionID, userID FROM sessions WHERE sessionID = (?)");
+		$stmt->bind_param("i", $sessionid);
+		$stmt->execute();
+		$stmt->bind_result($sessionID, $userID);
 
-    		/* execute query */
-    		$stmt->execute();
+		    /* fetch values */
+    	while ($stmt->fetch()) {
+        	//printf("%d %d\n", $sessionID, $userID);
+    	}
+    	$newUserID = $userID + 1;
+    	
+    	$stmt = $con->prepare("INSERT INTO sessions(sessionID, userID) VALUES (?,?)");
+		$stmt->bind_param("ii", $sessionid, $newUserID);
+		$stmt->execute();
 
-    		/* store result */
-   			 $stmt->store_result();
-
-    		 //printf("Number of rows: %d.\n", $stmt->num_rows);
-    		 $newUserID = $stmt->num_rows;
-    		 echo $newUserID;
-		}
-		$query = "INSERT INTO sessions VALUES (".$sessionid.",".$newUserID.")";
-		if ($stmt = $con->prepare($query)) {
-    		/* execute query */
-    		$stmt->execute();
-
-    		/* store result */
-   			 $stmt->store_result();
-
-   			 echo $stmt->error_no();
-		}
-		    		/* close statement */
-   		 $stmt->close();
+   		$stmt->close();
 	}
+	echo $newUserID;
 }
 
 
-addPlayerToSession(14);
+if (!isset($_GET["action"]))
+{
+	echo "No action specified";
+	exit;
+}
+
+$action = $_GET["action"];
+if ($action == "newsession") {
+	newSession();
+}
+else if ($action == "addplayer") {
+	if (!isset($_GET["sessionid"]))
+	{
+		echo "sessionid is not set";
+		exit;
+	}
+
+	$sessionid = (int)$_GET["sessionid"];
+	addPlayerToSession($sessionid);
+}
+else {
+	echo "invalid action";
+	exit;
+}
 
 
 
