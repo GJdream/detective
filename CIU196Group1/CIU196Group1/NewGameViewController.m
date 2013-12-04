@@ -30,7 +30,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     SessionController *sc = [[SessionController alloc] init];
-    self.sessionIdLabel.text = [NSString stringWithFormat:@"ID: %d", sc.getSessionID];
+    self.sessionIdLabel.text = [NSString stringWithFormat:@"ID: %d", sc.getNewSessionID];
+    //NSUInteger res = [sc addPlayerToSession:14];
+    //NSLog(@"result %d", res);
 }
 
 - (void)didReceiveMemoryWarning

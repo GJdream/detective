@@ -10,8 +10,10 @@
 
 @interface SessionController : NSObject
 
-@property NSData *response;
+- (NSInteger) getNewSessionID;
 
-- (NSUInteger) getSessionID;
+- (NSInteger) addPlayerToSession: (NSInteger) sessionID;
+
+- (NSInteger) getNumberOfPlayersInSession: (NSInteger) sessionID;
 
 @end
