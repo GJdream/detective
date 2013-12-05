@@ -72,6 +72,30 @@
     }
 }
 
+// Retrieves the number of players in the session with the given sessionID. If the server responded with an error, the error message is printed and -1 is returned.
+- (NSInteger) getNumberOfPlayersInSession:(NSInteger)sessionID {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost/appserver?action=getnumberofplayers&sessionid=%d", sessionID]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    
+    @try {
+        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
+        return [responseStr integerValue];
+    }
+    @catch (NSException *e) {
+        NSLog(@"Server returned exception: %@", responseStr);
+        return -1;
+    }
+}
 
 
 @end
