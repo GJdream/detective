@@ -8,15 +8,15 @@
 
 #import "MenuViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "AppDelegate.h"
+#import "Game.h"
 
 @interface MenuViewController ()
-@property (strong, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
+@property (strong, nonatomic) IBOutlet UIImageView *userProfileImage;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-
 @end
 
 @implementation MenuViewController
+@synthesize userProfileImage, userNameLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,39 +33,48 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(sessionStateChanged:)
-     name:SCSessionStateChangedNotification
-     object:nil];
+    
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self
+//     selector:@selector(sessionStateChanged:)
+//     name:SCSessionStateChangedNotification
+//     object:nil];
+    
+    counter++;
+    NSLog(@"setting will appear: %d times",counter);
 }
 
-- (void)sessionStateChanged:(NSNotification*)notification {
-    [self populateUserDetails];
-}
+//- (void)sessionStateChanged:(NSNotification*)notification {
+//    [self populateUserDetails];
+//}
+//
+//- (void)populateUserDetails
+//{
+//    if (FBSession.activeSession.isOpen) {
+//        [[FBRequest requestForMe] startWithCompletionHandler:
+//         ^(FBRequestConnection *connection,
+//           NSDictionary<FBGraphUser> *user,
+//           NSError *error) {
+//             if (!error) {
+//                 userNameLabel.text = user.name;
+//                 //userProfileImage.profileID = user.id;
+//             }
+//         }];
+//    }
+//}
 
-- (void)populateUserDetails
-{
-    if (FBSession.activeSession.isOpen) {
-        [[FBRequest requestForMe] startWithCompletionHandler:
-         ^(FBRequestConnection *connection,
-           NSDictionary<FBGraphUser> *user,
-           NSError *error) {
-             if (!error) {
-                 self.userNameLabel.text = user.name;
-                 self.userProfileImage.profileID = user.id;
-             }
-         }];
-    }
-}
-
-
+static int counter = 0;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if (FBSession.activeSession.isOpen) {
-        [self populateUserDetails];
-    }
+    
+    userNameLabel.text = [[[Game sharedGame] myself] name];
+    [userProfileImage setImage:[[[Game sharedGame] myself] image]];
+    
+    
+//    if (FBSession.activeSession.isOpen) {
+//        [self populateUserDetails];
+//    }
 }
 
 - (void)didReceiveMemoryWarning

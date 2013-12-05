@@ -9,8 +9,13 @@
 #import "SettingViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "Game.h"
+
 @interface SettingViewController ()
 - (IBAction)logoutButtonWasPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIButton *logoutButton;
+- (IBAction)resetButtonPressed:(id)sender;
 
 @end
 
@@ -31,6 +36,24 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    if (FBSession.activeSession.isOpen) {
+        // To-do, show logout button
+        [self.loginButton setEnabled:NO];
+        [self.loginButton setHidden:TRUE];
+        [self.logoutButton setEnabled:YES];
+        [self.logoutButton setHidden:FALSE];
+        
+    } else {
+        // No, show the login button
+        [self.loginButton setEnabled:YES];
+        [self.loginButton setHidden:FALSE];
+        [self.logoutButton setEnabled:NO];
+        [self.logoutButton setHidden:TRUE];
+
+        //        [[self.window rootViewController] performSegueWithIdentifier:@"loginSegue" sender:(id)[self.window rootViewController]];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -38,7 +61,11 @@
 }
 
 - (IBAction)logoutButtonWasPressed:(id)sender {
+    //NSLog(@"this did run");
     [FBSession.activeSession closeAndClearTokenInformation];
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.view setNeedsDisplay];
+}
+- (IBAction)resetButtonPressed:(id)sender {
+    [[[Game sharedGame] myself] reset];
 }
 @end

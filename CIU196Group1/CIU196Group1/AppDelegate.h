@@ -9,11 +9,11 @@ extern NSString *const SCSessionStateChangedNotification;
 
 #import <UIKit/UIKit.h>
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 - (void)openSession;
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		352AF0061848948400C7C14D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 352AF0051848948400C7C14D /* Player.m */; };
+		352AF00A1848A01E00C7C14D /* NewGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352AF0091848A01E00C7C14D /* NewGameViewController.m */; };
+		352AF00D184A3D9000C7C14D /* PlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352AF00C184A3D9000C7C14D /* PlayerCell.m */; };
+		352AF012184B8FED00C7C14D /* alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 352AF011184B8FED00C7C14D /* alien.png */; };
+		352AF015184FB40900C7C14D /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 352AF014184FB40900C7C14D /* Game.m */; };
+		354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 354A2293184FDD2200B57DD3 /* ProfileViewController.m */; };
 		3571380118456E7000E7E8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380018456E7000E7E8D1 /* Foundation.framework */; };
 		3571380318456E7000E7E8D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380218456E7000E7E8D1 /* CoreGraphics.framework */; };
 		3571380518456E7000E7E8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380418456E7000E7E8D1 /* UIKit.framework */; };
@@ -37,6 +43,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		352AF0041848948400C7C14D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		352AF0051848948400C7C14D /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		352AF0081848A01E00C7C14D /* NewGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameViewController.h; sourceTree = "<group>"; };
+		352AF0091848A01E00C7C14D /* NewGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameViewController.m; sourceTree = "<group>"; };
+		352AF00B184A3D9000C7C14D /* PlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCell.h; sourceTree = "<group>"; };
+		352AF00C184A3D9000C7C14D /* PlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCell.m; sourceTree = "<group>"; };
+		352AF011184B8FED00C7C14D /* alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alien.png; path = images/alien.png; sourceTree = "<group>"; };
+		352AF013184FB40900C7C14D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		352AF014184FB40900C7C14D /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		354A2292184FDD2200B57DD3 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		354A2293184FDD2200B57DD3 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		357137FD18456E7000E7E8D1 /* CIU196Group1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIU196Group1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3571380018456E7000E7E8D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3571380218456E7000E7E8D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,8 +114,34 @@
 				3571389A18468A6C00E7E8D1 /* MenuViewController.m */,
 				3571389C184691D600E7E8D1 /* SettingViewController.h */,
 				3571389D184691D600E7E8D1 /* SettingViewController.m */,
+				352AF0081848A01E00C7C14D /* NewGameViewController.h */,
+				352AF0091848A01E00C7C14D /* NewGameViewController.m */,
+				354A2292184FDD2200B57DD3 /* ProfileViewController.h */,
+				354A2293184FDD2200B57DD3 /* ProfileViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		352AF0071848948A00C7C14D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				352AF0041848948400C7C14D /* Player.h */,
+				352AF0051848948400C7C14D /* Player.m */,
+				352AF00B184A3D9000C7C14D /* PlayerCell.h */,
+				352AF00C184A3D9000C7C14D /* PlayerCell.m */,
+				352AF013184FB40900C7C14D /* Game.h */,
+				352AF014184FB40900C7C14D /* Game.m */,
+			);
+			name = Classes;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		352AF010184B8FD800C7C14D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				352AF011184B8FED00C7C14D /* alien.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		357137F418456E7000E7E8D1 = {
@@ -138,7 +181,9 @@
 				3571380F18456E7100E7E8D1 /* AppDelegate.h */,
 				3571381018456E7100E7E8D1 /* AppDelegate.m */,
 				3571381218456E7100E7E8D1 /* Main.storyboard */,
+				352AF0071848948A00C7C14D /* Classes */,
 				352AF0031847F89300C7C14D /* ViewControllers */,
+				352AF010184B8FD800C7C14D /* Images */,
 				3571381B18456E7100E7E8D1 /* Images.xcassets */,
 				3571380718456E7000E7E8D1 /* Supporting Files */,
 			);
@@ -254,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3571381C18456E7100E7E8D1 /* Images.xcassets in Resources */,
+				352AF012184B8FED00C7C14D /* alien.png in Resources */,
 				3571380B18456E7000E7E8D1 /* InfoPlist.strings in Resources */,
 				3571381418456E7100E7E8D1 /* Main.storyboard in Resources */,
 			);
@@ -274,10 +320,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				352AF015184FB40900C7C14D /* Game.m in Sources */,
 				3571381118456E7100E7E8D1 /* AppDelegate.m in Sources */,
 				3571380D18456E7100E7E8D1 /* main.m in Sources */,
 				35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */,
+				354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */,
 				3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */,
+				352AF00D184A3D9000C7C14D /* PlayerCell.m in Sources */,
+				352AF0061848948400C7C14D /* Player.m in Sources */,
+				352AF00A1848A01E00C7C14D /* NewGameViewController.m in Sources */,
 				3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

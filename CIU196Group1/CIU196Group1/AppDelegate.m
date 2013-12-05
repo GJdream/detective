@@ -13,6 +13,12 @@ NSString *const SCSessionStateChangedNotification =
 
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "Game.h"
+
+@interface AppDelegate ()
+
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application
@@ -26,6 +32,8 @@ NSString *const SCSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
     [FBProfilePictureView class];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
@@ -42,15 +50,7 @@ NSString *const SCSessionStateChangedNotification =
     [self.window makeKeyAndVisible];
     
     
-    
-    // See if the app has a valid token for the current state.
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        // To-do, show logged in view
-        
-    } else {
-        // No, display the login page.
-        [self showLoginView];
-    }
+
     // Override point for customization after application launch.
     return YES;
 }
@@ -68,6 +68,7 @@ NSString *const SCSessionStateChangedNotification =
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[Game sharedGame] saveChanges];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -84,9 +85,13 @@ NSString *const SCSessionStateChangedNotification =
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[Game sharedGame] saveChanges];
     [FBSession.activeSession close];
 }
 
+
+FBProfilePictureView *fbImage;
+SEL getImageSelector;
 
 - (void)sessionStateChanged:(FBSession *)session
                       state:(FBSessionState) state
@@ -94,26 +99,30 @@ NSString *const SCSessionStateChangedNotification =
 {
     switch (state) {
         case FBSessionStateOpen: {
+            [[FBRequest requestForMe] startWithCompletionHandler:
+             ^(FBRequestConnection *connection,
+               NSDictionary<FBGraphUser> *user,
+               NSError *error) {
+                 if (!error) {
+                     [[[Game sharedGame] myself] setName:user.name];
+                     fbImage = [[FBProfilePictureView alloc] init];
+                     fbImage.profileID = user.id;
+                     getImageSelector = sel_registerName("getUserImageFromFBView");
+                     [self performSelector:getImageSelector withObject:nil afterDelay:1.0];
+                 }
+             }];
+            
             [[self.window rootViewController] dismissViewControllerAnimated:YES completion:nil];
-            //            UIViewController *topViewController =
-//            [self.navController topViewController];
-//            if ([[topViewController modalViewController]
-//                 isKindOfClass:[SCLoginViewController class]]) {
-//                [topViewController dismissModalViewControllerAnimated:YES];
-//            }
         }
             break;
         case FBSessionStateClosed:
         case FBSessionStateClosedLoginFailed:
             // Once the user has logged in, we want them to
             // be looking at the root view.
-            //[self.navController popToRootViewControllerAnimated:NO];
             [[self.window rootViewController] dismissViewControllerAnimated:NO completion:nil];
             
             [FBSession.activeSession closeAndClearTokenInformation];
-            
-            [self showLoginView];
-            break;
+                        break;
         default:
             break;
     }
@@ -133,6 +142,8 @@ NSString *const SCSessionStateChangedNotification =
     }
 }
 
+
+
 - (void)openSession
 {
     [FBSession openActiveSessionWithReadPermissions:nil
@@ -144,16 +155,35 @@ NSString *const SCSessionStateChangedNotification =
      }];
 }
 
-- (void)showLoginView
+- (void)getUserImageFromFBView
 {
     
-    [[self.window rootViewController] performSegueWithIdentifier:@"loginSegue" sender:(id)[self.window rootViewController]];
+    UIImage *img = nil;
     
-//    UIViewController *topViewController = [self.navController topViewController];
-//    
-//    SCLoginViewController* loginViewController =
-//    [[SCLoginViewController alloc]initWithNibName:@"SCLoginViewController" bundle:nil];
-//    [topViewController presentViewController:loginViewController animated:NO completion:nil];
+    fbImage.pictureCropping = FBProfilePictureCroppingSquare;
+    
+    //1 - Solution to get UIImage obj
+    
+    for (NSObject *obj in [fbImage subviews]) {
+        if ([obj isMemberOfClass:[UIImageView class]]) {
+            UIImageView *objImg = (UIImageView *)obj;
+            img = objImg.image;
+            break;
+        }
+    }
+    
+    //2 - Solution to get UIImage obj
+    
+    //    UIGraphicsBeginImageContext(profileDP.frame.size);
+    //    [profileDP.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //    img = UIGraphicsGetImageFromCurrentImageContext();
+    //    UIGraphicsEndImageContext();
+    
+    //Here I'm setting image and it works 100% for me.
+    
+    [[[Game sharedGame] myself] setImage:img];
+    
 }
+
 
 @end
