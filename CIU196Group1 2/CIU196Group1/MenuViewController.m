@@ -39,6 +39,9 @@
 //     selector:@selector(sessionStateChanged:)
 //     name:SCSessionStateChangedNotification
 //     object:nil];
+    
+    counter++;
+    NSLog(@"setting will appear: %d times",counter);
 }
 
 //- (void)sessionStateChanged:(NSNotification*)notification {
@@ -60,7 +63,7 @@
 //    }
 //}
 
-
+static int counter = 0;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     

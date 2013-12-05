@@ -13,7 +13,6 @@
 		352AF012184B8FED00C7C14D /* alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 352AF011184B8FED00C7C14D /* alien.png */; };
 		352AF015184FB40900C7C14D /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 352AF014184FB40900C7C14D /* Game.m */; };
 		354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 354A2293184FDD2200B57DD3 /* ProfileViewController.m */; };
-		354A22971850ABA600B57DD3 /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 354A22961850ABA600B57DD3 /* SessionController.m */; };
 		3571380118456E7000E7E8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380018456E7000E7E8D1 /* Foundation.framework */; };
 		3571380318456E7000E7E8D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380218456E7000E7E8D1 /* CoreGraphics.framework */; };
 		3571380518456E7000E7E8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380418456E7000E7E8D1 /* UIKit.framework */; };
@@ -55,8 +54,6 @@
 		352AF014184FB40900C7C14D /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		354A2292184FDD2200B57DD3 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		354A2293184FDD2200B57DD3 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		354A22951850ABA600B57DD3 /* SessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionController.h; path = CIU196Group1/SessionController.h; sourceTree = "<group>"; };
-		354A22961850ABA600B57DD3 /* SessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionController.m; path = CIU196Group1/SessionController.m; sourceTree = "<group>"; };
 		357137FD18456E7000E7E8D1 /* CIU196Group1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIU196Group1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3571380018456E7000E7E8D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3571380218456E7000E7E8D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,8 +125,6 @@
 		352AF0071848948A00C7C14D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				354A22951850ABA600B57DD3 /* SessionController.h */,
-				354A22961850ABA600B57DD3 /* SessionController.m */,
 				352AF0041848948400C7C14D /* Player.h */,
 				352AF0051848948400C7C14D /* Player.m */,
 				352AF00B184A3D9000C7C14D /* PlayerCell.h */,
@@ -327,7 +322,6 @@
 			files = (
 				352AF015184FB40900C7C14D /* Game.m in Sources */,
 				3571381118456E7100E7E8D1 /* AppDelegate.m in Sources */,
-				354A22971850ABA600B57DD3 /* SessionController.m in Sources */,
 				3571380D18456E7100E7E8D1 /* main.m in Sources */,
 				35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */,
 				354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */,

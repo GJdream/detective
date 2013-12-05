@@ -2,21 +2,21 @@
 //  NewGameViewController.m
 //  CIU196Group1
 //
+//  Created by saqirltu on 29/11/13.
 //  Copyright (c) 2013 Eric Zhang, Robert Sebescen. All rights reserved.
 //
 
 #import "NewGameViewController.h"
+
 #import <FacebookSDK/FacebookSDK.h>
 
 #import "Player.h"
 #import "PlayerCell.h"
 
-#import "SessionController.h"
-
-
 @interface NewGameViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *playerTable;
 @property (strong, nonatomic) IBOutlet UILabel *sessionIDLabel;
+
 @end
 
 @implementation NewGameViewController
@@ -102,18 +102,8 @@ NSMutableArray *players;
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.playerTable reloadData];
-    self.sessionIDLabel.text = @"defaule_shit";
+    self.sessionIDLabel.text = @"testSTRING";
+}  // Dispose of any resources that can be recreated.
 
-    SessionController *sc = [[SessionController alloc] init];
-    self.sessionIDLabel.text = [NSString stringWithFormat:@"ID: %d", sc.getNewSessionID];
-    //NSUInteger res = [sc addPlayerToSession:14];
-    //NSLog(@"result %d", res);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
