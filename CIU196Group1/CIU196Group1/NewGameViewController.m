@@ -2,11 +2,16 @@
 //  NewGameViewController.m
 //  CIU196Group1
 //
+<<<<<<< HEAD
 //  Created by saqirltu on 29/11/13.
+=======
+//  Created by Robert Sebescen on 2013-11-29.
+>>>>>>> 9879aea09b90356c3c7645543cd7093abbfefb03
 //  Copyright (c) 2013 Eric Zhang, Robert Sebescen. All rights reserved.
 //
 
 #import "NewGameViewController.h"
+<<<<<<< HEAD
 
 #import <FacebookSDK/FacebookSDK.h>
 
@@ -16,11 +21,20 @@
 @interface NewGameViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *playerTable;
 @property (strong, nonatomic) IBOutlet UILabel *sessionIDLabel;
+=======
+#import "SessionController.h"
+
+@interface NewGameViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *sessionIdLabel;
+>>>>>>> 9879aea09b90356c3c7645543cd7093abbfefb03
 
 @end
 
 @implementation NewGameViewController
+<<<<<<< HEAD
 NSMutableArray *players;
+=======
+>>>>>>> 9879aea09b90356c3c7645543cd7093abbfefb03
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +49,7 @@ NSMutableArray *players;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+<<<<<<< HEAD
     
     // player database setupssssssssssss
     
@@ -106,4 +121,18 @@ NSMutableArray *players;
 }  // Dispose of any resources that can be recreated.
 
 
+=======
+    SessionController *sc = [[SessionController alloc] init];
+    self.sessionIdLabel.text = [NSString stringWithFormat:@"ID: %d", sc.getNewSessionID];
+    //NSUInteger res = [sc addPlayerToSession:14];
+    //NSLog(@"result %d", res);
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+>>>>>>> 9879aea09b90356c3c7645543cd7093abbfefb03
 @end

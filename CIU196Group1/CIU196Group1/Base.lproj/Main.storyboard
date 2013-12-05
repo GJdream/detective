@@ -275,8 +275,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Game" id="bd0-3E-Qiq"/>
                     <connections>
+<<<<<<< HEAD
                         <outlet property="playerTable" destination="CAu-P7-yoL" id="cZy-UZ-CLZ"/>
                         <outlet property="sessionIDLabel" destination="mjH-02-OPm" id="ZLY-7U-na5"/>
+=======
+                        <outlet property="sessionIdLabel" destination="mjH-02-OPm" id="l9R-ax-Sau"/>
+>>>>>>> 9879aea09b90356c3c7645543cd7093abbfefb03
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLN-9D-Enb" userLabel="First Responder" sceneMemberID="firstResponder"/>
