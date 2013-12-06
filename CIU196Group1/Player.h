@@ -12,8 +12,10 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) UIImage *image;
-@property (nonatomic, assign) int gameSession;
-@property (nonatomic, assign) int gameID;
+@property (nonatomic, assign) int gameSessionID;
+@property (nonatomic, assign) int inGameID;
+@property (nonatomic, assign) int role;
+@property (nonatomic, assign) bool isAlive;
 
 - (void) reset;
 

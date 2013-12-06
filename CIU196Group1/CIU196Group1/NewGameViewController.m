@@ -42,18 +42,17 @@ NSMutableArray *players;
     
     Player *player = [[Player alloc] init];
     player.name = @"Bill Evans";
-    player.gameID = 1;
+    player.gameSessionID = 1;
     [players addObject:player];
     
     player = [[Player alloc] init];
     player.name = @"Oscar Peterson";
-    player.gameID = 2;
+    player.gameSessionID = 2;
     [players addObject:player];
     
     player = [[Player alloc] init];
     player.name = @"Dave Brubeck";
-    
-    player.gameID = 3;
+    player.gameSessionID = 3;
     [players addObject:player];
 
     

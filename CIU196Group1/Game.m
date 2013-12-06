@@ -24,15 +24,6 @@ static Game* _sharedGame = nil;
 }
 
 
-//static Player* myself = nil;
-//
-//+(Player*)myself {
-//    @synchronized([Game class])
-//    {
-//        return myself;
-//    }
-//}
-
 - (id)init
 {
     self = [super init];

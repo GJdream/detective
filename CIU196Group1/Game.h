@@ -13,7 +13,6 @@
 @interface Game : NSObject
 
 +(Game*) sharedGame;
-//+(Player*)myself;
 -(BOOL)saveChanges;
 @property (nonatomic, strong) Player* myself;
 

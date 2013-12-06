@@ -60,12 +60,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (IBAction)logoutButtonWasPressed:(id)sender {
     //NSLog(@"this did run");
     [FBSession.activeSession closeAndClearTokenInformation];
-    [self.view setNeedsDisplay];
+    [self viewWillAppear:TRUE];
 }
+
 - (IBAction)resetButtonPressed:(id)sender {
     [[[Game sharedGame] myself] reset];
 }
+
 @end
