@@ -27,10 +27,10 @@
 		3571382518456E7100E7E8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380418456E7000E7E8D1 /* UIKit.framework */; };
 		3571382D18456E7100E7E8D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3571382B18456E7100E7E8D1 /* InfoPlist.strings */; };
 		3571382F18456E7100E7E8D1 /* CIU196Group1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571382E18456E7100E7E8D1 /* CIU196Group1Tests.m */; };
-		357138391845812E00E7E8D1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 357138381845812E00E7E8D1 /* FacebookSDK.framework */; };
 		35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35713894184679AC00E7E8D1 /* SCLoginViewController.m */; };
 		3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389A18468A6C00E7E8D1 /* MenuViewController.m */; };
 		3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389D184691D600E7E8D1 /* SettingViewController.m */; };
+		F647D6051850AE27006C6A5D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F647D6041850AE27006C6A5D /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,13 +74,13 @@
 		3571382A18456E7100E7E8D1 /* CIU196Group1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CIU196Group1Tests-Info.plist"; sourceTree = "<group>"; };
 		3571382C18456E7100E7E8D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3571382E18456E7100E7E8D1 /* CIU196Group1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIU196Group1Tests.m; sourceTree = "<group>"; };
-		357138381845812E00E7E8D1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		35713893184679AC00E7E8D1 /* SCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoginViewController.h; sourceTree = "<group>"; };
 		35713894184679AC00E7E8D1 /* SCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoginViewController.m; sourceTree = "<group>"; };
 		3571389918468A6C00E7E8D1 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		3571389A18468A6C00E7E8D1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		3571389C184691D600E7E8D1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		3571389D184691D600E7E8D1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		F647D6041850AE27006C6A5D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3571380318456E7000E7E8D1 /* CoreGraphics.framework in Frameworks */,
-				357138391845812E00E7E8D1 /* FacebookSDK.framework in Frameworks */,
+				F647D6051850AE27006C6A5D /* FacebookSDK.framework in Frameworks */,
 				3571380518456E7000E7E8D1 /* UIKit.framework in Frameworks */,
 				3571380118456E7000E7E8D1 /* Foundation.framework in Frameworks */,
 			);
@@ -171,7 +171,7 @@
 		357137FF18456E7000E7E8D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				357138381845812E00E7E8D1 /* FacebookSDK.framework */,
+				F647D6041850AE27006C6A5D /* FacebookSDK.framework */,
 				3571380018456E7000E7E8D1 /* Foundation.framework */,
 				3571380218456E7000E7E8D1 /* CoreGraphics.framework */,
 				3571380418456E7000E7E8D1 /* UIKit.framework */,
@@ -467,6 +467,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/saqirltu/Documents/FacebookSDK,
+					/Users/pgrobban/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CIU196Group1/CIU196Group1-Prefix.pch";
@@ -485,6 +486,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/saqirltu/Documents/FacebookSDK,
+					/Users/pgrobban/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CIU196Group1/CIU196Group1-Prefix.pch";
