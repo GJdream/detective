@@ -22,4 +22,6 @@
 
 - (void) startGame;
 
+- (bool) isChanged;
+
 @end

@@ -189,5 +189,28 @@ static NSString * ip = @"http://95.80.44.85/";
     NSLog(@"response from server: %@", responseStr);
 }
 
+- (bool) isChanged {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=ischanged&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    @try {
+        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
+        return [responseStr boolValue];
+    }
+    @catch (NSException *e) {
+        NSLog(@"Server returned exception: %@", responseStr);
+        return -1;
+    }
+}
+
 
 @end

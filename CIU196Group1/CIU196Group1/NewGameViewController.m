@@ -69,18 +69,18 @@ BOOL timerActive = TRUE;
     
     
     //TODELETE: following are a dummy list for test purpose
-    NSMutableArray *dummyplayers;
-    dummyplayers = [NSMutableArray arrayWithCapacity:20];
-    Player *player = [[Player alloc] init];
-    player.name = @"Bill Evans";
-    [dummyplayers addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Oscar Peterson";
-    [dummyplayers addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Dave Brubeck";
-    [dummyplayers addObject:player];
-    [[Game sharedGame] setHeroes: dummyplayers];
+//    NSMutableArray *dummyplayers;
+//    dummyplayers = [NSMutableArray arrayWithCapacity:20];
+//    Player *player = [[Player alloc] init];
+//    player.name = @"Bill Evans";
+//    [dummyplayers addObject:player];
+//    player = [[Player alloc] init];
+//    player.name = @"Oscar Peterson";
+//    [dummyplayers addObject:player];
+//    player = [[Player alloc] init];
+//    player.name = @"Dave Brubeck";
+//    [dummyplayers addObject:player];
+//    [[Game sharedGame] setHeroes: dummyplayers];
     
     
     
@@ -141,23 +141,24 @@ BOOL timerActive = TRUE;
         
         //RobertTODO: i just came up with a new thought, you can add a statusChange flag to player table, when game status changed on the server, this flag is set to true to all players in the session. so we can resue in sc.status function. remember to reset the statusChagne flag into false at the end of sc.status function, better to do it on server side due to atomicity concern
         
-//        if(sc.statusChange){
-//            [[Game sharedGame] addHero: sc.fetchNewPlayer];
-//        or
-//            [[Game sharedGame] setHeroes: sc.status];
-//        }
+        if([[[Game sharedGame] sessionController] isChanged]){
+            
+           // [[Game sharedGame] setHeroes: sc.status];
+            
+            //Dummy
+            Player *ahero = [[Player alloc] init];
+            [[Game sharedGame] addHero: ahero];
+        }
 
         
-        //TODELETE: following 3 lines are dummy data for test purpose
-        NSLog(@"checking the server");
-        Player *ahero = [[Player alloc] init];
-        [[Game sharedGame] addHero: ahero];
+        
+        
         
         
         counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
         [self.playerTable reloadData];
 
-        //RobertTODO: add this method returns the ready flag of the game session
+        //RobertDone: add this method returns the ready flag of the game session
         if([[[Game sharedGame] sessionController] isGameReady]){
             [[Game sharedGame] setWaiting:FALSE];
             [self enterGame];
