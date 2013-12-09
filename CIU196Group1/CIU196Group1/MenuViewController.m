@@ -13,6 +13,13 @@
 @interface MenuViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *userProfileImage;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+
+@property (strong, nonatomic) IBOutlet UIButton *resumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *newgameButton;
+@property (strong, nonatomic) IBOutlet UIButton *joingameButton;
+@property (strong, nonatomic) IBOutlet UIButton *quitgameButton;
+- (IBAction)quitButtonClicked:(id)sender;
+
 @end
 
 @implementation MenuViewController
@@ -69,9 +76,30 @@
     [userProfileImage setImage:[[[Game sharedGame] myself] image]];
     
     
-//    if (FBSession.activeSession.isOpen) {
-//        [self populateUserDetails];
-//    }
+    if ([[Game sharedGame] sessionID]) {
+        // if already in a game
+        [self.newgameButton setEnabled:NO];
+        [self.newgameButton setHidden:TRUE];
+        [self.resumeButton setEnabled:YES];
+        [self.resumeButton setHidden:FALSE];
+        [self.joingameButton setEnabled:NO];
+        [self.joingameButton setHidden:TRUE];
+        [self.quitgameButton setEnabled:YES];
+        [self.quitgameButton setHidden:FALSE];
+
+        
+    } else {
+        // if not in any game
+        [self.newgameButton setEnabled:YES];
+        [self.newgameButton setHidden:FALSE];
+        [self.resumeButton setEnabled:NO];
+        [self.resumeButton setHidden:TRUE];
+        [self.joingameButton setEnabled:YES];
+        [self.joingameButton setHidden:FALSE];
+        [self.quitgameButton setEnabled:NO];
+        [self.quitgameButton setHidden:TRUE];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,4 +119,13 @@
     exit(0);
 }
 
+- (IBAction)quitButtonClicked:(id)sender {
+    //RobertTODO: remove a player from a game session, you should create a methos with no parameter, because you are able to get the sessonID by calling
+    //[[Game sharedGame] sessionID]
+        //and the players inGame id by calling
+    //[[[Game sharedGame] myself] inGameID]
+    
+    [[Game sharedGame] reset];
+    [self viewWillAppear: TRUE];
+}
 @end

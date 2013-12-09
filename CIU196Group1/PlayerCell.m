@@ -9,6 +9,7 @@
 #import "PlayerCell.h"
 
 @implementation PlayerCell
+@synthesize nameLabel,profileImage;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -9,13 +9,14 @@
 #import "Player.h"
 
 @implementation Player
+@synthesize name, image, inGameID, role, isAlive;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-//        self.name = @"User Noname";
-//        self.image = [UIImage imageNamed:@"alien.png"];
+        self.name = @"User Noname";
+        self.image = [UIImage imageNamed:@"alien.png"];
     }
     return self;
 }

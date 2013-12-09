@@ -8,19 +8,25 @@
 #import "NewGameViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-#import "Player.h"
 #import "PlayerCell.h"
-
+#import "Game.h"
 #import "SessionController.h"
 
 
 @interface NewGameViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *playerTable;
 @property (strong, nonatomic) IBOutlet UILabel *sessionIDLabel;
+@property (strong, nonatomic) IBOutlet UILabel *counterLabel;
+@property (strong, nonatomic) IBOutlet UIButton *startButton;
+- (IBAction)startButtonClicked:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *gameNavButton;
+
 @end
 
 @implementation NewGameViewController
-NSMutableArray *players;
+
+@synthesize sessionIDLabel, playerTable, counterLabel;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,33 +37,142 @@ NSMutableArray *players;
     return self;
 }
 
+
+NSTimer *timer;
+BOOL timerActive = TRUE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // player database setupssssssssssss
+
+    SessionController *sc = [[SessionController alloc] init];
     
-    players = [NSMutableArray arrayWithCapacity:20];
+    //if already joind a game, skip rejoining
+    if(![[Game sharedGame] sessionID]){
+        [[Game sharedGame] setSessionID: sc.getNewSessionID];
+        
+        //RobertTODO: when a player join a game, it also sends the player info to the server, so i want you to add a parameter with type of Player* (or at least a String name and a profile image) to addPlayerToSession method as called below
+        
+        //RobertTODO Update: you don't really need to add a parameter here, you can simply access the player own information from your SC code by calling [[Game sharedGame] myself]
+        
+        [[[Game sharedGame] myself] setInGameID: [sc addPlayerToSession:[[Game sharedGame] sessionID]]];
+
+    }
     
+    sessionIDLabel.text = [NSString stringWithFormat:@"ID: %lu", (unsigned long)[[Game sharedGame] sessionID]];
+    
+    
+    //load the current game status at once
+    //RobertTODO: return me a type of NSMutableArray* with Player as instance
+//    [[Game sharedGame] setHeroes: sc.status];
+    
+    
+    //TODELETE: following are a dummy list for test purpose
+    NSMutableArray *dummyplayers;
+    dummyplayers = [NSMutableArray arrayWithCapacity:20];
     Player *player = [[Player alloc] init];
     player.name = @"Bill Evans";
-    player.gameSessionID = 1;
-    [players addObject:player];
-    
+    [dummyplayers addObject:player];
     player = [[Player alloc] init];
     player.name = @"Oscar Peterson";
-    player.gameSessionID = 2;
-    [players addObject:player];
-    
+    [dummyplayers addObject:player];
     player = [[Player alloc] init];
     player.name = @"Dave Brubeck";
-    player.gameSessionID = 3;
-    [players addObject:player];
-
+    [dummyplayers addObject:player];
+    [[Game sharedGame] setHeroes: dummyplayers];
+    
+    
+    
+    counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
+    // start polling from the server
+    [self startUpdating];
     
 }
 
+- (void)startUpdating
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkServer:) userInfo:nil repeats:YES];
+}
+
+- (void)stopUpdating
+{
+    [timer invalidate];
+    timer = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    //disable the start button as default
+    [self.startButton setEnabled:FALSE];
+    [self.startButton setHidden:TRUE];
+    [self.gameNavButton setEnabled:FALSE];
+    
+    //if it's a host and the game status is waiting, show start button
+    if([[Game sharedGame] waiting]){
+        if ([[Game sharedGame] host] == [[[Game sharedGame] myself] inGameID]) {
+            [self.startButton setEnabled:TRUE];
+            [self.startButton setHidden:FALSE];
+        }
+    } else{
+        [self.gameNavButton setEnabled:TRUE];
+    }
+    
+    
+    [self.playerTable reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    timerActive = TRUE;
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    timerActive = FALSE;
+}
+
+// polling is done here
+- (void)checkServer : (id) sender{
+    if(timerActive && [[Game sharedGame] waiting]){
+        
+        
+        //RobertTODO: return a Player* which is newly added as called below, feel free to rename the method, if no changes, return nil. this is kinda depracated by following solution
+        
+        //or
+        
+        //RobertTODO: i just came up with a new thought, you can add a statusChange flag to player table, when game status changed on the server, this flag is set to true to all players in the session. so we can resue in sc.status function. remember to reset the statusChagne flag into false at the end of sc.status function, better to do it on server side due to atomicity concern
+        
+//        if(sc.statusChange){
+//            [[Game sharedGame] addHero: sc.fetchNewPlayer];
+//        or
+//            [[Game sharedGame] setHeroes: sc.status];
+//        }
+
+        
+        //TODELETE: following 3 lines are dummy data for test purpose
+        NSLog(@"checking the server");
+        Player *ahero = [[Player alloc] init];
+        [[Game sharedGame] addHero: ahero];
+        
+        
+        counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
+        [self.playerTable reloadData];
+
+        //RobertTODO: add this method returns the ready flag of the game session
+//        if([sc isReady]){
+//            [[Game sharedGame] setWaiting:FALSE];
+//            [self enterGame];
+//        }
+        
+        
+        NSLog(@"my inGameID is %d", [[[Game sharedGame] myself] inGameID]);
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 #pragma mark - Table View
 
@@ -77,42 +192,44 @@ NSMutableArray *players;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [players count];
+    return [[Game sharedGame] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PlayerCell *cell = (PlayerCell*)[tableView dequeueReusableCellWithIdentifier:@"PlayerCell"];
     
-    Player *player = players[indexPath.row];
+    Player *player = [[Game sharedGame] heroAtIndex:indexPath.row];
     
     cell.nameLabel.text = player.name;
-//    cell.profileImage.profileID = ?
+    cell.profileImage.image = player.image;
     
     return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 66;
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [self.playerTable reloadData];
-    self.sessionIDLabel.text = @"defaule_shit";
-
-    SessionController *sc = [[SessionController alloc] init];
-    self.sessionIDLabel.text = [NSString stringWithFormat:@"ID: %d", sc.getNewSessionID];
-    //NSUInteger res = [sc addPlayerToSession:14];
-    //NSLog(@"result %d", res);
+- (IBAction)startButtonClicked:(id)sender {
+    
+    //RobertTODO: create a method that sets the ready flag of the game session to TRUE
+    
+    //[sc startGame]
+    
+    [[Game sharedGame] setWaiting:FALSE];
+    [self enterGame];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) enterGame{
+    [self performSegueWithIdentifier:@"startGame" sender:self];
 }
 
 @end

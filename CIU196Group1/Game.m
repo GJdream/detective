@@ -10,9 +10,11 @@
 
 
 @implementation Game
-@synthesize myself = profileData;
+@synthesize myself = profileData, heroes, sessionID, host, waiting;
+
 
 static Game* _sharedGame = nil;
+
 +(Game*)sharedGame {
     @synchronized([Game class])
     {
@@ -29,6 +31,9 @@ static Game* _sharedGame = nil;
     self = [super init];
     if (self) {
         [self loadData];
+        heroes =[[NSMutableArray alloc] init];
+        host = 0;
+        waiting = TRUE;
     }
     return self;
 }
@@ -65,6 +70,43 @@ Player* profileData = nil;
 
 - (BOOL)saveChanges {
     return [NSKeyedArchiver archiveRootObject:self.myself toFile:[self profileStoreDataPath]];
+}
+
+- (void)reset{
+    sessionID = 0;
+}
+
+//
+// heroes managers
+//
+- (NSUInteger)count {
+    //TODO; here we have to assume maximum no more than 13 players
+    if ([heroes count] > 13) {
+        return 13;
+    }
+    return [heroes count];
+}
+
+- (Player* )heroAtIndex:(NSUInteger)index {
+    
+    return (Player* )[heroes objectAtIndex:index];
+}
+
+- (void)addHero:(Player *)ahero {
+    
+    [heroes addObject:ahero];
+}
+
+- (void)removeHero:(Player *)ahero {
+    
+    [heroes removeObject:ahero];
+    
+}
+
+- (void)removeBookAtIndex:(NSUInteger)index {
+    
+    [heroes removeObjectAtIndex:index];
+    
 }
 
 @end
