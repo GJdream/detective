@@ -100,7 +100,7 @@ static NSString * ip = @"http://95.80.44.85/";
     }
 }
 
-- (void) getPlayerData:(NSInteger)sessionID {
+- (NSDictionary *) getPlayerData:(NSInteger)sessionID {
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getplayerdata&sessionid=", sessionID]]                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData  timeoutInterval:10];
     //NSError *requestError;
     //NSURLResponse *urlResponse = nil;
@@ -118,10 +118,10 @@ static NSString * ip = @"http://95.80.44.85/";
         [self performSelectorOnMainThread:@selector(fetchedData:)
                                withObject:data waitUntilDone:YES];
     });
-    
+    return nil;
 }
 
-- (void)fetchedData:(NSData *)responseData {
+- (NSDictionary *)fetchedData:(NSData *)responseData {
     //parse out the json data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
@@ -129,8 +129,7 @@ static NSString * ip = @"http://95.80.44.85/";
                           
                           options:kNilOptions
                           error:&error];
-    
-    NSLog(@"%@", json);
+    return json;
 }
 
 

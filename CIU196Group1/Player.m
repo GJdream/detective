@@ -27,6 +27,11 @@
     self.image = [UIImage imageNamed:@"alien.png"];
 }
 
++ (Player*) parseData:(NSData *)json {
+    
+    return nil;
+}
+
 
 #define kEncodeKeyStringValue   @"kEncodeKeyStringValue"
 #define kEncodeKeyImageValue   @"kEncodeKeyImageValue"
