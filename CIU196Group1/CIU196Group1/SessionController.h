@@ -24,4 +24,6 @@
 
 - (bool) isChanged;
 
+- (void) changeCleared;
+
 @end

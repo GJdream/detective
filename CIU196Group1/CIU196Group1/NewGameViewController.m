@@ -143,7 +143,9 @@ BOOL timerActive = TRUE;
         
         if([[[Game sharedGame] sessionController] isChanged]){
             
-           // [[Game sharedGame] setHeroes: sc.status];
+//            [[Game sharedGame] setHeroes: sc.status];
+            
+            [[[Game sharedGame] sessionController] changeCleared];
             
             //Dummy
             Player *ahero = [[Player alloc] init];
