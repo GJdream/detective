@@ -213,7 +213,7 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 - (void) changeCleared {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=ischanged&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=changecleared&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
