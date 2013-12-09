@@ -10,7 +10,7 @@
 
 
 @implementation Game
-@synthesize myself = profileData, heroes, sessionID, host, waiting;
+@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController;
 
 
 static Game* _sharedGame = nil;
@@ -34,6 +34,7 @@ static Game* _sharedGame = nil;
         heroes =[[NSMutableArray alloc] init];
         host = 0;
         waiting = TRUE;
+        sessionController = [[SessionController alloc] init];
     }
     return self;
 }

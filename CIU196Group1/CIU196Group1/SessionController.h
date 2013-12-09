@@ -14,6 +14,12 @@
 
 - (NSInteger) addPlayerToSession: (NSInteger) sessionID;
 
-- (NSInteger) getNumberOfPlayersInSession: (NSInteger) sessionID;
+- (NSInteger) getNumberOfPlayersInSession;
+
+- (void) removePlayerFromSession;
+
+- (bool) isGameReady;
+
+- (void) startGame;
 
 @end

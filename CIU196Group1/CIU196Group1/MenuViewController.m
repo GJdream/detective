@@ -120,10 +120,12 @@
 }
 
 - (IBAction)quitButtonClicked:(id)sender {
-    //RobertTODO: remove a player from a game session, you should create a methos with no parameter, because you are able to get the sessonID by calling
+    //RobertDone: remove a player from a game session, you should create a methos with no parameter, because you are able to get the sessonID by calling
     //[[Game sharedGame] sessionID]
         //and the players inGame id by calling
     //[[[Game sharedGame] myself] inGameID]
+    
+    [[[Game sharedGame] sessionController] removePlayerFromSession];
     
     [[Game sharedGame] reset];
     [self viewWillAppear: TRUE];

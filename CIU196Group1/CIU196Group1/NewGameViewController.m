@@ -158,14 +158,15 @@ BOOL timerActive = TRUE;
         [self.playerTable reloadData];
 
         //RobertTODO: add this method returns the ready flag of the game session
-//        if([sc isReady]){
-//            [[Game sharedGame] setWaiting:FALSE];
-//            [self enterGame];
-//        }
+        if([[[Game sharedGame] sessionController] isGameReady]){
+            [[Game sharedGame] setWaiting:FALSE];
+            [self enterGame];
+        }
         
         
         NSLog(@"my inGameID is %d", [[[Game sharedGame] myself] inGameID]);
     }
+        
 }
 
 - (void)didReceiveMemoryWarning
@@ -220,9 +221,9 @@ BOOL timerActive = TRUE;
 
 - (IBAction)startButtonClicked:(id)sender {
     
-    //RobertTODO: create a method that sets the ready flag of the game session to TRUE
+    //RobertDone: create a method that sets the ready flag of the game session to TRUE
     
-    //[sc startGame]
+    [[[Game sharedGame] sessionController] startGame];
     
     [[Game sharedGame] setWaiting:FALSE];
     [self enterGame];

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SessionController.h"
 
 #import "Player.h"
 
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *heroes;
 @property NSInteger host;   //index of the host in heroes array
 @property BOOL waiting;     //true if the host is waiting in new players page
+@property SessionController* sessionController;
 
 
 //-(void)updateStatus: (NSMutableArray *)heroes;

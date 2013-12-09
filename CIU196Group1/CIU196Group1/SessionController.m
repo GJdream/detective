@@ -7,6 +7,7 @@
 //
 
 #import "SessionController.h"
+#import "Game.h"
 
 @implementation SessionController
 
@@ -76,8 +77,8 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 // Retrieves the number of players in the session with the given sessionID. If the server responded with an error, the error message is printed and -1 is returned.
-- (NSInteger) getNumberOfPlayersInSession:(NSInteger)sessionID {
- NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getnumberofplayers&sessionid=", sessionID]]
+- (NSInteger) getNumberOfPlayersInSession {
+ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getnumberofplayers&sessionid=", [[Game sharedGame] sessionID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -130,6 +131,62 @@ static NSString * ip = @"http://95.80.44.85/";
                           options:kNilOptions
                           error:&error];
     return json;
+}
+
+- (void) removePlayerFromSession {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=removeplayer&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    NSLog(@"response from server: %@", responseStr);
+}
+
+- (bool) isGameReady {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=sessionready&sessionid=", [[Game sharedGame] sessionID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    
+    @try {
+        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
+        return [responseStr boolValue];
+    }
+    @catch (NSException *e) {
+        NSLog(@"Server returned exception: %@", responseStr);
+        return -1;
+    }
+}
+
+- (void) startGame {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=startgame&sessionid=", [[Game sharedGame] sessionID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    NSLog(@"response from server: %@", responseStr);
 }
 
 

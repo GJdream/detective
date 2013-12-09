@@ -17,7 +17,6 @@
 		354A229A1854FC6900B57DD3 /* JoingameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 354A22991854FC6900B57DD3 /* JoingameViewController.m */; };
 		354A22A0185519E400B57DD3 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 354A229F185519E400B57DD3 /* StatusViewController.m */; };
 		354A22A318551A0000B57DD3 /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 354A22A218551A0000B57DD3 /* SecretViewController.m */; };
-		354A22A51855203D00B57DD3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
 		3571380118456E7000E7E8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380018456E7000E7E8D1 /* Foundation.framework */; };
 		3571380318456E7000E7E8D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380218456E7000E7E8D1 /* CoreGraphics.framework */; };
 		3571380518456E7000E7E8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3571380418456E7000E7E8D1 /* UIKit.framework */; };
@@ -34,6 +33,7 @@
 		35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35713894184679AC00E7E8D1 /* SCLoginViewController.m */; };
 		3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389A18468A6C00E7E8D1 /* MenuViewController.m */; };
 		3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389D184691D600E7E8D1 /* SettingViewController.m */; };
+		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */,
 				3571380318456E7000E7E8D1 /* CoreGraphics.framework in Frameworks */,
-				354A22A51855203D00B57DD3 /* FacebookSDK.framework in Frameworks */,
 				3571380518456E7000E7E8D1 /* UIKit.framework in Frameworks */,
 				3571380118456E7000E7E8D1 /* Foundation.framework in Frameworks */,
 			);
@@ -485,6 +485,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/saqirltu/Desktop/detective/CIU196Group1,
+					/Users/pgrobban/detective/CIU196Group1,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CIU196Group1/CIU196Group1-Prefix.pch";
@@ -503,6 +504,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/saqirltu/Desktop/detective/CIU196Group1,
+					/Users/pgrobban/detective/CIU196Group1,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CIU196Group1/CIU196Group1-Prefix.pch";
