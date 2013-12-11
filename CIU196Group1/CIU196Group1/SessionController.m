@@ -25,7 +25,7 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // Gets a new session ID from the server. if the server responds with an error, the error message is printed and -1 is returned.
 - (NSInteger) getNewSessionID {
-    [self getPlayerData:1];
+//    [self getPlayerData:1];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", ip, @"?action=newsession"]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
@@ -52,8 +52,8 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // Adds a player to an existing session. The method will connect to the server and retrieve an available player ID for that session. If the server responded with an error, the error message is printed and -1 is returned.
 // TODO: make server check if sessionID exists
-- (NSInteger) addPlayerToSession {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=addplayer&sessionid=", [[Game sharedGame] sessionID]]]
+- (NSInteger) addPlayerToSession : (NSInteger) sessionID{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=addplayer&sessionid=", sessionID]]
                                                          cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -103,7 +103,7 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // queries the server for player data given a sessionID. returns an NSArray of NSDictionaries, to be
 // parsed by Player.parseFromJSON
-- (NSMutableArray *) getPlayerData:(NSInteger)sessionID {
+- (NSMutableArray *) getPlayerData {
     
     /* something is broken with this
     __block NSData* data;
@@ -118,20 +118,23 @@ static NSString * ip = @"http://95.80.44.85/";
      */
     
     // create the URL we'd like to query
-    NSURL *myURL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getplayerdata&sessionid=", sessionID]];
+    NSURL *myURL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=getplayerdata&sessionid=", (long)[[Game sharedGame] sessionID]]];
                     
     // we'll receive raw data so we'll create an NSData Object with it
     NSData *myData = [[NSData alloc]initWithContentsOfURL:myURL];
                     
     id myJSON = [NSJSONSerialization JSONObjectWithData:myData options:NSJSONReadingMutableContainers error:nil];
 
-    NSMutableArray *jsonArray = (NSMutableArray *)myJSON;
-                    
-//    for (id element in jsonArray) {
-//                        NSLog(@"Element: %@", [element description]);            
-//                    }
+    NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
+    for (NSDictionary* playerData in myJSON) {
+        Player* player = [[Player alloc] init];
+        [player setName: playerData[@"playerName"]];
+        [player setRole: (NSInteger)playerData[@"playerRole"]];
+        [player setIsAlive: (bool)playerData[@"playerAlive"]];
+    }
+
     
-    return jsonArray;
+    return players;
 }
 
 - (NSDictionary *)fetchedData:(NSData *)responseData {
@@ -146,7 +149,7 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 - (void) removePlayerFromSession {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=removeplayer&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu%@%d", ip, @"?action=removeplayer&sessionid=", (long)[[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -162,7 +165,7 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 - (bool) isGameReady {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=sessionready&sessionid=", [[Game sharedGame] sessionID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=sessionready&sessionid=", (long)[[Game sharedGame] sessionID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -186,7 +189,7 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 - (void) startGame {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=startgame&sessionid=", [[Game sharedGame] sessionID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=startgame&sessionid=", (long)[[Game sharedGame] sessionID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -202,7 +205,7 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 - (bool) isChanged {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=ischanged&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu%@%d", ip, @"?action=ischanged&sessionid=", (long)[[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -225,7 +228,7 @@ static NSString * ip = @"http://95.80.44.85/";
 }
 
 - (void) changeCleared {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d%@%d", ip, @"?action=changecleared&sessionid=", [[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu%@%d", ip, @"?action=changecleared&sessionid=", (long)[[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     

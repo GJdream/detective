@@ -45,18 +45,16 @@ BOOL timerActive = TRUE;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-
-    SessionController *sc = [[SessionController alloc] init];
     
     //if already joind a game, skip rejoining
     if(![[Game sharedGame] sessionID]){
-        [[Game sharedGame] setSessionID: sc.getNewSessionID];
+        [[Game sharedGame] setSessionID: [[[Game sharedGame] sessionController] getNewSessionID]];
         
         //RobertTODO: when a player join a game, it also sends the player info to the server, so i want you to add a parameter with type of Player* (or at least a String name and a profile image) to addPlayerToSession method as called below
         
         //RobertTODO Update: you don't really need to add a parameter here, you can simply access the player own information from your SC code by calling [[Game sharedGame] myself]
         
-        [[[Game sharedGame] myself] setInGameID: [sc addPlayerToSession:[[Game sharedGame] sessionID]]];
+        [[[Game sharedGame] myself] setInGameID: [[[Game sharedGame] sessionController]  addPlayerToSession:[[Game sharedGame] sessionID]]];
 
     }
     
@@ -71,7 +69,8 @@ BOOL timerActive = TRUE;
 //        [players addObject: [Player parseFromJSON:playerData]];
 //    }
     
-    [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData:[[Game sharedGame] sessionID]]];
+    [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
+    [[[Game sharedGame] sessionController] changeCleared];
     
     
     //TODELETE: following are a dummy list for test purpose
@@ -150,12 +149,13 @@ BOOL timerActive = TRUE;
         if([[[Game sharedGame] sessionController] isChanged]){
             
 //            [[Game sharedGame] setHeroes: sc.status];
+            [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
             
             [[[Game sharedGame] sessionController] changeCleared];
             
-            //Dummy
-            Player *ahero = [[Player alloc] init];
-            [[Game sharedGame] addHero: ahero];
+//            //Dummy
+//            Player *ahero = [[Player alloc] init];
+//            [[Game sharedGame] addHero: ahero];
         }
 
         
@@ -209,7 +209,8 @@ BOOL timerActive = TRUE;
 {
     PlayerCell *cell = (PlayerCell*)[tableView dequeueReusableCellWithIdentifier:@"PlayerCell"];
     
-    Player *player = [[Game sharedGame] heroAtIndex:indexPath.row];
+    
+    Player *player = [[Game sharedGame] heroAtIndex:indexPath.row];    
     
     cell.nameLabel.text = player.name;
     cell.profileImage.image = player.image;
