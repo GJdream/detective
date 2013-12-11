@@ -52,8 +52,8 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // Adds a player to an existing session. The method will connect to the server and retrieve an available player ID for that session. If the server responded with an error, the error message is printed and -1 is returned.
 // TODO: make server check if sessionID exists
-- (NSInteger) addPlayerToSession: (NSInteger) sessionID {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=addplayer&sessionid=", sessionID]]
+- (NSInteger) addPlayerToSession {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=addplayer&sessionid=", [[Game sharedGame] sessionID]]]
                                                          cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -103,7 +103,7 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // queries the server for player data given a sessionID. returns an NSArray of NSDictionaries, to be
 // parsed by Player.parseFromJSON
-- (NSArray *) getPlayerData:(NSInteger)sessionID {
+- (NSMutableArray *) getPlayerData:(NSInteger)sessionID {
     
     /* something is broken with this
     __block NSData* data;
@@ -125,7 +125,7 @@ static NSString * ip = @"http://95.80.44.85/";
                     
     id myJSON = [NSJSONSerialization JSONObjectWithData:myData options:NSJSONReadingMutableContainers error:nil];
 
-    NSArray *jsonArray = (NSArray *)myJSON;
+    NSMutableArray *jsonArray = (NSMutableArray *)myJSON;
                     
 //    for (id element in jsonArray) {
 //                        NSLog(@"Element: %@", [element description]);            

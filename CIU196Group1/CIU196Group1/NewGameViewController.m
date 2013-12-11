@@ -65,13 +65,13 @@ BOOL timerActive = TRUE;
     
     //load the current game status at once
     //RobertDone: return me a type of NSMutableArray* with Player as instance
+//    
+//    NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
+//    for (NSDictionary* playerData in [[[Game sharedGame] sessionController] getPlayerData:[[Game sharedGame] sessionID]]) {
+//        [players addObject: [Player parseFromJSON:playerData]];
+//    }
     
-    NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
-    for (NSDictionary* playerData in [[[Game sharedGame] sessionController] getPlayerData:[[Game sharedGame] sessionID]]) {
-        [players addObject: [Player parseFromJSON:playerData]];
-    }
-    
-//    [[Game sharedGame] setHeroes: sc.status];
+    [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData:[[Game sharedGame] sessionID]]];
     
     
     //TODELETE: following are a dummy list for test purpose
