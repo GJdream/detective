@@ -9,14 +9,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408287482.094907"
+            filePath = "CIU196Group1/AppDelegate.m"
+            timestampString = "408273266.829586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-getPlayerData:"
-            landmarkType = "5">
+            startingLineNumber = "14"
+            endingLineNumber = "14">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,12 +23,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CIU196Group1/AppDelegate.m"
-            timestampString = "408273266.829586"
+            filePath = "CIU196Group1/SessionController.m"
+            timestampString = "408464022.231363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14">
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "-getPlayerData:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

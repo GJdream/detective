@@ -101,25 +101,37 @@ static NSString * ip = @"http://95.80.44.85/";
     }
 }
 
-- (NSDictionary *) getPlayerData:(NSInteger)sessionID {
-    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getplayerdata&sessionid=", sessionID]]                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData  timeoutInterval:10];
-    //NSError *requestError;
-    //NSURLResponse *urlResponse = nil;
+// queries the server for player data given a sessionID. returns an NSArray of NSDictionaries, to be
+// parsed by Player.parseFromJSON
+- (NSArray *) getPlayerData:(NSInteger)sessionID {
     
-    //NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    //NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    
-    //NSLog(@"%@", responseStr);
-    
-    dispatch_async(dispatch_get_global_queue(
-                                             DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* data = [NSData dataWithContentsOfURL:
+    /* something is broken with this
+    __block NSData* data;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        data = [NSData dataWithContentsOfURL:
                         [NSURL URLWithString: [NSString stringWithFormat:@"%@%@%d", ip, @"?action=getplayerdata&sessionid=", sessionID]]];
         [self performSelectorOnMainThread:@selector(fetchedData:)
                                withObject:data waitUntilDone:YES];
+        NSLog(@"aaa %@", data);
+
     });
-    return nil;
+     */
+    
+    // create the URL we'd like to query
+    NSURL *myURL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getplayerdata&sessionid=", sessionID]];
+                    
+    // we'll receive raw data so we'll create an NSData Object with it
+    NSData *myData = [[NSData alloc]initWithContentsOfURL:myURL];
+                    
+    id myJSON = [NSJSONSerialization JSONObjectWithData:myData options:NSJSONReadingMutableContainers error:nil];
+
+    NSArray *jsonArray = (NSArray *)myJSON;
+                    
+//    for (id element in jsonArray) {
+//                        NSLog(@"Element: %@", [element description]);            
+//                    }
+    
+    return jsonArray;
 }
 
 - (NSDictionary *)fetchedData:(NSData *)responseData {

@@ -13,13 +13,19 @@
 
 - (id)init
 {
+    return [self initWithName:@"User Noname" image:[UIImage imageNamed:@"alien.png"]];
+}
+
+-(id)initWithName:(NSString *)aName image:(UIImage*) anImage {
     self = [super init];
+
     if (self) {
-        self.name = @"User Noname";
-        self.image = [UIImage imageNamed:@"alien.png"];
+        self.name = aName;
+        self.image = anImage;
     }
     return self;
 }
+
 
 - (void)reset
 {
@@ -27,10 +33,14 @@
     self.image = [UIImage imageNamed:@"alien.png"];
 }
 
-+ (Player*) parseData:(NSData *)json {
-    
-    return nil;
+// parses a player from an NSDictionary (json object)
++ (Player*) parseFromJSON: (NSDictionary*) json {
+    Player* player = [[Player alloc] initWithName:json[@"playerName"] image:[UIImage imageNamed:@"alien.png"]];
+    player.role = (NSInteger)json[@"playerRole"];
+    player.isAlive = (bool)json[@"playerAlive"];
+    return player;
 }
+
 
 
 #define kEncodeKeyStringValue   @"kEncodeKeyStringValue"

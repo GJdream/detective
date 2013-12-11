@@ -32,8 +32,6 @@ NSString *const SCSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    
     [FBProfilePictureView class];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"

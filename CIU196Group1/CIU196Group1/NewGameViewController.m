@@ -64,7 +64,13 @@ BOOL timerActive = TRUE;
     
     
     //load the current game status at once
-    //RobertTODO: return me a type of NSMutableArray* with Player as instance
+    //RobertDone: return me a type of NSMutableArray* with Player as instance
+    
+    NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
+    for (NSDictionary* playerData in [[[Game sharedGame] sessionController] getPlayerData:[[Game sharedGame] sessionID]]) {
+        [players addObject: [Player parseFromJSON:playerData]];
+    }
+    
 //    [[Game sharedGame] setHeroes: sc.status];
     
     
@@ -139,7 +145,7 @@ BOOL timerActive = TRUE;
         
         //or
         
-        //RobertTODO: i just came up with a new thought, you can add a statusChange flag to player table, when game status changed on the server, this flag is set to true to all players in the session. so we can resue in sc.status function. remember to reset the statusChagne flag into false at the end of sc.status function, better to do it on server side due to atomicity concern
+        //RobertDone: i just came up with a new thought, you can add a statusChange flag to player table, when game status changed on the server, this flag is set to true to all players in the session. so we can resue in sc.status function. remember to reset the statusChagne flag into false at the end of sc.status function, better to do it on server side due to atomicity concern
         
         if([[[Game sharedGame] sessionController] isChanged]){
             

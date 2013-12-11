@@ -26,4 +26,6 @@
 
 - (void) changeCleared;
 
+- (NSArray*) getPlayerData: (NSInteger) sessionID;
+
 @end
