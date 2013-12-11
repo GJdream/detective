@@ -19,6 +19,4 @@
 
 - (void) reset;
 
-+ (Player*) parseFromJSON: (NSDictionary*) jsonString;
-
 @end

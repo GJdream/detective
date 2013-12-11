@@ -33,15 +33,6 @@
     self.image = [UIImage imageNamed:@"alien.png"];
 }
 
-// parses a player from an NSDictionary (json object)
-+ (Player*) parseFromJSON: (NSDictionary*) json {
-    Player* player = [[Player alloc] initWithName:json[@"playerName"] image:[UIImage imageNamed:@"alien.png"]];
-    player.role = (NSInteger)json[@"playerRole"];
-    player.isAlive = (bool)json[@"playerAlive"];
-    return player;
-}
-
-
 
 #define kEncodeKeyStringValue   @"kEncodeKeyStringValue"
 #define kEncodeKeyImageValue   @"kEncodeKeyImageValue"

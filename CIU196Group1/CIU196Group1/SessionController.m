@@ -128,9 +128,16 @@ static NSString * ip = @"http://95.80.44.85/";
     NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
     for (NSDictionary* playerData in myJSON) {
         Player* player = [[Player alloc] init];
-        [player setName: playerData[@"playerName"]];
-        [player setRole: (NSInteger)playerData[@"playerRole"]];
-        [player setIsAlive: (bool)playerData[@"playerAlive"]];
+        if(![playerData[@"playerName"] isKindOfClass:[NSNull class]])
+            [player setName: playerData[@"playerName"]];
+        else
+            [player setName: @"empty"];
+        
+        //        [player setRole: (NSInteger)playerData[@"playerRole"]];
+        //        [player setIsAlive: (bool)playerData[@"playerAlive"]];
+        
+        [players addObject:player];
+
     }
 
     
