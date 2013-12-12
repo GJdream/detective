@@ -54,6 +54,7 @@
     [[Game sharedGame] setSessionID: [self.sessionIDInput.text integerValue]];
     NSInteger inGameID = [[[Game sharedGame] sessionController] addPlayerToSession: [self.sessionIDInput.text integerValue]];
     
+    
     if(inGameID){
         [[[Game sharedGame] myself] setInGameID: inGameID];
         [self performSegueWithIdentifier:@"joinGame" sender:self];
