@@ -54,7 +54,7 @@ static NSString * ip = @"http://95.80.44.85/";
 // TODO: make server check if sessionID exists
 - (NSInteger) addPlayerToSession : (NSInteger) sessionID{
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%d&name=%@", ip, sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%lu&name=%@", ip, (long)sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]]
                                                          cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -70,7 +70,8 @@ static NSString * ip = @"http://95.80.44.85/";
     @try {
         NSInteger returnVal =  [responseStr integerValue];
         [[Game sharedGame] setSessionID:sessionID];
-        [self uploadPlayerImage: returnVal];
+        [[[Game sharedGame] myself] setInGameID:returnVal];
+        [self uploadPlayerImage];
         return returnVal;
     }
     @catch (NSException *e) {
@@ -145,10 +146,7 @@ Player* player;
             
             UIImage *image = [UIImage imageWithData: imageData];
             [player setImage: image];
-//            [self performSelector:@selector (setImage:) withObject:imageData afterDelay:1.0];
-
             
-
         }
         else
             [player setName: @"empty"];
@@ -164,12 +162,7 @@ Player* player;
     return players;
 }
 
-SEL getImageSelector;
 
-- (void) setImage:(NSData*) imageData {
-    UIImage *image = [UIImage imageWithData: imageData];
-    [player setImage: image];
-}
 
 
 
@@ -308,7 +301,7 @@ SEL getImageSelector;
 
 
 // uploads the players current image to server.
-- (void) uploadPlayerImage :(NSInteger)playerID {
+- (void) uploadPlayerImage{
     
     NSData *storeData = UIImageJPEGRepresentation([[[Game sharedGame] myself] image], 90);
     NSString *URLString = [NSString stringWithFormat:@"%@/uploadimage.php", ip];
@@ -323,18 +316,20 @@ SEL getImageSelector;
     
     NSMutableData *body = [NSMutableData data];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    NSString *idItem = [NSString stringWithFormat:@"%d-%d", [[Game sharedGame] sessionID], playerID];
+    NSString *idItem = [NSString stringWithFormat:@"%d-%d", [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n", idItem] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[NSData dataWithData:storeData]];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:body];
     
+    NSLog(@"TTTTTTTT1 %@",[request description]);
+    
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     NSString *responseStr = [[NSString alloc] initWithData:returnData
                                                   encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", responseStr);
+    NSLog(@"TTTTTTTT2 %@", responseStr);
     
 }
 
