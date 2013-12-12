@@ -33,6 +33,15 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    if ([[Game sharedGame] sessionID]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 //dismiss the keyboard when the Text Field is not on focus
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

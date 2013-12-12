@@ -140,8 +140,12 @@ Player* player;
             NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip,
                                                                                               [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]]];
 
-           // getImageSelector = sel_registerName("setImage");
-            [self performSelector:@selector (setImage:) withObject:imageData afterDelay:1.0];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip,
+                   [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]);
+            
+            UIImage *image = [UIImage imageWithData: imageData];
+            [player setImage: image];
+//            [self performSelector:@selector (setImage:) withObject:imageData afterDelay:1.0];
 
             
 

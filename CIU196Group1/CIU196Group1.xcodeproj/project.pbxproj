@@ -36,6 +36,7 @@
 		35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A4071859C08A00CC0FF7 /* TestViewController.m */; };
 		35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */; };
 		35E5A40E1859E9A900CC0FF7 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40D1859E9A900CC0FF7 /* Timer.m */; };
+		35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */; };
 		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,8 @@
 		35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModalSubViewController.m; sourceTree = "<group>"; };
 		35E5A40C1859E9A900CC0FF7 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		35E5A40D1859E9A900CC0FF7 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
+		35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPushSubViewController.h; sourceTree = "<group>"; };
+		35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPushSubViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 				35E5A4071859C08A00CC0FF7 /* TestViewController.m */,
 				35E5A4091859CAEA00CC0FF7 /* TestModalSubViewController.h */,
 				35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */,
+				35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */,
+				35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				354A22A318551A0000B57DD3 /* SecretViewController.m in Sources */,
 				3571380D18456E7100E7E8D1 /* main.m in Sources */,
 				354A229A1854FC6900B57DD3 /* JoingameViewController.m in Sources */,
+				35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */,
 				35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */,
 				354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */,
 				35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */,

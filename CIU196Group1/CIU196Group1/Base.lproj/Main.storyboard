@@ -636,13 +636,25 @@
             </objects>
             <point key="canvasLocation" x="-732" y="1049"/>
         </scene>
-        <!--View Controller-->
+        <!--Test Push Sub View Controller-->
         <scene sceneID="5a2-6x-PTP">
             <objects>
-                <viewController id="eUL-pZ-iZ5" sceneMemberID="viewController">
+                <viewController id="eUL-pZ-iZ5" customClass="TestPushSubViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GTe-mm-8yO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Khi-0r-Jae">
+                                <rect key="frame" x="116" y="256" width="78" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Close push">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeClicked:" destination="eUL-pZ-iZ5" eventType="touchUpInside" id="JkV-cJ-jt6"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gvw-Mm-v90"/>
