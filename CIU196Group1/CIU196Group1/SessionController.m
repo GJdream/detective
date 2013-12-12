@@ -72,7 +72,7 @@ static NSString * ip = @"http://95.80.44.85/";
     @try {
         NSInteger returnVal =  [responseStr integerValue];
         [[Game sharedGame] setSessionID:sessionID];
-        [self uploadPlayerImage];
+        [self uploadPlayerImage: returnVal];
         return returnVal;
     }
     @catch (NSException *e) {
@@ -306,7 +306,7 @@ SEL getImageSelector;
 
 
 // uploads the players current image to server.
-- (void) uploadPlayerImage {
+- (void) uploadPlayerImage :(NSInteger)playerID {
     
     NSData *storeData = UIImageJPEGRepresentation([[[Game sharedGame] myself] image], 90);
     NSString *URLString = [NSString stringWithFormat:@"%@/uploadimage.php", ip];
@@ -321,7 +321,7 @@ SEL getImageSelector;
     
     NSMutableData *body = [NSMutableData data];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    NSString *idItem = [NSString stringWithFormat:@"%d-%d", [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID]];
+    NSString *idItem = [NSString stringWithFormat:@"%d-%d", [[Game sharedGame] sessionID], playerID];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n", idItem] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[NSData dataWithData:storeData]];
