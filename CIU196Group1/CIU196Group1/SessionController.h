@@ -30,6 +30,6 @@
 
 - (void) getSecret;
 
-- (void) uploadImage;
+- (void) uploadPlayerImage;
 
 @end

@@ -129,8 +129,15 @@ static NSString * ip = @"http://95.80.44.85/";
     NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
     for (NSDictionary* playerData in myJSON) {
         Player* player = [[Player alloc] init];
-        if(![playerData[@"playerName"] isKindOfClass:[NSNull class]])
+        if(![playerData[@"playerName"] isKindOfClass:[NSNull class]]) {
             [player setName: playerData[@"playerName"]];
+            
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@/uploadedimages/%d-%d.jpg", ip,
+                                                                         [[Game sharedGame] sessionID], (int)playerData[@"playerID"]]]];
+            UIImage *image = [UIImage imageWithData: imageData];
+            
+            [player setImage: image];
+        }
         else
             [player setName: @"empty"];
         
@@ -278,31 +285,37 @@ static NSString * ip = @"http://95.80.44.85/";
     
 }
 
-/*
-- (void) uploadImage {
+
+// uploads the players current image to server.
+- (void) uploadPlayerImage {
     
-    UIImage *image = [[[Game sharedGame] myself] image];
-    NSData *data = UIImagePNGRepresentation(image);
-    NSLog(@"size: %d", [data length]);
-    NSString *urlString = [NSString stringWithFormat:@"%@/uploadimage.php?image="];
+    NSData *storeData = UIImageJPEGRepresentation([[[Game sharedGame] myself] image], 90);
+    NSString *URLString = [NSString stringWithFormat:@"%@/uploadimage.php", ip];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:urlString]];
+    NSMutableURLRequest *request  = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:URLString]];
     [request setHTTPMethod:@"POST"];
     
-    
-    [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     NSMutableData *body = [NSMutableData data];
-    [body appendData:[NSData dataWithData:data]];
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *idItem = [NSString stringWithFormat:@"%d-%d", [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n", idItem] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:storeData]];
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:body];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     
-    NSLog(@"Ret: %@",returnString);
+    NSString *responseStr = [[NSString alloc] initWithData:returnData
+                                                  encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", responseStr);
     
-} */
+}
 
 
 @end

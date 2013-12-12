@@ -32,6 +32,8 @@ NSString *const SCSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[[Game sharedGame] sessionController] uploadPlayerImage];
+    
     [FBProfilePictureView class];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"

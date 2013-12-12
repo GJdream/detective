@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408464022.231363"
+            timestampString = "408548088.145505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-getPlayerData"
             landmarkType = "5">
          </BreakpointContent>
@@ -40,13 +40,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408542693.804861"
+            timestampString = "408548088.145505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
-            landmarkName = "@implementation SessionController"
-            landmarkType = "3">
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "-uploadPlayerImage"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408541074.825233"
+            timestampString = "408548088.145505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "-getSecret"
             landmarkType = "5">
          </BreakpointContent>
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408542840.313773"
+            timestampString = "408548088.145505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "-getSecret"
             landmarkType = "5">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408543894.714402"
+            timestampString = "408548088.145505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "-getSecret"
             landmarkType = "5">
          </BreakpointContent>
