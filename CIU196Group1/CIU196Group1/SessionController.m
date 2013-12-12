@@ -54,6 +54,7 @@ static NSString * ip = @"http://95.80.44.85/";
 // TODO: make server check if sessionID exists
 - (NSInteger) addPlayerToSession : (NSInteger) sessionID{
     [self uploadPlayerImage];
+
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%d&name=%@", ip, sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]]
                                                          cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
@@ -69,8 +70,10 @@ static NSString * ip = @"http://95.80.44.85/";
                                                   encoding:NSUTF8StringEncoding];
     
     @try {
-        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
-        return [responseStr integerValue];
+        NSInteger returnVal =  [responseStr integerValue];
+        [[Game sharedGame] setSessionID:sessionID];
+        [self uploadPlayerImage];
+        return returnVal;
     }
     @catch (NSException *e) {
         NSLog(@"Server returned exception: %@", responseStr);
