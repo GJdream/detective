@@ -8,8 +8,12 @@
 
 #import "StatusViewController.h"
 #import "Game.h"
+#import "Timer.h"
 
 @interface StatusViewController ()
+
+@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+
 @property (strong, nonatomic) IBOutlet UIImageView *player1;
 @property (strong, nonatomic) IBOutlet UIImageView *player2;
 @property (strong, nonatomic) IBOutlet UIImageView *player3;
@@ -57,7 +61,20 @@ NSMutableArray *players;
         [(UIImageView*)[players objectAtIndex:i] setImage:[[[Game sharedGame] heroAtIndex:i] image]];
     }
     
+    
+    [[[Game sharedGame] timer] start:10];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5
+                                               target:self
+                                             selector:@selector(loop)
+                                             userInfo:nil
+                                              repeats:YES];
+    
+    
+}
 
+- (void)loop{
+    self.timerLabel.text = [NSString stringWithFormat:@"%d sec", [[[Game sharedGame] timer] getCount]];
 }
 
 - (void)didReceiveMemoryWarning

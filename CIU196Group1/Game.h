@@ -10,6 +10,7 @@
 #import "SessionController.h"
 
 #import "Player.h"
+#import "Timer.h"
 
 @interface Game : NSObject
 
@@ -22,7 +23,8 @@
 @property (nonatomic, strong) NSMutableArray *heroes;
 @property NSInteger host;   //index of the host in heroes array
 @property BOOL waiting;     //true if the host is waiting in new players page
-@property SessionController* sessionController;
+@property (nonatomic, strong) SessionController* sessionController;
+@property (nonatomic, strong) Timer *timer;
 
 
 //-(void)updateStatus: (NSMutableArray *)heroes;

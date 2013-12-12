@@ -396,6 +396,13 @@
                                 <rect key="frame" x="20" y="363" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∞:∞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ETh-dB-hj1">
+                                <rect key="frame" x="104" y="236" width="96" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -414,6 +421,7 @@
                         <outlet property="player7" destination="Za4-OC-zsR" id="kbx-OD-Ya9"/>
                         <outlet property="player8" destination="K4u-YY-3L8" id="RAX-1A-Fer"/>
                         <outlet property="player9" destination="QZp-0s-KMi" id="2el-zJ-pG9"/>
+                        <outlet property="timerLabel" destination="ETh-dB-hj1" id="LmP-Fa-BxV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccp-M3-B3s" userLabel="First Responder" sceneMemberID="firstResponder"/>
