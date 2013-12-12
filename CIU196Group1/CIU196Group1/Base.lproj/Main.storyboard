@@ -448,6 +448,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Secret" id="LvU-3N-C7n"/>
+                    <connections>
+                        <outlet property="clueLabel" destination="Bvb-Q2-eud" id="adC-ji-MsK"/>
+                        <outlet property="roleLabel" destination="wQb-X8-z4Y" id="ebN-LB-M1a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGr-HF-Exs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,9 +7,12 @@
 //
 
 #import "SecretViewController.h"
+#import "Game.h"
 
 @interface SecretViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *roleLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *clueLabel;
 @end
 
 @implementation SecretViewController
@@ -27,7 +30,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.roleLabel.text = [NSString stringWithFormat:@"Role: %d", [[[Game sharedGame] myself] role]];
+    
+    self.clueLabel.text = [NSString stringWithFormat:@"Clue: %@", [[[Game sharedGame] myself] clue]];
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {
