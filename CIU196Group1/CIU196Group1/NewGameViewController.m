@@ -200,6 +200,8 @@ BOOL timerActive = TRUE;
 }
 
 - (void) enterGame{
+    //RobertTODO: uncomment the line below
+//    [[[Game sharedGame] sessionController] getSecret];
     [self performSegueWithIdentifier:@"startGame" sender:self];
 }
 

@@ -33,6 +33,8 @@
 		35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35713894184679AC00E7E8D1 /* SCLoginViewController.m */; };
 		3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389A18468A6C00E7E8D1 /* MenuViewController.m */; };
 		3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389D184691D600E7E8D1 /* SettingViewController.m */; };
+		35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A4071859C08A00CC0FF7 /* TestViewController.m */; };
+		35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */; };
 		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,10 @@
 		3571389A18468A6C00E7E8D1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		3571389C184691D600E7E8D1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		3571389D184691D600E7E8D1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		35E5A4061859C08A00CC0FF7 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		35E5A4071859C08A00CC0FF7 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		35E5A4091859CAEA00CC0FF7 /* TestModalSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModalSubViewController.h; sourceTree = "<group>"; };
+		35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModalSubViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,10 @@
 				354A229F185519E400B57DD3 /* StatusViewController.m */,
 				354A22A118551A0000B57DD3 /* SecretViewController.h */,
 				354A22A218551A0000B57DD3 /* SecretViewController.m */,
+				35E5A4061859C08A00CC0FF7 /* TestViewController.h */,
+				35E5A4071859C08A00CC0FF7 /* TestViewController.m */,
+				35E5A4091859CAEA00CC0FF7 /* TestModalSubViewController.h */,
+				35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -349,9 +359,11 @@
 				354A229A1854FC6900B57DD3 /* JoingameViewController.m in Sources */,
 				35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */,
 				354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */,
+				35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */,
 				3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */,
 				352AF00D184A3D9000C7C14D /* PlayerCell.m in Sources */,
 				352AF0061848948400C7C14D /* Player.m in Sources */,
+				35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */,
 				352AF00A1848A01E00C7C14D /* NewGameViewController.m in Sources */,
 				3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */,
 			);

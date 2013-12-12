@@ -9,7 +9,7 @@
 #import "Player.h"
 
 @implementation Player
-@synthesize name, image, inGameID, role, isAlive;
+@synthesize name, image, inGameID, role, isAlive, clue;
 
 - (id)init
 {
@@ -22,6 +22,10 @@
     if (self) {
         self.name = aName;
         self.image = anImage;
+        self.role = 0;
+        self.inGameID = -1;
+        self.isAlive = TRUE;
+        self.clue = @"none";
     }
     return self;
 }
