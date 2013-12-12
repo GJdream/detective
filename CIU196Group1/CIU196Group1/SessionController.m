@@ -53,10 +53,11 @@ static NSString * ip = @"http://95.80.44.85/";
 // Adds a player to an existing session. The method will connect to the server and retrieve an available player ID for that session. If the server responded with an error, the error message is printed and -1 is returned.
 // TODO: make server check if sessionID exists
 - (NSInteger) addPlayerToSession : (NSInteger) sessionID{
+    [self uploadPlayerImage];
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%d&name=%@", ip, sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]]
                                                          cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
-    
     
     [request setHTTPMethod: @"GET"];
     NSError *requestError;
@@ -104,6 +105,8 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // queries the server for player data given a sessionID. returns an NSArray of NSDictionaries, to be
 // parsed by Player.parseFromJSON
+Player* player;
+
 - (NSMutableArray *) getPlayerData {
     
     /* something is broken with this
@@ -128,15 +131,19 @@ static NSString * ip = @"http://95.80.44.85/";
 
     NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
     for (NSDictionary* playerData in myJSON) {
-        Player* player = [[Player alloc] init];
         if(![playerData[@"playerName"] isKindOfClass:[NSNull class]]) {
+            player = [[Player alloc] init];
+
             [player setName: playerData[@"playerName"]];
             
-            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@/uploadedimages/%d-%d.jpg", ip,
-                                                                         [[Game sharedGame] sessionID], (int)playerData[@"playerID"]]]];
-            UIImage *image = [UIImage imageWithData: imageData];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip,
+                                                                                              [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]]];
+
+           // getImageSelector = sel_registerName("setImage");
+            [self performSelector:@selector (setImage:) withObject:imageData afterDelay:1.0];
+
             
-            [player setImage: image];
+
         }
         else
             [player setName: @"empty"];
@@ -151,6 +158,15 @@ static NSString * ip = @"http://95.80.44.85/";
     
     return players;
 }
+
+SEL getImageSelector;
+
+- (void) setImage:(NSData*) imageData {
+    UIImage *image = [UIImage imageWithData: imageData];
+    [player setImage: image];
+}
+
+
 
 - (NSDictionary *)fetchedData:(NSData *)responseData {
     //parse out the json data
