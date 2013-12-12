@@ -273,7 +273,7 @@ static NSString * ip = @"http://95.80.44.85/";
     NSLog(@"response from server: %@", responseStr);
     
     NSArray *words = [responseStr componentsSeparatedByString:@";"];
-    [[[Game sharedGame] myself] setRole: (NSInteger)words[0]];
+    [[[Game sharedGame] myself] setRole: [words[0] integerValue]];
     [[[Game sharedGame] myself] setClue: words[1]];
     
 }
