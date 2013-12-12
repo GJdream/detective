@@ -57,7 +57,7 @@ static NSString * ip = @"http://95.80.44.85/";
                                                          cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
-    NSLog(@"%@", [NSString stringWithFormat:@"%@?action=addplayer&sessionid=%d&name=%@", ip, sessionID, [[[Game sharedGame] myself] name]]);
+    
     [request setHTTPMethod: @"GET"];
     NSError *requestError;
     NSURLResponse *urlResponse = nil;

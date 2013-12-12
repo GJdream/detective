@@ -50,9 +50,6 @@ BOOL timerActive = TRUE;
     if(![[Game sharedGame] sessionID]){
         [[Game sharedGame] setSessionID: [[[Game sharedGame] sessionController] getNewSessionID]];
         
-        //RobertTODO: when a player join a game, it also sends the player info to the server, so i want you to add a parameter with type of Player* (or at least a String name and a profile image) to addPlayerToSession method as called below
-        
-        //RobertTODO Update: you don't really need to add a parameter here, you can simply access the player own information from your SC code by calling [[Game sharedGame] myself]
         
         [[[Game sharedGame] myself] setInGameID: [[[Game sharedGame] sessionController]  addPlayerToSession:[[Game sharedGame] sessionID]]];
 
@@ -60,33 +57,9 @@ BOOL timerActive = TRUE;
     
     sessionIDLabel.text = [NSString stringWithFormat:@"ID: %lu", (unsigned long)[[Game sharedGame] sessionID]];
     
-    
-    //load the current game status at once
-    //RobertDone: return me a type of NSMutableArray* with Player as instance
-//    
-//    NSMutableArray *players = [NSMutableArray arrayWithCapacity:20];
-//    for (NSDictionary* playerData in [[[Game sharedGame] sessionController] getPlayerData:[[Game sharedGame] sessionID]]) {
-//        [players addObject: [Player parseFromJSON:playerData]];
-//    }
-    
+    //initial setup of the data
     [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
     [[[Game sharedGame] sessionController] changeCleared];
-    
-    
-    //TODELETE: following are a dummy list for test purpose
-//    NSMutableArray *dummyplayers;
-//    dummyplayers = [NSMutableArray arrayWithCapacity:20];
-//    Player *player = [[Player alloc] init];
-//    player.name = @"Bill Evans";
-//    [dummyplayers addObject:player];
-//    player = [[Player alloc] init];
-//    player.name = @"Oscar Peterson";
-//    [dummyplayers addObject:player];
-//    player = [[Player alloc] init];
-//    player.name = @"Dave Brubeck";
-//    [dummyplayers addObject:player];
-//    [[Game sharedGame] setHeroes: dummyplayers];
-    
     
     
     counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
@@ -140,40 +113,28 @@ BOOL timerActive = TRUE;
     if(timerActive && [[Game sharedGame] waiting]){
         
         
-        //RobertTODO: return a Player* which is newly added as called below, feel free to rename the method, if no changes, return nil. this is kinda depracated by following solution
-        
-        //or
-        
-        //RobertDone: i just came up with a new thought, you can add a statusChange flag to player table, when game status changed on the server, this flag is set to true to all players in the session. so we can resue in sc.status function. remember to reset the statusChagne flag into false at the end of sc.status function, better to do it on server side due to atomicity concern
+        //if there is some change, update the game status
         
         if([[[Game sharedGame] sessionController] isChanged]){
             
-//            [[Game sharedGame] setHeroes: sc.status];
             [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
             
             [[[Game sharedGame] sessionController] changeCleared];
             
-//            //Dummy
-//            Player *ahero = [[Player alloc] init];
-//            [[Game sharedGame] addHero: ahero];
         }
-
-        
-        
-        
         
         
         counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
         [self.playerTable reloadData];
 
-        //RobertDone: add this method returns the ready flag of the game session
+        //if a new game is ready to start, set waiting flag to false, and move to game page
         if([[[Game sharedGame] sessionController] isGameReady]){
             [[Game sharedGame] setWaiting:FALSE];
             [self enterGame];
         }
         
         
-        NSLog(@"my inGameID is %d", [[[Game sharedGame] myself] inGameID]);
+//        NSLog(@"my inGameID is %d", [[[Game sharedGame] myself] inGameID]);
     }
         
 }
@@ -229,9 +190,8 @@ BOOL timerActive = TRUE;
     return YES;
 }
 
+// this method is only availble to the host since it is where the button is only visible
 - (IBAction)startButtonClicked:(id)sender {
-    
-    //RobertDone: create a method that sets the ready flag of the game session to TRUE
     
     [[[Game sharedGame] sessionController] startGame];
     
