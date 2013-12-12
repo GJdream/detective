@@ -254,5 +254,55 @@ static NSString * ip = @"http://95.80.44.85/";
 
 }
 
+- (void) getRoleAndSecret {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getroleandsecret&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    
+    // will return a string in the form role;clue
+    NSLog(@"response from server: %@", responseStr);
+    
+    NSArray *words = [responseStr componentsSeparatedByString:@";"];
+    [[[Game sharedGame] myself] setRole: (int)words[0]];
+    [[[Game sharedGame] myself] setClue: (int)words[1]];
+    
+}
+
+/*
+- (void) uploadImage {
+    
+    UIImage *image = [[[Game sharedGame] myself] image];
+    NSData *data = UIImagePNGRepresentation(image);
+    NSLog(@"size: %d", [data length]);
+    NSString *urlString = [NSString stringWithFormat:@"%@/uploadimage.php?image="];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    [body appendData:[NSData dataWithData:data]];
+    [request setHTTPBody:body];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Ret: %@",returnString);
+    
+} */
+
 
 @end

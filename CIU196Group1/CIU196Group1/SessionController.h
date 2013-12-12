@@ -28,4 +28,6 @@
 
 - (NSMutableArray*) getPlayerData;
 
+- (void) uploadImage;
+
 @end
