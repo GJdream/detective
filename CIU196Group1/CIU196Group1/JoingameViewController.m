@@ -50,16 +50,16 @@
 }
 
 - (IBAction)joinButtonClicked:(id)sender {
-    SessionController *sc = [[SessionController alloc] init];
     
-    NSInteger inGameID = [sc addPlayerToSession: [self.sessionIDInput.text integerValue]];
+    [[Game sharedGame] setSessionID: [self.sessionIDInput.text integerValue]];
+    NSInteger inGameID = [[[Game sharedGame] sessionController] addPlayerToSession: [self.sessionIDInput.text integerValue]];
     
     if(inGameID){
-        [[Game sharedGame] setSessionID: [self.sessionIDInput.text integerValue]];
         [[[Game sharedGame] myself] setInGameID: inGameID];
         [self performSegueWithIdentifier:@"joinGame" sender:self];
     }
     else{
+        [[Game sharedGame] setSessionID:0];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Session not found" message:@"pleae check with the host for correct Session ID" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
         [self performSelector:@selector(autoDismiss:) withObject:alert afterDelay:4];
