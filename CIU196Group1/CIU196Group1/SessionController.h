@@ -28,6 +28,8 @@
 
 - (NSMutableArray*) getPlayerData;
 
+- (void) getSecret;
+
 - (void) uploadImage;
 
 @end

@@ -254,7 +254,7 @@ static NSString * ip = @"http://95.80.44.85/";
 
 }
 
-- (void) getRoleAndSecret {
+- (void) getSecret {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getroleandsecret&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
@@ -274,7 +274,7 @@ static NSString * ip = @"http://95.80.44.85/";
     
     NSArray *words = [responseStr componentsSeparatedByString:@";"];
     [[[Game sharedGame] myself] setRole: (int)words[0]];
-    [[[Game sharedGame] myself] setClue: (int)words[1]];
+    [[[Game sharedGame] myself] setClue: words[1]];
     
 }
 
