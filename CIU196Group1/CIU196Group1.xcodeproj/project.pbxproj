@@ -36,6 +36,7 @@
 		35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A4071859C08A00CC0FF7 /* TestViewController.m */; };
 		35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */; };
 		35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */; };
+		F6571F95185B4001004A576A /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F6571F94185B4001004A576A /* Utilities.m */; };
 		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,8 @@
 		35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModalSubViewController.m; sourceTree = "<group>"; };
 		35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPushSubViewController.h; sourceTree = "<group>"; };
 		35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPushSubViewController.m; sourceTree = "<group>"; };
+		F6571F93185B4001004A576A /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		F6571F94185B4001004A576A /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,8 @@
 				352AF00C184A3D9000C7C14D /* PlayerCell.m */,
 				352AF013184FB40900C7C14D /* Game.h */,
 				352AF014184FB40900C7C14D /* Game.m */,
+				F6571F93185B4001004A576A /* Utilities.h */,
+				F6571F94185B4001004A576A /* Utilities.m */,
 			);
 			name = Classes;
 			path = ..;
@@ -367,6 +372,7 @@
 				354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */,
 				35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */,
 				3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */,
+				F6571F95185B4001004A576A /* Utilities.m in Sources */,
 				352AF00D184A3D9000C7C14D /* PlayerCell.m in Sources */,
 				352AF0061848948400C7C14D /* Player.m in Sources */,
 				35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */,
