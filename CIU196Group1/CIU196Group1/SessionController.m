@@ -142,8 +142,7 @@ Player* player;
             NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip,
                                                                                               [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]]];
 
-            NSLog(@"%@",[NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip,
-                   [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]);
+            //NSLog(@"%@",[NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip, [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]);
             
             UIImage *image = [UIImage imageWithData: imageData];
             [player setImage: image];
@@ -326,7 +325,7 @@ Player* player;
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:body];
     [request addValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
-    NSLog(@"body length %d",[body length]);
+    //NSLog(@"body length %d",[body length]);
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
