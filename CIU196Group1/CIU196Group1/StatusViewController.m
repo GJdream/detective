@@ -12,7 +12,9 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
-@property (strong, nonatomic) IBOutlet UIButton *actionButton;
+//@property (strong, nonatomic) IBOutlet UIButton *actionButton;
+@property (strong, nonatomic) IBOutlet UIView *actionView;
+
 - (IBAction)actionButtonClicked:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *skipButton;
 - (IBAction)skipButtonClicked:(id)sender;
@@ -35,7 +37,7 @@
 
 @implementation StatusViewController
 
-@synthesize timerLabel, infoLabel, actionButton, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
+@synthesize timerLabel, infoLabel, actionView, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
 
 
 
@@ -67,8 +69,8 @@ NSMutableArray *players;
     //Not gonna have skip in plan
     [skipButton setHidden:TRUE];
     [skipButton setEnabled:FALSE];
-    [actionButton setHidden:TRUE];
-    [actionButton setEnabled:FALSE];
+    [actionView setHidden:TRUE];
+//    [actionView setEnabled:FALSE];
     
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
                                    selector:@selector(loop) userInfo:nil repeats:YES];
@@ -85,11 +87,11 @@ NSInteger count;
     
     if ([[Game sharedGame] turnFinished]) {
         //only case we show the action button
-        [actionButton setHidden:FALSE];
-        [actionButton setEnabled:TRUE];
+        [actionView setHidden:FALSE];
+//        [actionView setEnabled:TRUE];
     }else{
-        [actionButton setHidden:TRUE];
-        [actionButton setEnabled:FALSE];
+        [actionView setHidden:TRUE];
+//        [actionView setEnabled:FALSE];
         
 //        if (![[Game sharedGame] isMyTurn]) {
 //            [skipButton setHidden:TRUE];
@@ -109,8 +111,10 @@ NSInteger count;
 
 
 - (IBAction)actionButtonClicked:(id)sender {
-
+    NSLog(@"it's clicked");
+    [[[Game sharedGame] sessionController] commitAction: -1];
 }
 - (IBAction)skipButtonClicked:(id)sender {
 }
+
 @end

@@ -409,17 +409,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kqx-H1-9yu">
-                                <rect key="frame" x="103" y="282" width="89" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Action!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="actionButtonClicked:" destination="dgP-Eh-YeP" eventType="touchUpInside" id="4WJ-y6-9gE"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="etq-GU-gbx">
                                 <rect key="frame" x="234" y="476" width="46" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -431,12 +420,29 @@
                                     <action selector="skipButtonClicked:" destination="dgP-Eh-YeP" eventType="touchUpInside" id="jRh-As-NdA"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="kD6-Fm-HSf" userLabel="ActionView">
+                                <rect key="frame" x="11" y="71" width="284" height="397"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kqx-H1-9yu">
+                                        <rect key="frame" x="93" y="212" width="89" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Action!">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionButtonClicked:" destination="dgP-Eh-YeP" eventType="touchUpInside" id="4WJ-y6-9gE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Criminal Scene" id="RqI-zf-4Y6"/>
                     <connections>
-                        <outlet property="actionButton" destination="kqx-H1-9yu" id="JLt-WX-kYz"/>
+                        <outlet property="actionView" destination="kD6-Fm-HSf" id="DM2-fi-ADB"/>
                         <outlet property="infoLabel" destination="Mx6-ji-JRC" id="fwb-t1-pee"/>
                         <outlet property="player1" destination="tlQ-Ub-3sU" id="OF0-a3-rqn"/>
                         <outlet property="player10" destination="Bhc-Ya-YyG" id="MnL-5Q-dJG"/>
