@@ -447,7 +447,11 @@ Player* player;
 
 //RobertTODO: return random order please, from server, so should be same for all player
 - (NSMutableArray*) getOrder{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=getplayorder&sessionid=", (long)[[Game sharedGame] sessionID]]]
+    if ([self didEveryoneGotOrder]) {
+        [self clearOrder];
+    }
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getplayerorder&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -465,6 +469,49 @@ Player* player;
     
     return arrayFromString;
 }
+
+- (bool) didEveryoneGotOrder {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=isordercleared&sessionid=", (long)[[Game sharedGame] sessionID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    
+    @try {
+        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
+        return [responseStr boolValue];
+    }
+    @catch (NSException *e) {
+        NSLog(@"Server returned exception: %@", responseStr);
+        return -1;
+    }
+}
+
+- (void) clearOrder {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=clearorder&sessionid=%lu", ip, (long)[[Game sharedGame] sessionID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"response from server: %@", responseStr);
+}
+
 
 //RobertTODO: call the server with targetID, based on the role, different action applied on server, if i send targetID as -1, that is a empty action, but necessary to change the flag somehow
 - (void)commitAction : (NSInteger) targetID{
