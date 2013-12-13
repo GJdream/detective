@@ -404,7 +404,7 @@ Player* player;
 
 //RobertTODO: call the server with targetID, based on the role, different action applied on server, if i send targetID as -1, that is a empty action, but necessary to change the flag somehow
 - (void)commitAction : (NSInteger) targetID{
-    if (targetID >=0) {
+    if (targetID >=0 && targetID < [[Game sharedGame] count]) {
         NSLog(@"action target is: No.%d - %@", targetID, [[[Game sharedGame] heroAtIndex:targetID] name]);
     }
     else{
