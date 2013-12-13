@@ -8,11 +8,14 @@
 
 #import "StatusViewController.h"
 #import "Game.h"
-#import "Timer.h"
-
 @interface StatusViewController ()
 
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+@property (strong, nonatomic) IBOutlet UIButton *actionButton;
+- (IBAction)actionButtonClicked:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *skipButton;
+- (IBAction)skipButtonClicked:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIImageView *player1;
 @property (strong, nonatomic) IBOutlet UIImageView *player2;
@@ -32,7 +35,7 @@
 
 @implementation StatusViewController
 
-@synthesize player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
+@synthesize timerLabel, infoLabel, actionButton, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
 
 
 
@@ -60,22 +63,41 @@ NSMutableArray *players;
     for (int i=0; i < [[Game sharedGame]count]; i++) {
         [(UIImageView*)[players objectAtIndex:i] setImage:[[[Game sharedGame] heroAtIndex:i] image]];
     }
+
+    //Not gonna have skip in plan
+    [skipButton setHidden:TRUE];
+    [skipButton setEnabled:FALSE];
+    [actionButton setHidden:TRUE];
+    [actionButton setEnabled:FALSE];
     
-    
-    [[[Game sharedGame] timer] start:10];
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.5
-                                               target:self
-                                             selector:@selector(loop)
-                                             userInfo:nil
-                                              repeats:YES];
-    
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
+                                   selector:@selector(loop) userInfo:nil repeats:YES];
     
 }
 
+NSInteger count;
 - (void)loop{
-    self.timerLabel.text = [NSString stringWithFormat:@"%d sec", [[[Game sharedGame] timer] getCount]];
+    
+    // update the timer and the information all the time
+    timerLabel.text = [NSString stringWithFormat:@"%d sec", [[Game sharedGame] readTimer]];
+    infoLabel.text = [[Game sharedGame] news];
+    
+    
+    if ([[Game sharedGame] turnFinished]) {
+        //only case we show the action button
+        [actionButton setHidden:FALSE];
+        [actionButton setEnabled:TRUE];
+    }else{
+        [actionButton setHidden:TRUE];
+        [actionButton setEnabled:FALSE];
+        
+//        if (![[Game sharedGame] isMyTurn]) {
+//            [skipButton setHidden:TRUE];
+//            [skipButton setEnabled:FALSE];
+//        }
+    }
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -85,4 +107,10 @@ NSMutableArray *players;
     NSLog(@"did receive memory warning");
 }
 
+
+- (IBAction)actionButtonClicked:(id)sender {
+
+}
+- (IBAction)skipButtonClicked:(id)sender {
+}
 @end

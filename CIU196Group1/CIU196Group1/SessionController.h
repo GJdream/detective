@@ -32,4 +32,9 @@
 
 - (void) uploadPlayerImage;
 
+//Game Logics
+- (NSMutableArray*) getOrder;
+
+- (void)commitAction : (NSInteger) targetID;
+
 @end

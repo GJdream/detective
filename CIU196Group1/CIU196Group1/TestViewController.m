@@ -51,6 +51,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     NSLog(@"running method: viewDidLoad");
+    
+    UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    actionButton.frame = CGRectMake(200, 200, 200, 44); // position in the parent view and set the size of the button
+    [actionButton setTitle:@"Action!" forState:UIControlStateNormal];
+    // add targets and actions
+    [actionButton addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    // add to a view
+    [self.view addSubview:actionButton];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,5 +82,8 @@
     NSLog(@"running method: viewDidDisappear");
 }
 
+- (IBAction)actionButtonClicked:(id)sender {
+    [(UIButton*)sender removeFromSuperview];
+}
 
 @end

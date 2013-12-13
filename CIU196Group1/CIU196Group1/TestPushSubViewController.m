@@ -31,8 +31,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

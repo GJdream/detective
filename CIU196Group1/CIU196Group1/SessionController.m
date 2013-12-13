@@ -334,4 +334,27 @@ Player* player;
 }
 
 
+//RobertTODO: return random order please, from server, so should be same for all player
+- (NSMutableArray*) getOrder{
+    NSMutableArray *order = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [[Game sharedGame] count]; i++) {
+        [order addObject:[NSNumber numberWithInteger:i]];
+    }
+    
+    for (int i = 0; i < [[Game sharedGame] count]; i++) {
+        // Select a random element between i and end of array to swap with.
+        NSInteger n = arc4random_uniform([[Game sharedGame] count]);
+        [order exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+    
+    NSLog(@"random order: %@", order);
+    return order;
+}
+
+//RobertTODO: call the server with targetID, based on the role, different action applied on server, if i send targetID as -1, that is a empty action, but necessary to change the flag somehow
+- (void)commitAction : (NSInteger) targetID{
+    
+}
+
 @end

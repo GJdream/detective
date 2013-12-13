@@ -10,7 +10,7 @@
 #import "SessionController.h"
 
 #import "Player.h"
-#import "Timer.h"
+//#import "Timer.h"
 
 @interface Game : NSObject
 
@@ -24,13 +24,18 @@
 @property NSInteger host;   //index of the host in heroes array
 @property BOOL waiting;     //true if the host is waiting in new players page
 @property (nonatomic, strong) SessionController* sessionController;
-@property (nonatomic, strong) Timer *timer;
-
-
-//-(void)updateStatus: (NSMutableArray *)heroes;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSMutableArray *order;
+@property (nonatomic, strong) NSString *news;
+@property BOOL turnFinished;
 
 - (NSUInteger)count;
 - (void)addHero:(Player *)ahero;
 - (Player* )heroAtIndex:(NSUInteger)index;
+
+//Game logics
+- (void) startATurn;
+- (NSInteger) readTimer;
+- (BOOL) isMyTurn;
 
 @end

@@ -200,8 +200,11 @@ BOOL timerActive = TRUE;
 }
 
 - (void) enterGame{
-    //RobertTODO: uncomment the line below
     [[[Game sharedGame] sessionController] getSecret];
+    
+    //count down preparation time to read the clue
+    [[Game sharedGame] startATurn];
+
     [self performSegueWithIdentifier:@"startGame" sender:self];
 }
 

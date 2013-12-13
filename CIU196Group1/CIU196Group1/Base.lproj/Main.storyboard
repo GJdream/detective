@@ -397,17 +397,47 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∞:∞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ETh-dB-hj1">
-                                <rect key="frame" x="104" y="236" width="96" height="41"/>
+                                <rect key="frame" x="99" y="227" width="96" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="information of the game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mx6-ji-JRC">
+                                <rect key="frame" x="34" y="433" width="252" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kqx-H1-9yu">
+                                <rect key="frame" x="103" y="282" width="89" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Action!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionButtonClicked:" destination="dgP-Eh-YeP" eventType="touchUpInside" id="4WJ-y6-9gE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="etq-GU-gbx">
+                                <rect key="frame" x="234" y="476" width="46" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="skip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipButtonClicked:" destination="dgP-Eh-YeP" eventType="touchUpInside" id="jRh-As-NdA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Criminal Scene" id="RqI-zf-4Y6"/>
                     <connections>
+                        <outlet property="actionButton" destination="kqx-H1-9yu" id="JLt-WX-kYz"/>
+                        <outlet property="infoLabel" destination="Mx6-ji-JRC" id="fwb-t1-pee"/>
                         <outlet property="player1" destination="tlQ-Ub-3sU" id="OF0-a3-rqn"/>
                         <outlet property="player10" destination="Bhc-Ya-YyG" id="MnL-5Q-dJG"/>
                         <outlet property="player11" destination="z9e-Cl-fJH" id="dnE-ig-3ZV"/>
@@ -421,6 +451,7 @@
                         <outlet property="player7" destination="Za4-OC-zsR" id="kbx-OD-Ya9"/>
                         <outlet property="player8" destination="K4u-YY-3L8" id="RAX-1A-Fer"/>
                         <outlet property="player9" destination="QZp-0s-KMi" id="2el-zJ-pG9"/>
+                        <outlet property="skipButton" destination="etq-GU-gbx" id="Ypu-ji-PUr"/>
                         <outlet property="timerLabel" destination="ETh-dB-hj1" id="LmP-Fa-BxV"/>
                     </connections>
                 </viewController>
@@ -636,7 +667,7 @@
             </objects>
             <point key="canvasLocation" x="-732" y="1049"/>
         </scene>
-        <!--Test Push Sub View Controller-->
+        <!--Test Push Sub View Controller - Push Sub-->
         <scene sceneID="5a2-6x-PTP">
             <objects>
                 <viewController id="eUL-pZ-iZ5" customClass="TestPushSubViewController" sceneMemberID="viewController">
@@ -657,11 +688,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Gvw-Mm-v90"/>
+                    <navigationItem key="navigationItem" title="Push Sub" id="Gvw-Mm-v90"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4p-rC-rUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-316" y="1049"/>
+            <point key="canvasLocation" x="-244" y="897"/>
         </scene>
         <!--Test Modal Sub View Controller-->
         <scene sceneID="df2-ae-PYK">
