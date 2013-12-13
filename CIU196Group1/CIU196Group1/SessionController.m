@@ -328,14 +328,10 @@ Player* player;
     [request addValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
     NSLog(@"body length %d",[body length]);
     
-    NSLog(@"TTTTTTTT1 %@",[request description]);
-    
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     NSString *responseStr = [[NSString alloc] initWithData:returnData
                                                   encoding:NSUTF8StringEncoding];
-    NSLog(@"TTTTTTTT2 %@", responseStr);
-    
 }
 
 //RobertTODO: return random order please, from server, so should be same for all player
