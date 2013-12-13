@@ -89,6 +89,9 @@ NSMutableArray *players;
 }
 
 - (IBAction)playerClicked:(id)sender {
+    
+    targetLable.text = [NSString stringWithFormat:@"%@ selected", [[[Game sharedGame] heroAtIndex:[sender tag]] name]];
+    [[Game sharedGame] setTargetID:[sender tag]];
     NSLog(@"Sender of the click: %d", [sender tag]);
 }
 
@@ -130,7 +133,7 @@ NSInteger count;
 - (IBAction)actionButtonClicked:(id)sender {
     NSLog(@"it's clicked");
     [[[Game sharedGame] sessionController] commitAction: -1];
-    
+    [[Game sharedGame] setTargetID:-1];
     targetLable.text = @"";
 }
 - (IBAction)skipButtonClicked:(id)sender {

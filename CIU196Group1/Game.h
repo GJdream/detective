@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray *order;
 @property (nonatomic, strong) NSString *news;
 @property BOOL turnFinished;
+@property NSInteger targetID;
 
 - (NSUInteger)count;
 - (void)addHero:(Player *)ahero;

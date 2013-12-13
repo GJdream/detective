@@ -10,7 +10,7 @@
 
 
 @implementation Game
-@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished;
+@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, targetID;
 
 
 static Game* _sharedGame = nil;
@@ -134,11 +134,18 @@ NSInteger length;
             [self takeTurn];
     }
 }
-NSInteger prepareTime = 3, speechTime = 2, actionTime = 4;
+
+
+
+NSInteger prepareTime = 5, speechTime = 10, actionTime = 15;
+
+//short timer test
+//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
     i = 0;
+    targetID = -1;
     [self setTurnFinished:FALSE];
     
     //countDone preparation time for a turn
@@ -147,16 +154,8 @@ NSInteger prepareTime = 3, speechTime = 2, actionTime = 4;
     //set the first speech order
     [self setOrder: [[self sessionController] getOrder]];
     
-    //[self performSelector:@selector(startSpeech:) withObject:nil afterDelay:prepareTime];
-    
-    
 }
 
-//NSTimer* speechTimer;
-//- (void) startSpeech : (id) sender{
-//    speechTimer = [NSTimer scheduledTimerWithTimeInterval:speechTime target:self
-//                                   selector:@selector(takeTurn) userInfo:nil repeats:YES];
-//}
 
 int i = 0, turn = 0;
 - (void)takeTurn{
@@ -174,7 +173,7 @@ int i = 0, turn = 0;
         [self setTurnFinished:TRUE]; //TODO check this to show action button
         
         //if no action commited, get status and start new turn
-//        [self performSelector:@selector(commitAction:) withObject:[NSNumber numberWithInt:-1] afterDelay:actionTime];
+        [self performSelector:@selector(commitcommit:) withObject:[NSNumber numberWithInt:targetID] afterDelay:actionTime];
         //after 1 sec, refresh the data
         
         [self startTimer: actionTime];
@@ -182,10 +181,15 @@ int i = 0, turn = 0;
     }
 }
 
+- (void)commitcommit : (NSInteger) aTargetID{
+    [sessionController commitAction: aTargetID];
+}
+
 
 - (void) refreshStatus : (id) sender{
     [self setHeroes: [sessionController getPlayerData]];
     news = @"someone is dead"; //TODO better get it from server
+    targetID = -1;
     [self startATurn];
 }
 
