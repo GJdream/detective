@@ -340,7 +340,7 @@ Player* player;
         [self clearOrder];
     }
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getplayerorder&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getplayorder&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
