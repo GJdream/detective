@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CIU196Group1/SessionController.m"
-            timestampString = "408621264.163904"
+            timestampString = "408621844.044417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "-scaledCopyOfSize::"
             landmarkType = "5">
          </BreakpointContent>

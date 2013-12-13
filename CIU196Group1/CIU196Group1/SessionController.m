@@ -337,7 +337,8 @@ Player* player;
     
 }
 
-// returns a scaled copy of a given image with the given size
+// returns a scaled copy of a given image with size minimum of original size and new size. will
+// retain the proportions of the image
 - (UIImage *)scaledCopyOfSize: (UIImage*)image :(CGSize)newSize {
     CGImageRef imgRef = image.CGImage;
     
@@ -446,20 +447,23 @@ Player* player;
 
 //RobertTODO: return random order please, from server, so should be same for all player
 - (NSMutableArray*) getOrder{
-    NSMutableArray *order = [[NSMutableArray alloc] init];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=getplayorder&sessionid=", (long)[[Game sharedGame] sessionID]]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
     
-    for(int i = 0; i < [[Game sharedGame] count]; i++) {
-        [order addObject:[NSNumber numberWithInteger:i]];
-    }
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
     
-    for (int i = 0; i < [[Game sharedGame] count]; i++) {
-        // Select a random element between i and end of array to swap with.
-        NSInteger n = arc4random_uniform([[Game sharedGame] count]);
-        [order exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
     
-    NSLog(@"random order: %@", order);
-    return order;
+    NSString* responseStr = [[NSString alloc] initWithData:response
+                                                  encoding:NSUTF8StringEncoding];
+    NSLog(@"response from server: %@", responseStr);
+    
+    NSMutableArray *arrayFromString = [[responseStr componentsSeparatedByString:@","] mutableCopy];
+    
+    return arrayFromString;
 }
 
 //RobertTODO: call the server with targetID, based on the role, different action applied on server, if i send targetID as -1, that is a empty action, but necessary to change the flag somehow
