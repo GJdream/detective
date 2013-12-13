@@ -137,10 +137,10 @@ NSInteger length;
 
 
 
-NSInteger prepareTime = 5, speechTime = 10, actionTime = 15;
+//NSInteger prepareTime = 5, speechTime = 10, actionTime = 15;
 
 //short timer test
-//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
