@@ -322,6 +322,8 @@ Player* player;
     [body appendData:[NSData dataWithData:storeData]];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:body];
+    [request addValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
+    NSLog(@"body length %d",[body length]);
     
     NSLog(@"TTTTTTTT1 %@",[request description]);
     
