@@ -15,6 +15,7 @@
 //@property (strong, nonatomic) IBOutlet UIButton *actionButton;
 @property (strong, nonatomic) IBOutlet UIView *actionView;
 
+@property (strong, nonatomic) IBOutlet UILabel *targetLable;
 - (IBAction)actionButtonClicked:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *skipButton;
 - (IBAction)skipButtonClicked:(id)sender;
@@ -37,7 +38,7 @@
 
 @implementation StatusViewController
 
-@synthesize timerLabel, infoLabel, actionView, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
+@synthesize timerLabel, infoLabel, actionView, targetLable, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
 
 
 
@@ -61,20 +62,34 @@ NSMutableArray *players;
     players = [NSMutableArray arrayWithObjects: player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player12, player13,nil];
     
     
-    
-    for (int i=0; i < [[Game sharedGame]count]; i++) {
-        [(UIImageView*)[players objectAtIndex:i] setImage:[[[Game sharedGame] heroAtIndex:i] image]];
+    UIImageView *tempIV;
+    for (int i=0; i < [[Game sharedGame] count]; i++) {
+        tempIV = (UIImageView*)[players objectAtIndex:i];
+        [tempIV setImage:[[[Game sharedGame] heroAtIndex:i] image]];
+        if(1){
+            UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            actionButton.frame = CGRectMake(tempIV.frame.origin.x, tempIV.frame.origin.y, tempIV.frame.size.width, tempIV.frame.size.height); // position in the parent view and set the size of the button
+            [actionButton setTitle:@"select" forState:UIControlStateNormal];
+            [actionButton setTag:i]; 
+            // add targets and actions
+            [actionButton addTarget:self action:@selector(playerClicked:) forControlEvents:UIControlEventTouchUpInside];
+            // add to a view
+            [actionView addSubview:actionButton];
+        }
     }
 
     //Not gonna have skip in plan
     [skipButton setHidden:TRUE];
     [skipButton setEnabled:FALSE];
     [actionView setHidden:TRUE];
-//    [actionView setEnabled:FALSE];
     
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
                                    selector:@selector(loop) userInfo:nil repeats:YES];
     
+}
+
+- (IBAction)playerClicked:(id)sender {
+    NSLog(@"Sender of the click: %d", [sender tag]);
 }
 
 NSInteger count;
@@ -86,10 +101,12 @@ NSInteger count;
     
     
     if ([[Game sharedGame] turnFinished]) {
-        //only case we show the action button
+        //only case we show the action buttons
+        
         [actionView setHidden:FALSE];
-//        [actionView setEnabled:TRUE];
+        
     }else{
+        
         [actionView setHidden:TRUE];
 //        [actionView setEnabled:FALSE];
         
@@ -113,6 +130,8 @@ NSInteger count;
 - (IBAction)actionButtonClicked:(id)sender {
     NSLog(@"it's clicked");
     [[[Game sharedGame] sessionController] commitAction: -1];
+    
+    targetLable.text = @"";
 }
 - (IBAction)skipButtonClicked:(id)sender {
 }
