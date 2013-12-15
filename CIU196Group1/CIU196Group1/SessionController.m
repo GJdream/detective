@@ -284,8 +284,8 @@ Player* player;
     NSLog(@"clearOrder response: %@", serverResponse);
 }
 
-- (void) setVoteFromDetective: (NSInteger) voteID {
-    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=setvote&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
+- (void) addVoteFromDetective: (NSInteger) voteID {
+    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
     NSLog(@"clearOrder response: %@", serverResponse);
 }
 
@@ -297,7 +297,7 @@ Player* player;
         
         switch ([[[Game sharedGame] myself] role]) {
             case Detective:
-                [self setVoteFromDetective:targetID];
+                [self addVoteFromDetective:targetID];
                 break;
             case Police:
                 break;
