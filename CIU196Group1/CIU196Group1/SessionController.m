@@ -10,34 +10,37 @@
 #import "Game.h"
 #import "Utilities.h"
 
+// Handles sessions and server GET requests (would be more suitable to name it ServerController).
+//
+// It would be more suitable to return JSON from the server and parse it here, as right now
+// the actions are more hard coded.
 @implementation SessionController
-
 
 - (id) init {
     self = [super init];
     
     if (self) {
-
     }
     return self;
 }
 
-static NSString * ip = @"http://95.80.44.85/";
-
-// Makes a GET request for a server at a given URL. Returns a string with the response date.
+// Makes a GET request for a server at a given URL. Returns a string with the response data.
 - (NSString*) queryServer: (NSString*) queryURL{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: queryURL]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:5];
-    
+    // make the request
     [request setHTTPMethod: @"GET"];
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    // if the request failed, requestError will now be non-nil so we can log it
     if (requestError) {
         NSLog(@"%@", requestError);
         return nil;
     }
+    // otherwise, everything went fine and we got a response string
     else {
         NSString* responseStr = [[NSString alloc] initWithData:response
                                                       encoding:NSUTF8StringEncoding];
@@ -47,7 +50,10 @@ static NSString * ip = @"http://95.80.44.85/";
     
 }
 
+// IP for our app server
+static NSString * ip = @"http://95.80.44.85/";
 
+// Makes a get request to server with a given action
 - (NSString*) queryAppServerWithAction:(NSString*) action {
     NSString* urlString = [NSString stringWithFormat:@"%@?action=%@", ip, action];
     //NSLog(@"%@", urlString);
@@ -173,11 +179,13 @@ Player* player;
     }
 }
 
+// starts the game (i.e. sets isReady flag on server to true)
 - (void) startGame {
     NSString* serverResponse = [self queryAppServerWithAction:@"startgame" withSessionID:[[Game sharedGame] sessionID]];
     NSLog(@"startgame response: %@", serverResponse);
 }
 
+// sets changed flag on server
 - (bool) isChanged {
     NSString* serverResponse = [self queryAppServerWithAction:@"ischanged" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
     @try {
@@ -190,12 +198,14 @@ Player* player;
     }
 }
 
+// clears change flags on server
 - (void) changeCleared {
     NSString* serverResponse = [self queryAppServerWithAction:@"changecleared" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
     NSLog(@"changeCleared: %@", serverResponse);
 
 }
 
+// Sets this player's role and clue given by the server
 - (void) getSecret {
     NSString* serverResponse = [self queryAppServerWithAction:@"getsecret" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
     NSLog(@"getSecret: %@", serverResponse);
@@ -203,22 +213,23 @@ Player* player;
     NSArray *words = [serverResponse componentsSeparatedByString:@";"];
     [[[Game sharedGame] myself] setRole: [words[0] integerValue]];
     [[[Game sharedGame] myself] setClue: words[1]];
-    
 }
 
 
 // uploads the players current image to server.
 - (void) uploadPlayerImage{
     
+    // get a scaled profile image and store it as binary data to send to server
     UIImage *scaledProfileImage = [Utilities scaledImageCopyOfSize:[[[Game sharedGame] myself] image] : CGSizeMake(100, 100)];
-    
     NSData *storeData = UIImageJPEGRepresentation(scaledProfileImage, 90);
-    NSString *URLString = [NSString stringWithFormat:@"%@/uploadimage.php", ip];
     
+    // make POST request to server and let it handle it
+    NSString *URLString = [NSString stringWithFormat:@"%@/uploadimage.php", ip];
     NSMutableURLRequest *request  = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:URLString]];
     [request setHTTPMethod:@"POST"];
     
+    // random boundary from the
     NSString *boundary = @"---------------------------14737809831466499882746641449";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
@@ -240,7 +251,8 @@ Player* player;
                                                   encoding:NSUTF8StringEncoding];
 }
 
-//RobertTODO: return random order please, from server, so should be same for all player
+// Gets play order for players. All players will recieve the same order from the server.
+//RobertTODO: better logic for distributing player roles
 - (NSMutableArray*) getOrder{
     if ([self didEveryoneGotOrder]) {
         [self clearOrder];
