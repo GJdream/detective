@@ -12,8 +12,6 @@
 
 @implementation SessionController
 
-static NSString * ip = @"http://95.80.44.85/";
-
 
 - (id) init {
     self = [super init];
@@ -24,84 +22,91 @@ static NSString * ip = @"http://95.80.44.85/";
     return self;
 }
 
-// Gets a new session ID from the server. if the server responds with an error, the error message is printed and -1 is returned.
-- (NSInteger) getNewSessionID {
-//    [self getPlayerData:1];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", ip, @"?action=newsession"]]
+static NSString * ip = @"http://95.80.44.85/";
+
+// Makes a GET request for a server at a given URL. Returns a string with the response date.
+- (NSString*) queryServer: (NSString*) queryURL{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: queryURL]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
+                                                       timeoutInterval:5];
     
     [request setHTTPMethod: @"GET"];
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
-    
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", requestError);
+        return nil;
+    }
+    else {
+        NSString* responseStr = [[NSString alloc] initWithData:response
+                                                      encoding:NSUTF8StringEncoding];
+        //NSLog(@"Server returned %@", responseStr);
+        return responseStr;
+    }
     
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                              encoding:NSUTF8StringEncoding];
+}
+
+
+- (NSString*) queryAppServerWithAction:(NSString*) action {
+    NSString* urlString = [NSString stringWithFormat:@"%@?action=%@", ip, action];
+    //NSLog(@"%@", urlString);
+    return [self queryServer:urlString];
+}
+
+// TODO: make server check if sessionID exists
+- (NSString*) queryAppServerWithAction: (NSString*) action
+                         withSessionID:(NSInteger) sessionID {
+    return [self queryServer: [NSString stringWithFormat:@"%@?action=%@&sessionid=%d", ip, action, sessionID]];
+}
+
+- (NSString*) queryAppServerWithAction: (NSString*) action
+                         withSessionID:(NSInteger) sessionID
+                          withPlayerID:(NSInteger) playerID {
+    return [self queryServer:[NSString stringWithFormat:@"%@?action=%@&sessionid=%d&playerid=%d", ip, action, sessionID, playerID]];
+}
+
+// Gets a new session ID from the server. if the server responds with an error, the error message is printed and -1 is returned.
+- (NSInteger) getNewSessionID {
+    NSString *serverResponse = [self queryAppServerWithAction:@"newsession"];
     
     @try {
-        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
-        return [responseStr integerValue];
+        NSLog(@"getNewSessionID ok: %d",  [serverResponse integerValue]);
+        return [serverResponse integerValue];
     }
     @catch (NSException *e) {
-        NSLog(@"Server returned exception: %@", responseStr);
+        NSLog(@"getNewSessionID exception: %@", serverResponse);
         return -1;
     }
 }
 
 // Adds a player to an existing session. The method will connect to the server and retrieve an available player ID for that session. If the server responded with an error, the error message is printed and -1 is returned.
-// TODO: make server check if sessionID exists
 - (NSInteger) addPlayerToSession : (NSInteger) sessionID{
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%lu&name=%@", ip, (long)sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]]
-                                                         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
+    NSString* serverResponse = [self queryServer:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%lu&name=%@", ip, (long)sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
     
     @try {
-        NSInteger returnVal =  [responseStr integerValue];
+        NSInteger returnVal =  [serverResponse integerValue];
         [[Game sharedGame] setSessionID:sessionID];
         [[[Game sharedGame] myself] setInGameID:returnVal];
         [self uploadPlayerImage];
         return returnVal;
     }
     @catch (NSException *e) {
-        NSLog(@"Server returned exception: %@", responseStr);
+        NSLog(@"addPlayerToSession exception: %@", serverResponse);
         return -1;
     }
 }
 
 // Retrieves the number of players in the session with the given sessionID. If the server responded with an error, the error message is printed and -1 is returned.
 - (NSInteger) getNumberOfPlayersInSession {
- NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%d", ip, @"?action=getnumberofplayers&sessionid=", [[Game sharedGame] sessionID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
+    NSString* serverResponse = [self queryAppServerWithAction:@"getnumberofplayers" withSessionID:[[Game sharedGame] sessionID]];
     
     @try {
-        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
-        return [responseStr integerValue];
+        return [serverResponse integerValue];
     }
     @catch (NSException *e) {
-        NSLog(@"Server returned exception: %@", responseStr);
+        NSLog(@"getNumberOfPlayersInSession exception: %@", serverResponse);
         return -1;
     }
 }
@@ -111,18 +116,6 @@ static NSString * ip = @"http://95.80.44.85/";
 Player* player;
 
 - (NSMutableArray *) getPlayerData {
-    
-    /* something is broken with this
-    __block NSData* data;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString: [NSString stringWithFormat:@"%@%@%d", ip, @"?action=getplayerdata&sessionid=", sessionID]]];
-        [self performSelectorOnMainThread:@selector(fetchedData:)
-                               withObject:data waitUntilDone:YES];
-        NSLog(@"aaa %@", data);
-
-    });
-     */
     
     // create the URL we'd like to query
     NSURL *myURL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=getplayerdata&sessionid=", (long)[[Game sharedGame] sessionID]]];
@@ -162,138 +155,52 @@ Player* player;
     return players;
 }
 
-
-
-
-
-- (NSDictionary *)fetchedData:(NSData *)responseData {
-    //parse out the json data
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData
-                          
-                          options:kNilOptions
-                          error:&error];
-    return json;
-}
-
 - (void) removePlayerFromSession {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu%@%d", ip, @"?action=removeplayer&sessionid=", (long)[[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
-    NSLog(@"response from server: %@", responseStr);
+    NSString* serverResponse = [self queryAppServerWithAction:@"removeplayer" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
+    NSLog(@"removePlayerFromSession: %@", serverResponse);
 }
 
 - (bool) isGameReady {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=sessionready&sessionid=", (long)[[Game sharedGame] sessionID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
+    NSString* serverResponse = [self queryAppServerWithAction:@"sessionready" withSessionID:[[Game sharedGame] sessionID]];
     
     @try {
-        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
-        return [responseStr boolValue];
+        NSLog(@"isGameReady ok: %d",  [serverResponse integerValue]);
+        return [serverResponse boolValue];
     }
     @catch (NSException *e) {
-        NSLog(@"Server returned exception: %@", responseStr);
+        NSLog(@"isGameReady exception: %@", serverResponse);
         return -1;
     }
 }
 
 - (void) startGame {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=startgame&sessionid=", (long)[[Game sharedGame] sessionID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
-    NSLog(@"response from server: %@", responseStr);
+    NSString* serverResponse = [self queryAppServerWithAction:@"startgame" withSessionID:[[Game sharedGame] sessionID]];
+    NSLog(@"startgame response: %@", serverResponse);
 }
 
 - (bool) isChanged {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu%@%d", ip, @"?action=ischanged&sessionid=", (long)[[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
+    NSString* serverResponse = [self queryAppServerWithAction:@"ischanged" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
     @try {
-        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
-        return [responseStr boolValue];
+        NSLog(@"isChanged ok: %d",  [serverResponse boolValue]);
+        return [serverResponse boolValue];
     }
     @catch (NSException *e) {
-        NSLog(@"Server returned exception: %@", responseStr);
+        NSLog(@"isChanged exception: %@", serverResponse);
         return -1;
     }
 }
 
 - (void) changeCleared {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu%@%d", ip, @"?action=changecleared&sessionid=", (long)[[Game sharedGame] sessionID], @"&playerid=", [[[Game sharedGame] myself] inGameID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"response from server: %@", responseStr);
+    NSString* serverResponse = [self queryAppServerWithAction:@"changecleared" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
+    NSLog(@"changeCleared: %@", serverResponse);
 
 }
 
 - (void) getSecret {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getroleandsecret&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
+    NSString* serverResponse = [self queryAppServerWithAction:@"getsecret" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
+    NSLog(@"getSecret: %@", serverResponse);
     
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
-    
-    // will return a string in the form role;clue
-    NSLog(@"response from server: %@", responseStr);
-    
-    NSArray *words = [responseStr componentsSeparatedByString:@";"];
+    NSArray *words = [serverResponse componentsSeparatedByString:@";"];
     [[[Game sharedGame] myself] setRole: [words[0] integerValue]];
     [[[Game sharedGame] myself] setClue: words[1]];
     
@@ -329,7 +236,7 @@ Player* player;
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
-    NSString *responseStr = [[NSString alloc] initWithData:returnData
+    NSString *serverResponse = [[NSString alloc] initWithData:returnData
                                                   encoding:NSUTF8StringEncoding];
 }
 
@@ -339,65 +246,30 @@ Player* player;
         [self clearOrder];
     }
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=getplayorder&sessionid=%lu&playerid=%lu", ip, (long)[[Game sharedGame] sessionID], (long)[[[Game sharedGame] myself] inGameID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
+    NSString* serverResponse = [self queryAppServerWithAction:@"getplayorder" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
+    NSLog(@"getPlayOrder: %@", serverResponse);
     
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
-    NSLog(@"response from server: %@", responseStr);
-    
-    NSMutableArray *arrayFromString = [[responseStr componentsSeparatedByString:@","] mutableCopy];
+    NSMutableArray *arrayFromString = [[serverResponse componentsSeparatedByString:@","] mutableCopy];
     
     return arrayFromString;
 }
 
 - (bool) didEveryoneGotOrder {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%lu", ip, @"?action=isordercleared&sessionid=", (long)[[Game sharedGame] sessionID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
+    NSString* serverResponse = [self queryAppServerWithAction:@"isordercleared" withSessionID:[[Game sharedGame] sessionID]];
     
     @try {
-        //NSLog(@"Server returned ok: %d",  [responseStr integerValue]);
-        return [responseStr boolValue];
+        NSLog(@"didEveryOneGotOrder ok: %d",  [serverResponse boolValue]);
+        return [serverResponse boolValue];
     }
     @catch (NSException *e) {
-        NSLog(@"Server returned exception: %@", responseStr);
-        return -1;
+        NSLog(@"didEveryOneGetOrder exception: %@", serverResponse);
+        return false;
     }
 }
 
 - (void) clearOrder {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?action=clearorder&sessionid=%lu", ip, (long)[[Game sharedGame] sessionID]]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSString* responseStr = [[NSString alloc] initWithData:response
-                                                  encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"response from server: %@", responseStr);
+    NSString* serverResponse = [self queryAppServerWithAction:@"clearorder" withSessionID:[[Game sharedGame] sessionID]];
+    NSLog(@"clearOrder response: %@", serverResponse);
 }
 
 
