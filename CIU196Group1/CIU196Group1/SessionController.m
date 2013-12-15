@@ -284,15 +284,34 @@ Player* player;
     NSLog(@"clearOrder response: %@", serverResponse);
 }
 
+- (void) setVoteFromDetective: (NSInteger) voteID {
+    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=setvote&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
+    NSLog(@"clearOrder response: %@", serverResponse);
+}
+
 
 //RobertTODO: call the server with targetID, based on the role, different action applied on server, if i send targetID as -1, that is a empty action, but necessary to change the flag somehow
 - (void)commitAction : (NSInteger) targetID{
     if (targetID >=0 && targetID < [[Game sharedGame] count]) {
         NSLog(@"action target is: No.%d - %@", targetID, [[[Game sharedGame] heroAtIndex:targetID] name]);
+        
+        switch ([[[Game sharedGame] myself] role]) {
+            case Detective:
+                [self setVoteFromDetective:targetID];
+                break;
+            case Police:
+                break;
+            case Killer:
+                break;
+            default:
+                break;
+        }
+        
     }
     else{
         NSLog(@"non action committed");
     }
 }
+
 
 @end
