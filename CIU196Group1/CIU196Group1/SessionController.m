@@ -318,7 +318,7 @@ Player* player;
 
 
 - (void) addVoteFromDetective: (NSInteger) voteID {
-    NSString *testlog = [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID];
+    
     NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
     NSLog(@"addVoteFromDetective response: %@", serverResponse);
 }
@@ -330,12 +330,12 @@ Player* player;
 
 - (void) addVoteFromKiller: (NSInteger) voteID {
     NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
-    NSString *testlog = [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID];
+
     NSLog(@"addVoteFromKiller response: %@", serverResponse);
 }
 
 - (void) skipVote {
-    NSString *serverResponse = [[self queryAppServerWithAction:@"skipvote" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[Game sharedGame] myself]inGameID];
+    NSString *serverResponse = [self queryAppServerWithAction:@"skipvote" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself]inGameID]];
     NSLog(@"%@",serverResponse);
 }
 
