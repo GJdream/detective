@@ -38,6 +38,7 @@ static Game* _sharedGame = nil;
         news = @"check your role and clue";
         turnFinished = FALSE;
         syncTime = 0;
+        targetID = 100;
     }
     return self;
 }
@@ -146,7 +147,7 @@ NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 - (void) startATurn{
     
     i = 0;
-    targetID = -1;
+    targetID = 100;
     [self setTurnFinished:FALSE];
     
     //countDone preparation time for a turn
@@ -174,22 +175,22 @@ int i = 0, turn = 0;
         [self setTurnFinished:TRUE]; //TODO check this to show action button
         
         //if no action commited, get status and start new turn
-        [self performSelector:@selector(commitcommit:) withObject: [NSNumber numberWithInteger:targetID] afterDelay:actionTime];
+        [self performSelector:@selector(commitcommit:) withObject: nil afterDelay:actionTime];
         //after 1 sec, refresh the data
         
         [self startTimer: actionTime];
-        [self performSelector:@selector(refreshStatus:) withObject:nil afterDelay:(actionTime + 1.5)];
+        [self performSelector:@selector(refreshStatus:) withObject:nil afterDelay:(actionTime + 1)];
     }
 }
 
-- (void)commitcommit : (NSNumber*) aTargetID{
-    [sessionController commitAction: [aTargetID integerValue]];
+- (void)commitcommit : (id) sender{
+    [sessionController commitAction: [[Game sharedGame] targetID]];
 }
 
 
 - (void) refreshStatus : (id) sender{
     [self updateStatus: [sessionController getPlayerStatuses]];
-    targetID = -1;
+    targetID = 100;
     [self startATurn];
 }
 
