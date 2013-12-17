@@ -138,10 +138,10 @@ NSInteger length;
 
 
 
-NSInteger prepareTime = 5, speechTime = 5, actionTime = 10;
+//NSInteger prepareTime = 5, speechTime = 5, actionTime = 10;
 
 //short timer test
-//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
@@ -174,7 +174,7 @@ int i = 0, turn = 0;
         [self setTurnFinished:TRUE]; //TODO check this to show action button
         
         //if no action commited, get status and start new turn
-        [self performSelector:@selector(commitcommit:) withObject:[NSNumber numberWithInt:targetID] afterDelay:actionTime];
+        [self performSelector:@selector(commitcommit:) withObject:[NSNumber numberWithInteger:targetID] afterDelay:actionTime];
         //after 1 sec, refresh the data
         
         [self startTimer: actionTime];
@@ -183,7 +183,7 @@ int i = 0, turn = 0;
 }
 
 - (void)commitcommit : (NSInteger) aTargetID{
-    [sessionController commitAction: aTargetID];
+    [sessionController commitAction: 1];
 }
 
 

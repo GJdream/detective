@@ -296,6 +296,8 @@ Player* player;
     if (targetID >=0 && targetID < [[Game sharedGame] count]) {
         NSLog(@"action target is: No.%d - %@", targetID, [[[Game sharedGame] heroAtIndex:targetID] name]);
         
+        NSLog(@"BBBBBBBBBBBBB: %d",[[[Game sharedGame] myself] role]);
+        
         switch ([[[Game sharedGame] myself] role]) {
             case Detective:
                 [self addVoteFromDetective:targetID];
@@ -319,6 +321,8 @@ Player* player;
 
 
 - (void) addVoteFromDetective: (NSInteger) voteID {
+    NSString *testlog = [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID];
+    NSLog(testlog);
     NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
     NSLog(@"addVoteFromDetective response: %@", serverResponse);
 }
@@ -330,6 +334,8 @@ Player* player;
 
 - (void) addVoteFromKiller: (NSInteger) voteID {
     NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
+    NSString *testlog = [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID];
+    NSLog(testlog);
     NSLog(@"addVoteFromKiller response: %@", serverResponse);
 }
 

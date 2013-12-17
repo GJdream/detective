@@ -66,7 +66,7 @@ NSMutableArray *players;
     for (int i=0; i < [[Game sharedGame] count]; i++) {
         tempIV = (UIImageView*)[players objectAtIndex:i];
         [tempIV setImage:[[[Game sharedGame] heroAtIndex:i] image]];
-        if(1){
+        if(1){ //TODO if this playe is still alive
             UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             actionButton.frame = CGRectMake(tempIV.frame.origin.x, tempIV.frame.origin.y, tempIV.frame.size.width, tempIV.frame.size.height); // position in the parent view and set the size of the button
             [actionButton setTitle:@"select" forState:UIControlStateNormal];
