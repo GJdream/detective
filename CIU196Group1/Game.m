@@ -174,7 +174,7 @@ int i = 0, turn = 0;
         [self setTurnFinished:TRUE]; //TODO check this to show action button
         
         //if no action commited, get status and start new turn
-        [self performSelector:@selector(commitcommit:) withObject:[NSNumber numberWithInteger:targetID] afterDelay:actionTime];
+        [self performSelector:@selector(commitcommit:) withObject: [NSNumber numberWithInteger:targetID] afterDelay:actionTime];
         //after 1 sec, refresh the data
         
         [self startTimer: actionTime];
@@ -182,8 +182,8 @@ int i = 0, turn = 0;
     }
 }
 
-- (void)commitcommit : (NSInteger) aTargetID{
-    [sessionController commitAction: 1];
+- (void)commitcommit : (NSNumber*) aTargetID{
+    [sessionController commitAction: [aTargetID integerValue]];
 }
 
 

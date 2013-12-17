@@ -296,8 +296,6 @@ Player* player;
     if (targetID >=0 && targetID < [[Game sharedGame] count]) {
         NSLog(@"action target is: No.%d - %@", targetID, [[[Game sharedGame] heroAtIndex:targetID] name]);
         
-        NSLog(@"BBBBBBBBBBBBB: %d",[[[Game sharedGame] myself] role]);
-        
         switch ([[[Game sharedGame] myself] role]) {
             case Detective:
                 [self addVoteFromDetective:targetID];
@@ -313,9 +311,8 @@ Player* player;
                 break;
         }
         
-    }
-    else{
-        NSLog(@"non action committed");
+    } else {
+        [self skipVote];
     }
 }
 
@@ -337,6 +334,10 @@ Player* player;
     NSString *testlog = [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID];
     NSLog(testlog);
     NSLog(@"addVoteFromKiller response: %@", serverResponse);
+}
+
+- (void) skipVote {
+    //RobertTODO: set the value of myVoteThisRound to a big number, just for clarify i've voted
 }
 
 - (bool) hasEveryoneVoted {
