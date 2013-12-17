@@ -30,6 +30,8 @@
 @property BOOL turnFinished;
 @property NSInteger targetID;
 
+@property float syncTime;
+
 - (NSUInteger)count;
 - (void)addHero:(Player *)ahero;
 - (Player* )heroAtIndex:(NSUInteger)index;

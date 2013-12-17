@@ -60,7 +60,7 @@
 
 - (IBAction)joinButtonClicked:(id)sender {
     
-    [[Game sharedGame] setSessionID: [self.sessionIDInput.text integerValue]];
+//    [[Game sharedGame] setSessionID: [self.sessionIDInput.text integerValue]];
     NSInteger inGameID = [[[Game sharedGame] sessionController] addPlayerToSession: [self.sessionIDInput.text integerValue]];
     
     

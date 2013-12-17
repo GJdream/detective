@@ -10,7 +10,7 @@
 
 
 @implementation Game
-@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, targetID;
+@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, targetID, syncTime;
 
 
 static Game* _sharedGame = nil;
@@ -37,6 +37,7 @@ static Game* _sharedGame = nil;
         sessionController = [[SessionController alloc] init];
         news = @"check your role and clue";
         turnFinished = FALSE;
+        syncTime = 0;
     }
     return self;
 }
@@ -137,10 +138,10 @@ NSInteger length;
 
 
 
-//NSInteger prepareTime = 5, speechTime = 10, actionTime = 15;
+NSInteger prepareTime = 10, speechTime = 10, actionTime = 15;
 
 //short timer test
-NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
@@ -149,7 +150,7 @@ NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
     [self setTurnFinished:FALSE];
     
     //countDone preparation time for a turn
-    [self startTimer: prepareTime];
+    [self startTimer: prepareTime + syncTime]; //TODO change to syncTime
     
     //set the first speech order
     [self setOrder: [[self sessionController] getOrder]];

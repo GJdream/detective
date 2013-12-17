@@ -48,6 +48,7 @@ BOOL timerActive = TRUE;
     
     //if already joind a game, skip rejoining
     if(![[Game sharedGame] sessionID]){
+        
         [[Game sharedGame] setSessionID: [[[Game sharedGame] sessionController] getNewSessionID]];
         
         
