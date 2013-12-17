@@ -32,6 +32,7 @@
 
 - (void) uploadPlayerImage;
 
+- (NSMutableArray*) getPlayerStatuses;
 
 //Game Logics
 - (NSMutableArray*) getOrder;

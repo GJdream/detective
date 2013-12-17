@@ -88,13 +88,13 @@ static NSString * ip = @"http://95.80.44.85/";
 
 // Adds a player to an existing session. The method will connect to the server and retrieve an available player ID for that session. If the server responded with an error, the error message is printed and -1 is returned.
 - (NSInteger) addPlayerToSession : (NSInteger) sessionID{
-    
     NSString* serverResponse = [self queryServer:[NSString stringWithFormat:@"%@?action=addplayer&sessionid=%lu&name=%@", ip, (long)sessionID, [[[[Game sharedGame] myself] name] stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
     
     @try {
         NSInteger returnVal =  [serverResponse integerValue];
         [[Game sharedGame] setSessionID:sessionID];
         [[[Game sharedGame] myself] setInGameID:returnVal];
+
         [self uploadPlayerImage];
         return returnVal;
     }
@@ -157,8 +157,14 @@ Player* player;
 
     }
 
-    
     return players;
+}
+
+// reutnrs an array of strings with 1 if the player is alive and 0 if the player is dead
+- (NSMutableArray *) getPlayerStatuses {
+    NSString* serverResponse = [self queryAppServerWithAction:@"getplayerstatuses" withSessionID:[[Game sharedGame] sessionID]];
+    
+    return [[serverResponse componentsSeparatedByString:@","] mutableCopy];
 }
 
 - (void) removePlayerFromSession {
@@ -324,6 +330,11 @@ Player* player;
 - (void) addVoteFromKiller: (NSInteger) voteID {
     NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
     NSLog(@"addVoteFromKiller response: %@", serverResponse);
+}
+
+- (bool) hasEveryoneVoted {
+    NSString* serverResponse = [self queryAppServerWithAction:@"haseveryonevoted" withSessionID:[[Game sharedGame] sessionID]];
+    return [serverResponse boolValue];
 }
 
 
