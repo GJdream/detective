@@ -219,6 +219,7 @@ Player* player;
     NSArray *words = [serverResponse componentsSeparatedByString:@";"];
     [[[Game sharedGame] myself] setRole: [words[0] integerValue]];
     [[[Game sharedGame] myself] setClue: words[1]];
+    [[Game sharedGame] setSyncTime:[words[2] integerValue]];
 }
 
 
