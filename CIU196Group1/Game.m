@@ -138,7 +138,7 @@ NSInteger length;
 
 
 
-NSInteger prepareTime = 10, speechTime = 10, actionTime = 15;
+NSInteger prepareTime = 5, speechTime = 5, actionTime = 10;
 
 //short timer test
 //NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
@@ -150,7 +150,7 @@ NSInteger prepareTime = 10, speechTime = 10, actionTime = 15;
     [self setTurnFinished:FALSE];
     
     //countDone preparation time for a turn
-    [self startTimer: prepareTime + syncTime]; //TODO change to syncTime
+    [self startTimer: prepareTime]; //TODO change to syncTime
     
     //set the first speech order
     [self setOrder: [[self sessionController] getOrder]];
@@ -178,7 +178,7 @@ int i = 0, turn = 0;
         //after 1 sec, refresh the data
         
         [self startTimer: actionTime];
-        [self performSelector:@selector(refreshStatus:) withObject:nil afterDelay:(actionTime + 1)];
+        [self performSelector:@selector(refreshStatus:) withObject:nil afterDelay:(actionTime + 1.5)];
     }
 }
 
@@ -188,8 +188,7 @@ int i = 0, turn = 0;
 
 
 - (void) refreshStatus : (id) sender{
-    [self setHeroes: [sessionController getPlayerData]];
-    news = @"someone is dead"; //TODO better get it from server
+    [self updateStatus: [sessionController getPlayerStatuses]];
     targetID = -1;
     [self startATurn];
 }
@@ -201,4 +200,28 @@ int i = 0, turn = 0;
 - (BOOL) isMyTurn{
     return [[self heroAtIndex:turn] inGameID] == [self.myself inGameID];
 }
+
+- (void) updateStatus: (NSMutableArray *) heroStatus{
+    
+    news = @"";
+    int deathFlag = 0;
+    
+    for (int i =0; i < heroes.count; i++) {
+        if ([[self heroAtIndex:i] isAlive] && !(NSInteger)[heroStatus objectAtIndex:i]) {
+            deathFlag++;
+            if(deathFlag == 1)
+                news= [NSString stringWithFormat:@"%@%@", news, [[self heroAtIndex:i] name]];
+            else
+                news= [NSString stringWithFormat:@"%@ and %@", news, [[self heroAtIndex:i] name]];
+            [[self heroAtIndex:i] setIsAlive: FALSE];
+        }
+    }
+    
+    if (deathFlag == 0) {
+        news = @"nothing happened";
+    } else{
+        news= [NSString stringWithFormat:@"%@ died", news];
+    }
+}
+
 @end

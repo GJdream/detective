@@ -15,8 +15,6 @@
 @interface Game : NSObject
 
 +(Game*) sharedGame;
--(BOOL)saveChanges;
-- (void)reset;
 
 @property (nonatomic, strong) Player *myself;
 @property NSInteger sessionID;
@@ -29,9 +27,11 @@
 @property (nonatomic, strong) NSString *news;
 @property BOOL turnFinished;
 @property NSInteger targetID;
+@property NSInteger syncTime; //NOT used due to lacking millisecond precision
 
-@property NSInteger syncTime;
 
+-(BOOL)saveChanges;
+- (void)reset;
 - (NSUInteger)count;
 - (void)addHero:(Player *)ahero;
 - (Player* )heroAtIndex:(NSUInteger)index;
@@ -40,5 +40,6 @@
 - (void) startATurn;
 - (NSInteger) readTimer;
 - (BOOL) isMyTurn;
+- (void) updateStatus: (NSMutableArray *) heroStatus;
 
 @end

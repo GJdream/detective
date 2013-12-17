@@ -71,7 +71,7 @@ BOOL timerActive = TRUE;
 
 - (void)startUpdating
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkServer:) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(checkServer:) userInfo:nil repeats:YES];
 }
 
 - (void)stopUpdating
