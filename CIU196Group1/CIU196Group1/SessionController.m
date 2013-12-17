@@ -341,7 +341,7 @@ Player* player;
 
 // 0 for no win, 1 for detective win, 2 for killer win
 - (NSInteger) detectWinningCondition {
-    NSString *serverResponse = [self queryAppServerWithAction:@"detectwinningcondition" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself]inGameID]];
+    NSString *serverResponse = [self queryAppServerWithAction:@"detectwinningcondition" withSessionID:[[Game sharedGame] sessionID]];
     NSLog(@"detectWinningCondition response: %@",serverResponse);
     return [serverResponse integerValue];
 }
