@@ -139,10 +139,10 @@ NSInteger length;
 
 
 
-//NSInteger prepareTime = 5, speechTime = 5, actionTime = 10;
+NSInteger prepareTime = 15, speechTime = 5, actionTime = 10;
 
 //short timer test
-NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
@@ -208,7 +208,10 @@ int i = 0, turn = 0;
     int deathFlag = 0;
     
     for (int i =0; i < heroes.count; i++) {
-        if ([[self heroAtIndex:i] isAlive] && !(NSInteger)[heroStatus objectAtIndex:i]) {
+        NSLog(@"the hero is Alive:%d", [[self heroAtIndex:i] isAlive]);
+        NSLog(@"the hero is Alive:%d", [(NSNumber*)[heroStatus objectAtIndex:i] integerValue]);
+        
+        if ([[self heroAtIndex:i] isAlive] && ![(NSNumber*)[heroStatus objectAtIndex:i] integerValue]) {
             deathFlag++;
             if(deathFlag == 1)
                 news= [NSString stringWithFormat:@"%@%@", news, [[self heroAtIndex:i] name]];

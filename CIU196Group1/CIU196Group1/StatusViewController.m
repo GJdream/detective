@@ -66,16 +66,6 @@ NSMutableArray *players;
     for (int i=0; i < [[Game sharedGame] count]; i++) {
         tempIV = (UIImageView*)[players objectAtIndex:i];
         [tempIV setImage:[[[Game sharedGame] heroAtIndex:i] image]];
-        if(1){ //TODO if this playe is still alive
-            UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            actionButton.frame = CGRectMake(tempIV.frame.origin.x, tempIV.frame.origin.y, tempIV.frame.size.width, tempIV.frame.size.height); // position in the parent view and set the size of the button
-            [actionButton setTitle:@"select" forState:UIControlStateNormal];
-            [actionButton setTag:i]; 
-            // add targets and actions
-            [actionButton addTarget:self action:@selector(playerClicked:) forControlEvents:UIControlEventTouchUpInside];
-            // add to a view
-            [actionView addSubview:actionButton];
-        }
     }
 
     //Not gonna have skip in plan
@@ -85,7 +75,6 @@ NSMutableArray *players;
     
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
                                    selector:@selector(loop) userInfo:nil repeats:YES];
-    
 }
 
 - (IBAction)playerClicked:(id)sender {
@@ -97,26 +86,41 @@ NSMutableArray *players;
 
 NSInteger count;
 - (void)loop{
-    
+
     // update the timer and the information all the time
     timerLabel.text = [NSString stringWithFormat:@"%d sec", [[Game sharedGame] readTimer]];
     infoLabel.text = [[Game sharedGame] news];
     
+    for (int i = 0; i < [[Game sharedGame] count]; i++) {
+        if ([[[Game sharedGame] heroAtIndex:i] isAlive]) {
+            [(UIImageView*)[players objectAtIndex:i] setAlpha:1];
+        } else{
+            [(UIImageView*)[players objectAtIndex:i] setAlpha:0.5];
+        }
+    }
     
     if ([[Game sharedGame] turnFinished]) {
         //only case we show the action buttons
-        
         [actionView setHidden:FALSE];
+        UIImageView* tempIV;
+        for (int i=0; i < [[Game sharedGame] count]; i++) {
+            tempIV = (UIImageView*)[players objectAtIndex:i];
+            if([[[Game sharedGame] heroAtIndex:i] isAlive]){
+                UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                actionButton.frame = CGRectMake(tempIV.frame.origin.x, tempIV.frame.origin.y, tempIV.frame.size.width, tempIV.frame.size.height); // position in the parent view and set the size of the button
+                [actionButton setTitle:@"select" forState:UIControlStateNormal];
+                [actionButton setTag:i];
+                // add targets and actions
+                [actionButton addTarget:self action:@selector(playerClicked:) forControlEvents:UIControlEventTouchUpInside];
+                // add to a view
+                [actionView addSubview:actionButton];
+            }
+        }
         
     }else{
-        
         [actionView setHidden:TRUE];
-//        [actionView setEnabled:FALSE];
-        
-//        if (![[Game sharedGame] isMyTurn]) {
-//            [skipButton setHidden:TRUE];
-//            [skipButton setEnabled:FALSE];
-//        }
+        [[actionView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        targetLable.text = @"";
     }
 }
 
