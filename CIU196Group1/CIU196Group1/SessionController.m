@@ -336,12 +336,7 @@ Player* player;
 
 - (void) skipVote {
     NSString *serverResponse = [self queryAppServerWithAction:@"skipvote" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself]inGameID]];
-    NSLog(@"%@",serverResponse);
-}
-
-- (bool) hasEveryoneVoted {
-    NSString* serverResponse = [self queryAppServerWithAction:@"haseveryonevoted" withSessionID:[[Game sharedGame] sessionID]];
-    return [serverResponse boolValue];
+    NSLog(@"skipVote response: %@",serverResponse);
 }
 
 
