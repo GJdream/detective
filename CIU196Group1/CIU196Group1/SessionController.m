@@ -284,12 +284,6 @@ Player* player;
     NSLog(@"clearOrder response: %@", serverResponse);
 }
 
-- (void) addVoteFromDetective: (NSInteger) voteID {
-    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
-    NSLog(@"clearOrder response: %@", serverResponse);
-}
-
-
 //RobertTODO: call the server with targetID, based on the role, different action applied on server, if i send targetID as -1, that is a empty action, but necessary to change the flag somehow
 - (void)commitAction : (NSInteger) targetID{
     if (targetID >=0 && targetID < [[Game sharedGame] count]) {
@@ -300,10 +294,13 @@ Player* player;
                 [self addVoteFromDetective:targetID];
                 break;
             case Police:
+                [self addVoteFromPolice:targetID];
                 break;
             case Killer:
+                [self addVoteFromKiller:targetID];
                 break;
             default:
+                @throw [NSException exceptionWithName:@"" reason:@"invalid role sentt to commitAction" userInfo:nil];
                 break;
         }
         
@@ -312,6 +309,24 @@ Player* player;
         NSLog(@"non action committed");
     }
 }
+
+
+- (void) addVoteFromDetective: (NSInteger) voteID {
+    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromdetective&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
+    NSLog(@"addVoteFromDetective response: %@", serverResponse);
+}
+
+- (void) addVoteFromPolice: (NSInteger) voteID {
+    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefrompolice&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
+    NSLog(@"addVoteFromPolice response: %@", serverResponse);
+}
+
+- (void) addVoteFromKiller: (NSInteger) voteID {
+    NSString* serverResponse = [self queryServer: [NSString stringWithFormat:@"%@?action=addvotefromkiller&sessionid=%d&playerid=%d&voteid=%d", ip, [[Game sharedGame] sessionID], [[[Game sharedGame] myself] inGameID], voteID]];
+    NSLog(@"addVoteFromKiller response: %@", serverResponse);
+}
+
+
 
 
 @end
