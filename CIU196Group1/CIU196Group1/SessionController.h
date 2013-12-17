@@ -39,4 +39,6 @@
 
 - (void)commitAction : (NSInteger) targetID;
 
+- (NSInteger) detectWinningCondition;
+
 @end
