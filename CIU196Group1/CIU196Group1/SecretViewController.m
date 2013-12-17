@@ -30,8 +30,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSString *role = @"nothing";
+    switch ([[[Game sharedGame] myself] role]) {
+        case 0:
+            role = @"detective";
+            break;
+        case 1:
+            role = @"police";
+            break;
+        case 2:
+            role = @"killer";
+            break;
+            
+        default:
+            break;
+    }
     
-    self.roleLabel.text = [NSString stringWithFormat:@"Role: %d", [[[Game sharedGame] myself] role]];
+    self.roleLabel.text = [NSString stringWithFormat:@"Role: %@", role];
     
     self.clueLabel.text = [NSString stringWithFormat:@"Clue: %@", [[[Game sharedGame] myself] clue]];
 
