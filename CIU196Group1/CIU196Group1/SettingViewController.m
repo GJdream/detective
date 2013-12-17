@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 - (IBAction)resetButtonPressed:(id)sender;
+- (IBAction)backButtonClicked:(id)sender;
 
 @end
 
@@ -69,6 +70,11 @@
 
 - (IBAction)resetButtonPressed:(id)sender {
     [[[Game sharedGame] myself] reset];
+}
+
+- (IBAction)backButtonClicked:(id)sender {
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

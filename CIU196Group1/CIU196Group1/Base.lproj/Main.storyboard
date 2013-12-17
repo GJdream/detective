@@ -117,7 +117,7 @@
                         <barButtonItem key="backBarButtonItem" title="Menu" id="MGv-9c-ns5"/>
                         <barButtonItem key="rightBarButtonItem" title="Setting" id="wi9-PS-m9r">
                             <connections>
-                                <segue destination="uFf-sP-bbV" kind="push" id="fof-jR-Lo4"/>
+                                <segue destination="hbz-af-CCk" kind="modal" id="fof-jR-Lo4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -148,11 +148,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ceo-cF-edm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="always" id="ceo-cF-edm">
                                 <rect key="frame" x="60" y="170" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vHP-A5-2gV">
                                 <rect key="frame" x="135" y="226" width="51" height="30"/>
@@ -220,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IxF-MO-FA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-316" y="-1988"/>
+            <point key="canvasLocation" x="210" y="-1988"/>
         </scene>
         <!--NewGame View Controller-->
         <scene sceneID="PyY-4u-e95">
@@ -507,12 +507,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGr-HF-Exs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="-1469"/>
+            <point key="canvasLocation" x="716" y="-1469"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="43A-fH-dAt">
             <objects>
-                <viewController id="uFf-sP-bbV" userLabel="Setting View Controller" customClass="SettingViewController" sceneMemberID="viewController">
+                <viewController title="Setting" id="uFf-sP-bbV" userLabel="Setting View Controller" customClass="SettingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lGr-0T-kHc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -536,7 +536,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="fPC-hn-Bp3" kind="modal" id="9CD-o5-bbI"/>
+                                    <segue destination="fPC-hn-Bp3" kind="push" id="9CD-o5-bbI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AJp-RC-g9c">
@@ -564,7 +564,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Setting" id="M36-uB-m8G"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Setting" id="M36-uB-m8G">
+                        <barButtonItem key="backBarButtonItem" title="Setting" id="Hpc-Db-kMf"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Gb-9b-TXg">
+                            <connections>
+                                <action selector="backButtonClicked:" destination="uFf-sP-bbV" id="5rQ-cE-gOg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="loginButton" destination="aXh-gR-1aU" id="XyM-Fn-zuY"/>
                         <outlet property="logoutButton" destination="CJI-ML-C9N" id="lFp-Qr-gXN"/>
@@ -572,7 +581,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UaK-eC-yXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-754" y="-1988"/>
+            <point key="canvasLocation" x="-358" y="-1988"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PcP-c3-LaG">
@@ -733,6 +742,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otJ-bu-z1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-319" y="1709"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8bp-Fw-vkb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hbz-af-CCk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TfD-9m-gcs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uFf-sP-bbV" kind="relationship" relationship="rootViewController" id="4kl-u0-cCn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M9A-L9-eba" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-754" y="-1988"/>
         </scene>
     </scenes>
     <resources>
