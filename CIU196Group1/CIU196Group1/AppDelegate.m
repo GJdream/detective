@@ -48,10 +48,11 @@ NSString *const SCSessionStateChangedNotification =
 //                                                                       instantiateViewControllerWithIdentifier: @"menuController"];
     
     
-    UINavigationController *navigationController = (UINavigationController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window setRootViewController:navigationController];
-    [self.window setBackgroundColor:[UIColor whiteColor]];
+//    UINavigationController *navigationController = (UINavigationController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    [self.window setRootViewController:navigationController];
+//    [self.window setBackgroundColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
     
     
