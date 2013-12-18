@@ -31,7 +31,14 @@ NSString *const SCSessionStateChangedNotification =
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+{
+    
+    // Override point for customization after application launch.
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.backgroundColor = [UIColor whiteColor];
+    
     [FBProfilePictureView class];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
@@ -40,8 +47,8 @@ NSString *const SCSessionStateChangedNotification =
 //    UIViewController *menuController = (UIViewController*)[mainStoryboard
 //                                                                       instantiateViewControllerWithIdentifier: @"menuController"];
     
-    UINavigationController *navigationController = (UINavigationController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"topNavController"];
     
+    UINavigationController *navigationController = (UINavigationController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setRootViewController:navigationController];
     [self.window setBackgroundColor:[UIColor whiteColor]];

@@ -36,8 +36,12 @@
 		35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A4071859C08A00CC0FF7 /* TestViewController.m */; };
 		35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */; };
 		35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */; };
+		F604D0261861B87C00CAD893 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0251861B87C00CAD893 /* PageContentViewController.m */; };
+		F604D0291861B91C00CAD893 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0281861B91C00CAD893 /* ViewController.m */; };
 		F6571F95185B4001004A576A /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F6571F94185B4001004A576A /* Utilities.m */; };
 		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
+		F6D84AAE1861BA8F003D52FB /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = F6D84AAC1861BA8F003D52FB /* page1.png */; };
+		F6D84AAF1861BA8F003D52FB /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = F6D84AAD1861BA8F003D52FB /* page2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,8 +104,14 @@
 		35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModalSubViewController.m; sourceTree = "<group>"; };
 		35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPushSubViewController.h; sourceTree = "<group>"; };
 		35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPushSubViewController.m; sourceTree = "<group>"; };
+		F604D0241861B87C00CAD893 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
+		F604D0251861B87C00CAD893 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		F604D0271861B91C00CAD893 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F604D0281861B91C00CAD893 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F6571F93185B4001004A576A /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		F6571F94185B4001004A576A /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		F6D84AAC1861BA8F003D52FB /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page1.png; path = images/page1.png; sourceTree = "<group>"; };
+		F6D84AAD1861BA8F003D52FB /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page2.png; path = images/page2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +144,8 @@
 			children = (
 				35713893184679AC00E7E8D1 /* SCLoginViewController.h */,
 				35713894184679AC00E7E8D1 /* SCLoginViewController.m */,
+				F604D0271861B91C00CAD893 /* ViewController.h */,
+				F604D0281861B91C00CAD893 /* ViewController.m */,
 				3571389918468A6C00E7E8D1 /* MenuViewController.h */,
 				3571389A18468A6C00E7E8D1 /* MenuViewController.m */,
 				3571389C184691D600E7E8D1 /* SettingViewController.h */,
@@ -154,6 +166,8 @@
 				35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */,
 				35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */,
 				35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */,
+				F604D0241861B87C00CAD893 /* PageContentViewController.h */,
+				F604D0251861B87C00CAD893 /* PageContentViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -179,6 +193,8 @@
 		352AF010184B8FD800C7C14D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F6D84AAC1861BA8F003D52FB /* page1.png */,
+				F6D84AAD1861BA8F003D52FB /* page2.png */,
 				352AF011184B8FED00C7C14D /* alien.png */,
 			);
 			name = Images;
@@ -339,9 +355,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3571381C18456E7100E7E8D1 /* Images.xcassets in Resources */,
+				F6D84AAE1861BA8F003D52FB /* page1.png in Resources */,
 				352AF012184B8FED00C7C14D /* alien.png in Resources */,
 				3571380B18456E7000E7E8D1 /* InfoPlist.strings in Resources */,
 				3571381418456E7100E7E8D1 /* Main.storyboard in Resources */,
+				F6D84AAF1861BA8F003D52FB /* page2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,8 +392,10 @@
 				3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */,
 				F6571F95185B4001004A576A /* Utilities.m in Sources */,
 				352AF00D184A3D9000C7C14D /* PlayerCell.m in Sources */,
+				F604D0291861B91C00CAD893 /* ViewController.m in Sources */,
 				352AF0061848948400C7C14D /* Player.m in Sources */,
 				35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */,
+				F604D0261861B87C00CAD893 /* PageContentViewController.m in Sources */,
 				352AF00A1848A01E00C7C14D /* NewGameViewController.m in Sources */,
 				3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */,
 			);
