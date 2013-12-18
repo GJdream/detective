@@ -39,11 +39,10 @@ NSString *const SCSessionStateChangedNotification =
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     pageControl.backgroundColor = [UIColor whiteColor];
     
-    [FBProfilePictureView class];
+//    [FBProfilePictureView class];
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle: nil];
-//    
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+//
 //    UIViewController *menuController = (UIViewController*)[mainStoryboard
 //                                                                       instantiateViewControllerWithIdentifier: @"menuController"];
     
@@ -114,18 +113,22 @@ SEL getImageSelector;
                      fbImage = [[FBProfilePictureView alloc] init];
                      fbImage.profileID = user.id;
                      getImageSelector = sel_registerName("getUserImageFromFBView");
-                     [self performSelector:getImageSelector withObject:nil afterDelay:1.0];
+                     [self performSelector:getImageSelector withObject:nil afterDelay:0.5];
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Profile loaded" message:@"would u use your nickname?\nO(∩_∩)O~" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                     [alert show];
+                     [self performSelector:@selector(autoDismiss:) withObject:alert afterDelay:4];
                  }
              }];
             
-            [[self.window rootViewController] dismissViewControllerAnimated:YES completion:nil];
+//            [([[[(UIViewController*)[self.window rootViewController] navigationController] visibleViewController] navigationController]) popViewControllerAnimated:YES];
+//            [((UINavigationController*)[self.window rootViewController]) popViewControllerAnimated:YES];
         }
             break;
         case FBSessionStateClosed:
         case FBSessionStateClosedLoginFailed:
             // Once the user has logged in, we want them to
             // be looking at the root view.
-            [[self.window rootViewController] dismissViewControllerAnimated:NO completion:nil];
+//            [[self.window rootViewController] dismissViewControllerAnimated:NO completion:nil];
             
             [FBSession.activeSession closeAndClearTokenInformation];
                         break;
@@ -148,6 +151,10 @@ SEL getImageSelector;
     }
 }
 
+
+-(void)autoDismiss:(UIAlertView*)x{
+	[x dismissWithClickedButtonIndex:-1 animated:YES];
+}
 
 
 - (void)openSession
@@ -189,6 +196,7 @@ SEL getImageSelector;
     
     [[[Game sharedGame] myself] setImage:img];
     
+    [FBSession.activeSession closeAndClearTokenInformation];
 }
 
 
