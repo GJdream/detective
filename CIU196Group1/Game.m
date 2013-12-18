@@ -112,8 +112,12 @@ Player* profileData = nil;
 }
 
 - (Player* )heroAtIndex:(NSUInteger)index {
+    if (index < [heroes count]) {
+        return (Player* )[heroes objectAtIndex:index];
+    } else {
+        return nil;
+    }
     
-    return (Player* )[heroes objectAtIndex:index];
 }
 
 - (void)addHero:(Player *)ahero {
@@ -235,13 +239,15 @@ int i = 0, turn = 0;
             if(deathFlag == 1)
                 news= [NSString stringWithFormat:@"%@%@", news, [[self heroAtIndex:i] name]];
             else
-                news= [NSString stringWithFormat:@"%@ and\n %@", news, [[self heroAtIndex:i] name]];
+                news= [NSString stringWithFormat:@"%@ and %@", news, [[self heroAtIndex:i] name]];
+            [[self heroAtIndex:i] setIsAlive: FALSE];
+            
+            
         }
-        [[self heroAtIndex:i] setIsAlive: [(NSNumber*)[heroStatus objectAtIndex:i] integerValue]];
     }
     
     if (deathFlag == 0) {
-        return;
+        news = @"nothing happened";
     } else{
         news= [NSString stringWithFormat:@"%@ died", news];
     }

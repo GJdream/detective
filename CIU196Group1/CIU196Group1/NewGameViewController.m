@@ -122,16 +122,13 @@ BOOL timerActive = TRUE;
         //if there is some change, update the game status
         
         if([[[Game sharedGame] sessionController] isChanged]){
-            
-            [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
-            
-            [[[Game sharedGame] sessionController] changeCleared];
-            
-            [self viewWillAppear:TRUE];
+            //if no action commited, get status and start new turn
+            [self performSelector:@selector(loadPlayerData:) withObject: nil afterDelay:1];
         }
         
         
         counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
+        
         [self.playerTable reloadData];
 
         //if a new game is ready to start, set waiting flag to false, and move to game page
@@ -141,6 +138,7 @@ BOOL timerActive = TRUE;
         }
         
         
+        [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
 //        NSLog(@"my inGameID is %d", [[[Game sharedGame] myself] inGameID]);
     }
         
@@ -150,6 +148,16 @@ BOOL timerActive = TRUE;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadPlayerData : (id) sender {
+    [[Game sharedGame] setHeroes: [[[Game sharedGame] sessionController] getPlayerData]];
+    
+    [[[Game sharedGame] sessionController] changeCleared];
+    
+    
+    [self viewWillAppear:TRUE];
+
 }
 
 #pragma mark - Table View
