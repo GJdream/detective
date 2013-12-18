@@ -49,15 +49,15 @@
         <!--Page View Controller-->
         <scene sceneID="qAV-e3-pel">
             <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0pQ-Bc-TW7" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="TutorialViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0pQ-Bc-TW7" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYI-n4-3pH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1432" y="422"/>
         </scene>
-        <!--Page Content View Controller-->
+        <!--Tutorial Content View Controller-->
         <scene sceneID="3bO-Tb-YVE">
             <objects>
-                <viewController storyboardIdentifier="PageContentViewController" id="2uy-mu-lDD" customClass="PageContentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialContentViewController" id="2uy-mu-lDD" customClass="TutorialContentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EyA-Ca-Tpn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,18 +66,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to play" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pyd-3R-eIi">
-                                <rect key="frame" x="114" y="113" width="92" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="ROO-1d-HhW" id="sei-nB-MYn"/>
-                        <outlet property="titleLabel" destination="pyd-3R-eIi" id="s58-3M-q3D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OtB-bu-nLN" userLabel="First Responder" sceneMemberID="firstResponder"/>

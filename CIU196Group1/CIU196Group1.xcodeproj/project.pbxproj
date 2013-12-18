@@ -36,7 +36,7 @@
 		35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A4071859C08A00CC0FF7 /* TestViewController.m */; };
 		35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */; };
 		35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */; };
-		F604D0261861B87C00CAD893 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0251861B87C00CAD893 /* PageContentViewController.m */; };
+		F604D0261861B87C00CAD893 /* TutorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0251861B87C00CAD893 /* TutorialContentViewController.m */; };
 		F604D0291861B91C00CAD893 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0281861B91C00CAD893 /* ViewController.m */; };
 		F6571F95185B4001004A576A /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F6571F94185B4001004A576A /* Utilities.m */; };
 		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
@@ -104,8 +104,8 @@
 		35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModalSubViewController.m; sourceTree = "<group>"; };
 		35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPushSubViewController.h; sourceTree = "<group>"; };
 		35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPushSubViewController.m; sourceTree = "<group>"; };
-		F604D0241861B87C00CAD893 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
-		F604D0251861B87C00CAD893 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		F604D0241861B87C00CAD893 /* TutorialContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialContentViewController.h; sourceTree = "<group>"; };
+		F604D0251861B87C00CAD893 /* TutorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialContentViewController.m; sourceTree = "<group>"; };
 		F604D0271861B91C00CAD893 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F604D0281861B91C00CAD893 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F6571F93185B4001004A576A /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 				35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */,
 				35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */,
 				35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */,
-				F604D0241861B87C00CAD893 /* PageContentViewController.h */,
-				F604D0251861B87C00CAD893 /* PageContentViewController.m */,
+				F604D0241861B87C00CAD893 /* TutorialContentViewController.h */,
+				F604D0251861B87C00CAD893 /* TutorialContentViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -395,7 +395,7 @@
 				F604D0291861B91C00CAD893 /* ViewController.m in Sources */,
 				352AF0061848948400C7C14D /* Player.m in Sources */,
 				35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */,
-				F604D0261861B87C00CAD893 /* PageContentViewController.m in Sources */,
+				F604D0261861B87C00CAD893 /* TutorialContentViewController.m in Sources */,
 				352AF00A1848A01E00C7C14D /* NewGameViewController.m in Sources */,
 				3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */,
 			);

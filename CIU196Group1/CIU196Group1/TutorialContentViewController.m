@@ -1,18 +1,16 @@
 //
-//  PageContentViewController.m
-//  PageViewDemo
+//  TutorialContentViewController
 //
-//  Created by Simon on 24/11/13.
-//  Copyright (c) 2013 Appcoda. All rights reserved.
+//  Created by Robert Sebescen on 24/11/13.
 //
 
-#import "PageContentViewController.h"
+#import "TutorialContentViewController.h"
 
-@interface PageContentViewController ()
+@interface TutorialContentViewController ()
 
 @end
 
-@implementation PageContentViewController
+@implementation TutorialContentViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +26,6 @@
     [super viewDidLoad];
 
     self.backgroundImageView.image = [UIImage imageNamed:self.imageFile];
-    self.titleLabel.text = self.titleText;
 
 }
 
