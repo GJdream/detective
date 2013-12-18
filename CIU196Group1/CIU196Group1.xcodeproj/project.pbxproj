@@ -38,6 +38,10 @@
 		35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */; };
 		F604D0261861B87C00CAD893 /* TutorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0251861B87C00CAD893 /* TutorialContentViewController.m */; };
 		F604D0291861B91C00CAD893 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F604D0281861B91C00CAD893 /* ViewController.m */; };
+		F629A1071861DE1C00B6692B /* page4.png in Resources */ = {isa = PBXBuildFile; fileRef = F629A1031861DE1C00B6692B /* page4.png */; };
+		F629A1081861DE1C00B6692B /* page5.png in Resources */ = {isa = PBXBuildFile; fileRef = F629A1041861DE1C00B6692B /* page5.png */; };
+		F629A1091861DE1C00B6692B /* page6.png in Resources */ = {isa = PBXBuildFile; fileRef = F629A1051861DE1C00B6692B /* page6.png */; };
+		F629A10A1861DE1C00B6692B /* page7.png in Resources */ = {isa = PBXBuildFile; fileRef = F629A1061861DE1C00B6692B /* page7.png */; };
 		F6571F95185B4001004A576A /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F6571F94185B4001004A576A /* Utilities.m */; };
 		F6771D911861CF2A0056A22E /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = F6771D901861CF2A0056A22E /* page3.png */; };
 		F6D804151855C31500B0CAD4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354A22A41855203D00B57DD3 /* FacebookSDK.framework */; };
@@ -109,6 +113,10 @@
 		F604D0251861B87C00CAD893 /* TutorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialContentViewController.m; sourceTree = "<group>"; };
 		F604D0271861B91C00CAD893 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F604D0281861B91C00CAD893 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F629A1031861DE1C00B6692B /* page4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page4.png; path = images/page4.png; sourceTree = "<group>"; };
+		F629A1041861DE1C00B6692B /* page5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page5.png; path = images/page5.png; sourceTree = "<group>"; };
+		F629A1051861DE1C00B6692B /* page6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page6.png; path = images/page6.png; sourceTree = "<group>"; };
+		F629A1061861DE1C00B6692B /* page7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page7.png; path = images/page7.png; sourceTree = "<group>"; };
 		F6571F93185B4001004A576A /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		F6571F94185B4001004A576A /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		F6771D901861CF2A0056A22E /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page3.png; path = images/page3.png; sourceTree = "<group>"; };
@@ -146,8 +154,6 @@
 			children = (
 				35713893184679AC00E7E8D1 /* SCLoginViewController.h */,
 				35713894184679AC00E7E8D1 /* SCLoginViewController.m */,
-				F604D0271861B91C00CAD893 /* ViewController.h */,
-				F604D0281861B91C00CAD893 /* ViewController.m */,
 				3571389918468A6C00E7E8D1 /* MenuViewController.h */,
 				3571389A18468A6C00E7E8D1 /* MenuViewController.m */,
 				3571389C184691D600E7E8D1 /* SettingViewController.h */,
@@ -168,6 +174,8 @@
 				35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */,
 				35E5A40F185A0FA800CC0FF7 /* TestPushSubViewController.h */,
 				35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */,
+				F604D0271861B91C00CAD893 /* ViewController.h */,
+				F604D0281861B91C00CAD893 /* ViewController.m */,
 				F604D0241861B87C00CAD893 /* TutorialContentViewController.h */,
 				F604D0251861B87C00CAD893 /* TutorialContentViewController.m */,
 			);
@@ -195,9 +203,13 @@
 		352AF010184B8FD800C7C14D /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F6771D901861CF2A0056A22E /* page3.png */,
 				F6D84AAC1861BA8F003D52FB /* page1.png */,
 				F6D84AAD1861BA8F003D52FB /* page2.png */,
+				F6771D901861CF2A0056A22E /* page3.png */,
+				F629A1031861DE1C00B6692B /* page4.png */,
+				F629A1041861DE1C00B6692B /* page5.png */,
+				F629A1051861DE1C00B6692B /* page6.png */,
+				F629A1061861DE1C00B6692B /* page7.png */,
 				352AF011184B8FED00C7C14D /* alien.png */,
 			);
 			name = Images;
@@ -358,10 +370,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3571381C18456E7100E7E8D1 /* Images.xcassets in Resources */,
+				F629A1091861DE1C00B6692B /* page6.png in Resources */,
 				F6D84AAE1861BA8F003D52FB /* page1.png in Resources */,
 				352AF012184B8FED00C7C14D /* alien.png in Resources */,
 				3571380B18456E7000E7E8D1 /* InfoPlist.strings in Resources */,
 				3571381418456E7100E7E8D1 /* Main.storyboard in Resources */,
+				F629A1081861DE1C00B6692B /* page5.png in Resources */,
+				F629A1071861DE1C00B6692B /* page4.png in Resources */,
+				F629A10A1861DE1C00B6692B /* page7.png in Resources */,
 				F6D84AAF1861BA8F003D52FB /* page2.png in Resources */,
 				F6771D911861CF2A0056A22E /* page3.png in Resources */,
 			);
