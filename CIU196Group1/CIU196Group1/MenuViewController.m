@@ -45,6 +45,9 @@
 //     selector:@selector(sessionStateChanged:)
 //     name:SCSessionStateChangedNotification
 //     object:nil];
+    
+    [self performSegueWithIdentifier:@"showTutorial" sender:self];
+
 }
 
 //- (void)sessionStateChanged:(NSNotification*)notification {

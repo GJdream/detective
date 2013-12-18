@@ -9,6 +9,8 @@
 
 @interface ViewController ()
 
+- (IBAction)skipButtonClicked:(id)sender;
+
 @end
 
 @implementation ViewController
@@ -104,4 +106,7 @@
     return 0;
 }
 
+- (IBAction)skipButtonClicked:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
