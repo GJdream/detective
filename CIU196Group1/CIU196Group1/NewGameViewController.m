@@ -213,8 +213,8 @@ BOOL timerActive = TRUE;
     
     [[Game sharedGame] updateStatus: [[[Game sharedGame] sessionController] getPlayerStatuses]];
     
-    //TODELETE just for test perpose
-    [[Game sharedGame] setWinningCondition:0];
+//    //TODELETE just for test perpose
+//    [[Game sharedGame] setWinningCondition:0];
     
     [[Game sharedGame] setNews:@"check your role and clue"];
     

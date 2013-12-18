@@ -235,15 +235,13 @@ int i = 0, turn = 0;
             if(deathFlag == 1)
                 news= [NSString stringWithFormat:@"%@%@", news, [[self heroAtIndex:i] name]];
             else
-                news= [NSString stringWithFormat:@"%@ and %@", news, [[self heroAtIndex:i] name]];
-            [[self heroAtIndex:i] setIsAlive: FALSE];
-            
-            
+                news= [NSString stringWithFormat:@"%@ and\n %@", news, [[self heroAtIndex:i] name]];
         }
+        [[self heroAtIndex:i] setIsAlive: [(NSNumber*)[heroStatus objectAtIndex:i] integerValue]];
     }
     
     if (deathFlag == 0) {
-        news = @"nothing happened";
+        return;
     } else{
         news= [NSString stringWithFormat:@"%@ died", news];
     }
