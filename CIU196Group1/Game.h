@@ -28,7 +28,7 @@
 @property BOOL turnFinished;
 @property NSInteger targetID;
 @property NSInteger syncTime; //NOT used due to lacking millisecond precision
-
+@property NSInteger winningCondition;
 
 -(BOOL)saveChanges;
 - (void)reset;
@@ -41,5 +41,5 @@
 - (NSInteger) readTimer;
 - (BOOL) isMyTurn;
 - (void) updateStatus: (NSMutableArray *) heroStatus;
-
+- (void) endGame;
 @end

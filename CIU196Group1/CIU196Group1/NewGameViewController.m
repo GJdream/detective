@@ -90,8 +90,13 @@ BOOL timerActive = TRUE;
     //if it's a host and the game status is waiting, show start button
     if([[Game sharedGame] waiting]){
         if ([[Game sharedGame] host] == [[[Game sharedGame] myself] inGameID]) {
-            [self.startButton setEnabled:TRUE];
             [self.startButton setHidden:FALSE];
+            if ([[Game sharedGame] count] >= 3) {
+                [self.startButton setEnabled:TRUE];
+            }
+            else{
+                [self.startButton setEnabled:FALSE];
+            }
         }
     } else{
         [self.gameNavButton setEnabled:TRUE];
@@ -122,6 +127,7 @@ BOOL timerActive = TRUE;
             
             [[[Game sharedGame] sessionController] changeCleared];
             
+            [self viewWillAppear:TRUE];
         }
         
         
@@ -196,12 +202,21 @@ BOOL timerActive = TRUE;
     
     [[[Game sharedGame] sessionController] startGame];
     
+    //This line actaully allows use to be first one on sync phase
     [[Game sharedGame] setWaiting:FALSE];
+    
     [self enterGame];
 }
 
 - (void) enterGame{
     [[[Game sharedGame] sessionController] getSecret];
+    
+    [[Game sharedGame] updateStatus: [[[Game sharedGame] sessionController] getPlayerStatuses]];
+    
+    //TODELETE just for test perpose
+    [[Game sharedGame] setWinningCondition:0];
+    
+    [[Game sharedGame] setNews:@"check your role and clue"];
     
     //count down preparation time to read the clue
     [[Game sharedGame] startATurn];

@@ -54,7 +54,7 @@
 
 
 NSMutableArray *players;
-
+NSTimer *loopTimer;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,7 +73,7 @@ NSMutableArray *players;
     [skipButton setEnabled:FALSE];
     [actionView setHidden:TRUE];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
+    loopTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
                                    selector:@selector(loop) userInfo:nil repeats:YES];
 }
 
@@ -117,13 +117,33 @@ NSInteger count;
             }
         }
         
-    }else{
+    } else{
         [actionView setHidden:TRUE];
         [[actionView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
         targetLable.text = @"";
     }
+    
+    //winning condition check
+    if ([[Game sharedGame] winningCondition]) {
+        if ([[Game sharedGame] winningCondition] == 1) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Well done!" message:@"Detectives Won!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil,nil];
+            [alert show];
+            [self performSelector:@selector(autoDismiss:) withObject:alert afterDelay:4];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wohoo!" message:@"The Killer Won!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil,nil];
+            [alert show];
+            [self performSelector:@selector(autoDismiss:) withObject:alert afterDelay:4];
+        }
+        
+        [loopTimer invalidate];
+        [[Game sharedGame] endGame];
+    }
 }
 
+-(void)autoDismiss:(UIAlertView*)x{
+	[x dismissWithClickedButtonIndex:-1 animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning
 {

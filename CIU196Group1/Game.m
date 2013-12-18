@@ -10,7 +10,7 @@
 
 
 @implementation Game
-@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, targetID, syncTime;
+@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, targetID, syncTime, winningCondition;
 
 
 static Game* _sharedGame = nil;
@@ -31,6 +31,7 @@ static Game* _sharedGame = nil;
     self = [super init];
     if (self) {
         [self loadData];
+        sessionID = 0;
         heroes =[[NSMutableArray alloc] init];
         host = 0;
         waiting = TRUE;
@@ -39,11 +40,30 @@ static Game* _sharedGame = nil;
         turnFinished = FALSE;
         syncTime = 0;
         targetID = 100;
+        winningCondition = 0;
     }
     return self;
 }
 
+- (void)reset{
+    sessionID = 0;
+    heroes =[[NSMutableArray alloc] init];
+    host = 0;
+    waiting = TRUE;
+    news = @"check your role and clue";
+    turnFinished = FALSE;
+    syncTime = 0;
+    targetID = 100;
+    winningCondition = 0;
+}
 
+- (void) endGame{
+    waiting = TRUE;
+    syncTime = 0;
+    targetID = 100;
+    winningCondition = 0;
+//    [timer invalidate];
+}
 
 #define kFileName @"Profile.data"
 
@@ -79,9 +99,6 @@ Player* profileData = nil;
     return [NSKeyedArchiver archiveRootObject:self.myself toFile:[self profileStoreDataPath]];
 }
 
-- (void)reset{
-    sessionID = 0;
-}
 
 //
 // heroes managers
@@ -139,10 +156,10 @@ NSInteger length;
 
 
 
-NSInteger prepareTime = 15, speechTime = 5, actionTime = 10;
+//NSInteger prepareTime = 15, speechTime = 5, actionTime = 10;
 
 //short timer test
-//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
@@ -191,7 +208,9 @@ int i = 0, turn = 0;
 - (void) refreshStatus : (id) sender{
     [self updateStatus: [sessionController getPlayerStatuses]];
     targetID = 100;
-    [self startATurn];
+    if(winningCondition == 0){
+        [self startATurn];
+    }
 }
 
 - (NSInteger) readTimer{
@@ -218,6 +237,8 @@ int i = 0, turn = 0;
             else
                 news= [NSString stringWithFormat:@"%@ and %@", news, [[self heroAtIndex:i] name]];
             [[self heroAtIndex:i] setIsAlive: FALSE];
+            
+            
         }
     }
     
@@ -226,6 +247,8 @@ int i = 0, turn = 0;
     } else{
         news= [NSString stringWithFormat:@"%@ died", news];
     }
+
+    winningCondition = [sessionController detectWinningCondition];
 }
 
 @end
