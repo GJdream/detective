@@ -51,7 +51,7 @@
 }
 
 // IP for our app server
-static NSString * ip = @"http://95.80.44.85/";
+static NSString * ip = @"http://95.80.44.90/";
 
 // Makes a get request to server with a given action
 - (NSString*) queryAppServerWithAction:(NSString*) action {
