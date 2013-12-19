@@ -118,7 +118,7 @@ NSInteger count;
     }
     
     // TOTEST: seems we are not updating the myself.isalive, so need to check this
-    if ([[Game sharedGame] turnFinished]) {
+    if ([[Game sharedGame] turnFinished] && [[[Game sharedGame] myself] isAlive]) {
         //only case we show the action buttons
         [actionView setHidden:FALSE];
         UIImageView* tempIV;

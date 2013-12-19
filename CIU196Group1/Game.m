@@ -264,6 +264,7 @@ int i = 0, turn = 0;
             NSLog(@"died inGameID: %d, myself inGameID: %d",[[self heroAtIndex:i] inGameID], [self.myself inGameID]);
             if ([[self heroAtIndex:i] inGameID] == [self.myself inGameID]) {
                 [self.myself setIsAlive:FALSE];
+                NSLog(@"I died");
             }
         }
     }

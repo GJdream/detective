@@ -137,6 +137,8 @@ Player* player;
             player = [[Player alloc] init];
 
             [player setName: playerData[@"playerName"]];
+            [player setInGameID: [playerData[@"playerID"] integerValue]];
+            
             
             NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@/uploadedfiles/%d-%d.jpg", ip,
                                                                                               [[Game sharedGame] sessionID], [playerData[@"playerID"] intValue]]]];
