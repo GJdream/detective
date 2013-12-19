@@ -35,6 +35,9 @@
 {
     self.name = @"User Noname";
     self.image = [UIImage imageNamed:@"alien.png"];
+    self.isAlive = TRUE;
+    
+    NSLog(@"ISALIVE is set: %d", self.isAlive);
 }
 
 

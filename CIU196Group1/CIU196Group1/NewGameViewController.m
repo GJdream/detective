@@ -219,6 +219,10 @@ BOOL timerActive = TRUE;
 }
 
 - (void) enterGame{
+    
+    
+    [[[Game sharedGame] myself] setIsAlive:TRUE];
+    
     [[[Game sharedGame] sessionController] getSecret];
     
     [[Game sharedGame] updateStatus: [[[Game sharedGame] sessionController] getPlayerStatuses]];

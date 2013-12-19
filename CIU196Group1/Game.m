@@ -160,6 +160,8 @@ NSInteger length;
         if(!turnFinished)
             [self takeTurn];
     }
+    
+    NSLog(@"am I alive: %d", [self.myself isAlive]);
 }
 
 
