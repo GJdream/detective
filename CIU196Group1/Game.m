@@ -163,7 +163,7 @@ NSInteger length;
 
 
 
-NSInteger prepareTime = 30, speechTime = 15, actionTime = 20;
+NSInteger prepareTime = 20, speechTime = 15, actionTime = 20;
 
 //short timer test
 //NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;

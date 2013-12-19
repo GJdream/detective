@@ -56,7 +56,7 @@ NSString *const SCSessionStateChangedNotification =
 //    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     [self.window makeKeyAndVisible];
     
-    
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 
     // Override point for customization after application launch.
     return YES;
