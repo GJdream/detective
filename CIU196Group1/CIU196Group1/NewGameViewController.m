@@ -128,7 +128,6 @@ BOOL timerActive = TRUE;
             [self performSelector:@selector(loadPlayerData:) withObject: nil afterDelay:1];
         }
         
-        
         counterLabel.text =  [NSString stringWithFormat:@"%d player(s) joined", [[Game sharedGame] count]];
         
         [self.playerTable reloadData];
