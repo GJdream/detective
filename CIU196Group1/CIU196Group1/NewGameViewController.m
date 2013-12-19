@@ -54,6 +54,7 @@ BOOL timerActive = TRUE;
         
         [[[Game sharedGame] myself] setInGameID: [[[Game sharedGame] sessionController]  addPlayerToSession:[[Game sharedGame] sessionID]]];
 
+//        [[[Game sharedGame] myself] setName: [NSString stringWithFormat:@"%ld %@",(long)[[[Game sharedGame] myself] inGameID], [[[Game sharedGame] myself] name]]];
     }
     
     sessionIDLabel.text = [NSString stringWithFormat:@"ID: %lu", (unsigned long)[[Game sharedGame] sessionID]];

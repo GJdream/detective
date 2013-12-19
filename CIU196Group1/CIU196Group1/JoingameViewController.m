@@ -66,6 +66,7 @@
     
     if(inGameID){
         [[[Game sharedGame] myself] setInGameID: inGameID];
+//        [[[Game sharedGame] myself] setName: [NSString stringWithFormat:@"%ld %@",(long)[[[Game sharedGame] myself] inGameID], [[[Game sharedGame] myself] name]]];
         [self performSegueWithIdentifier:@"joinGame" sender:self];
     }
     else{

@@ -260,6 +260,8 @@ int i = 0, turn = 0;
                 news= [NSString stringWithFormat:@"%@ and %@", news, [[self heroAtIndex:i] name]];
             [[self heroAtIndex:i] setIsAlive: FALSE];
             
+            
+            NSLog(@"died inGameID: %d, myself inGameID: %d",[[self heroAtIndex:i] inGameID], [self.myself inGameID]);
             if ([[self heroAtIndex:i] inGameID] == [self.myself inGameID]) {
                 [self.myself setIsAlive:FALSE];
             }

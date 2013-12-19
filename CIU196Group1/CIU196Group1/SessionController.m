@@ -176,7 +176,7 @@ Player* player;
     NSString* serverResponse = [self queryAppServerWithAction:@"sessionready" withSessionID:[[Game sharedGame] sessionID]];
     
     @try {
-        NSLog(@"isGameReady ok: %d",  [serverResponse integerValue]);
+//        NSLog(@"isGameReady ok: %d",  [serverResponse integerValue]);
         return [serverResponse boolValue];
     }
     @catch (NSException *e) {
@@ -195,7 +195,7 @@ Player* player;
 - (bool) isChanged {
     NSString* serverResponse = [self queryAppServerWithAction:@"ischanged" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
     @try {
-        NSLog(@"isChanged ok: %d",  [serverResponse boolValue]);
+//        NSLog(@"isChanged ok: %d",  [serverResponse boolValue]);
         return [serverResponse boolValue];
     }
     @catch (NSException *e) {
@@ -207,7 +207,7 @@ Player* player;
 // clears change flags on server
 - (void) changeCleared {
     NSString* serverResponse = [self queryAppServerWithAction:@"changecleared" withSessionID:[[Game sharedGame] sessionID] withPlayerID:[[[Game sharedGame] myself] inGameID]];
-    NSLog(@"changeCleared: %@", serverResponse);
+//    NSLog(@"changeCleared: %@", serverResponse);
 
 }
 
