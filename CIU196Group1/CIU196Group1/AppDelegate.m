@@ -52,6 +52,8 @@ NSString *const SCSessionStateChangedNotification =
 //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //    [self.window setRootViewController:navigationController];
 //    [self.window setBackgroundColor:[UIColor whiteColor]];
+    
+//    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     [self.window makeKeyAndVisible];
     
     

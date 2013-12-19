@@ -33,6 +33,20 @@
 		35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35713894184679AC00E7E8D1 /* SCLoginViewController.m */; };
 		3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389A18468A6C00E7E8D1 /* MenuViewController.m */; };
 		3571389E184691D600E7E8D1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3571389D184691D600E7E8D1 /* SettingViewController.m */; };
+		357C7DAE18625BBA00B7571C /* MyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 357C7DAD18625BBA00B7571C /* MyLabel.m */; };
+		357C7DB5186263CD00B7571C /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 357C7DB4186263CD00B7571C /* MyButton.m */; };
+		357C7DBD1862699200B7571C /* background_brown.png in Resources */ = {isa = PBXBuildFile; fileRef = 357C7DB61862699200B7571C /* background_brown.png */; };
+		357C7DBF1862699200B7571C /* background_oldstyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 357C7DB81862699200B7571C /* background_oldstyle.png */; };
+		357C7DC01862699200B7571C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 357C7DB91862699200B7571C /* background.png */; };
+		357C7DC11862699200B7571C /* background_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 357C7DBA1862699200B7571C /* background_green.png */; };
+		357C7DC21862699200B7571C /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = 357C7DBB1862699200B7571C /* background2.png */; };
+		357C7DC31862699200B7571C /* background3.png in Resources */ = {isa = PBXBuildFile; fileRef = 357C7DBC1862699200B7571C /* background3.png */; };
+		357C7DC61862952F00B7571C /* MyMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 357C7DC51862952F00B7571C /* MyMarker.m */; };
+		357C980C1862571A00BF5B0D /* BlackWolf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 357C98071862571A00BF5B0D /* BlackWolf.ttf */; };
+		357C980D1862571A00BF5B0D /* Plain&Simple.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 357C98081862571A00BF5B0D /* Plain&Simple.ttf */; };
+		357C980E1862571A00BF5B0D /* SnackerComic_PerosnalUseOnly.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 357C98091862571A00BF5B0D /* SnackerComic_PerosnalUseOnly.ttf */; };
+		357C980F1862571A00BF5B0D /* The Lovers.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 357C980A1862571A00BF5B0D /* The Lovers.ttf */; };
+		357C98101862571A00BF5B0D /* YouRookMarbelous.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 357C980B1862571A00BF5B0D /* YouRookMarbelous.ttf */; };
 		35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A4071859C08A00CC0FF7 /* TestViewController.m */; };
 		35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A40A1859CAEA00CC0FF7 /* TestModalSubViewController.m */; };
 		35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E5A410185A0FA800CC0FF7 /* TestPushSubViewController.m */; };
@@ -103,6 +117,23 @@
 		3571389A18468A6C00E7E8D1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		3571389C184691D600E7E8D1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		3571389D184691D600E7E8D1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		357C7DAC18625BBA00B7571C /* MyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLabel.h; sourceTree = "<group>"; };
+		357C7DAD18625BBA00B7571C /* MyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLabel.m; sourceTree = "<group>"; };
+		357C7DB3186263CD00B7571C /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
+		357C7DB4186263CD00B7571C /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
+		357C7DB61862699200B7571C /* background_brown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_brown.png; path = images/background/background_brown.png; sourceTree = "<group>"; };
+		357C7DB81862699200B7571C /* background_oldstyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_oldstyle.png; path = images/background/background_oldstyle.png; sourceTree = "<group>"; };
+		357C7DB91862699200B7571C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = images/background/background.png; sourceTree = "<group>"; };
+		357C7DBA1862699200B7571C /* background_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_green.png; path = images/background/background_green.png; sourceTree = "<group>"; };
+		357C7DBB1862699200B7571C /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background2.png; path = images/background/background2.png; sourceTree = "<group>"; };
+		357C7DBC1862699200B7571C /* background3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background3.png; path = images/background/background3.png; sourceTree = "<group>"; };
+		357C7DC41862952F00B7571C /* MyMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMarker.h; sourceTree = "<group>"; };
+		357C7DC51862952F00B7571C /* MyMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMarker.m; sourceTree = "<group>"; };
+		357C98071862571A00BF5B0D /* BlackWolf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = BlackWolf.ttf; path = images/fonts/BlackWolf.ttf; sourceTree = "<group>"; };
+		357C98081862571A00BF5B0D /* Plain&Simple.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Plain&Simple.ttf"; path = "images/fonts/Plain&Simple.ttf"; sourceTree = "<group>"; };
+		357C98091862571A00BF5B0D /* SnackerComic_PerosnalUseOnly.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SnackerComic_PerosnalUseOnly.ttf; path = images/fonts/SnackerComic_PerosnalUseOnly.ttf; sourceTree = "<group>"; };
+		357C980A1862571A00BF5B0D /* The Lovers.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "The Lovers.ttf"; path = "images/fonts/The Lovers.ttf"; sourceTree = "<group>"; };
+		357C980B1862571A00BF5B0D /* YouRookMarbelous.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = YouRookMarbelous.ttf; path = images/fonts/YouRookMarbelous.ttf; sourceTree = "<group>"; };
 		35E5A4061859C08A00CC0FF7 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		35E5A4071859C08A00CC0FF7 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		35E5A4091859CAEA00CC0FF7 /* TestModalSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModalSubViewController.h; sourceTree = "<group>"; };
@@ -195,6 +226,12 @@
 				352AF014184FB40900C7C14D /* Game.m */,
 				F6571F93185B4001004A576A /* Utilities.h */,
 				F6571F94185B4001004A576A /* Utilities.m */,
+				357C7DAC18625BBA00B7571C /* MyLabel.h */,
+				357C7DAD18625BBA00B7571C /* MyLabel.m */,
+				357C7DB3186263CD00B7571C /* MyButton.h */,
+				357C7DB4186263CD00B7571C /* MyButton.m */,
+				357C7DC41862952F00B7571C /* MyMarker.h */,
+				357C7DC51862952F00B7571C /* MyMarker.m */,
 			);
 			name = Classes;
 			path = ..;
@@ -203,6 +240,12 @@
 		352AF010184B8FD800C7C14D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				357C7DB61862699200B7571C /* background_brown.png */,
+				357C7DB81862699200B7571C /* background_oldstyle.png */,
+				357C7DB91862699200B7571C /* background.png */,
+				357C7DBA1862699200B7571C /* background_green.png */,
+				357C7DBB1862699200B7571C /* background2.png */,
+				357C7DBC1862699200B7571C /* background3.png */,
 				F6D84AAC1861BA8F003D52FB /* page1.png */,
 				F6D84AAD1861BA8F003D52FB /* page2.png */,
 				F6771D901861CF2A0056A22E /* page3.png */,
@@ -255,6 +298,7 @@
 				352AF0071848948A00C7C14D /* Classes */,
 				352AF0031847F89300C7C14D /* ViewControllers */,
 				352AF010184B8FD800C7C14D /* Images */,
+				357C98111862572400BF5B0D /* fonts */,
 				3571381B18456E7100E7E8D1 /* Images.xcassets */,
 				3571380718456E7000E7E8D1 /* Supporting Files */,
 			);
@@ -288,6 +332,18 @@
 				3571382B18456E7100E7E8D1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		357C98111862572400BF5B0D /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				357C98071862571A00BF5B0D /* BlackWolf.ttf */,
+				357C98081862571A00BF5B0D /* Plain&Simple.ttf */,
+				357C98091862571A00BF5B0D /* SnackerComic_PerosnalUseOnly.ttf */,
+				357C980A1862571A00BF5B0D /* The Lovers.ttf */,
+				357C980B1862571A00BF5B0D /* YouRookMarbelous.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,15 +425,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				357C980E1862571A00BF5B0D /* SnackerComic_PerosnalUseOnly.ttf in Resources */,
 				3571381C18456E7100E7E8D1 /* Images.xcassets in Resources */,
+				357C98101862571A00BF5B0D /* YouRookMarbelous.ttf in Resources */,
+				357C980F1862571A00BF5B0D /* The Lovers.ttf in Resources */,
+				357C7DC31862699200B7571C /* background3.png in Resources */,
+				357C980D1862571A00BF5B0D /* Plain&Simple.ttf in Resources */,
 				F629A1091861DE1C00B6692B /* page6.png in Resources */,
 				F6D84AAE1861BA8F003D52FB /* page1.png in Resources */,
+				357C980C1862571A00BF5B0D /* BlackWolf.ttf in Resources */,
 				352AF012184B8FED00C7C14D /* alien.png in Resources */,
 				3571380B18456E7000E7E8D1 /* InfoPlist.strings in Resources */,
+				357C7DC01862699200B7571C /* background.png in Resources */,
+				357C7DC21862699200B7571C /* background2.png in Resources */,
 				3571381418456E7100E7E8D1 /* Main.storyboard in Resources */,
 				F629A1081861DE1C00B6692B /* page5.png in Resources */,
 				F629A1071861DE1C00B6692B /* page4.png in Resources */,
+				357C7DBD1862699200B7571C /* background_brown.png in Resources */,
+				357C7DC11862699200B7571C /* background_green.png in Resources */,
 				F629A10A1861DE1C00B6692B /* page7.png in Resources */,
+				357C7DBF1862699200B7571C /* background_oldstyle.png in Resources */,
 				F6D84AAF1861BA8F003D52FB /* page2.png in Resources */,
 				F6771D911861CF2A0056A22E /* page3.png in Resources */,
 			);
@@ -407,6 +474,8 @@
 				354A229A1854FC6900B57DD3 /* JoingameViewController.m in Sources */,
 				35E5A411185A0FA800CC0FF7 /* TestPushSubViewController.m in Sources */,
 				35713895184679AC00E7E8D1 /* SCLoginViewController.m in Sources */,
+				357C7DAE18625BBA00B7571C /* MyLabel.m in Sources */,
+				357C7DC61862952F00B7571C /* MyMarker.m in Sources */,
 				354A2294184FDD2200B57DD3 /* ProfileViewController.m in Sources */,
 				35E5A4081859C08A00CC0FF7 /* TestViewController.m in Sources */,
 				3571389B18468A6C00E7E8D1 /* MenuViewController.m in Sources */,
@@ -414,6 +483,7 @@
 				352AF00D184A3D9000C7C14D /* PlayerCell.m in Sources */,
 				F604D0291861B91C00CAD893 /* ViewController.m in Sources */,
 				352AF0061848948400C7C14D /* Player.m in Sources */,
+				357C7DB5186263CD00B7571C /* MyButton.m in Sources */,
 				35E5A40B1859CAEA00CC0FF7 /* TestModalSubViewController.m in Sources */,
 				F604D0261861B87C00CAD893 /* TutorialContentViewController.m in Sources */,
 				352AF00A1848A01E00C7C14D /* NewGameViewController.m in Sources */,

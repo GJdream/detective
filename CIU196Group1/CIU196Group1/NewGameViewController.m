@@ -91,6 +91,8 @@ BOOL timerActive = TRUE;
     if([[Game sharedGame] waiting]){
         if ([[Game sharedGame] host] == [[[Game sharedGame] myself] inGameID]) {
             [self.startButton setHidden:FALSE];
+            
+            //TODO: change it back to 3 for real, 1 for test
             if ([[Game sharedGame] count] >= 3) {
                 [self.startButton setEnabled:TRUE];
             }
@@ -101,7 +103,6 @@ BOOL timerActive = TRUE;
     } else{
         [self.gameNavButton setEnabled:TRUE];
     }
-    
     
     [self.playerTable reloadData];
 }
@@ -208,7 +209,7 @@ BOOL timerActive = TRUE;
 // this method is only availble to the host since it is where the button is only visible
 - (IBAction)startButtonClicked:(id)sender {
     
-    [[[Game sharedGame] sessionController] startGame];
+    [[[Game sharedGame] sessionController] startGame]; //TOTEST: check if this is setting the ready flag to true, stopped working tonight
     
     //This line actaully allows use to be first one on sync phase
     [[Game sharedGame] setWaiting:FALSE];

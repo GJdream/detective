@@ -26,9 +26,11 @@
 @property (nonatomic, strong) NSMutableArray *order;
 @property (nonatomic, strong) NSString *news;
 @property BOOL turnFinished;
+@property NSInteger whoseTurn;
 @property NSInteger targetID;
 @property NSInteger syncTime; //NOT used due to lacking millisecond precision
 @property NSInteger winningCondition;
+
 
 -(BOOL)saveChanges;
 - (void)reset;

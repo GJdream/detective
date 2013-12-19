@@ -10,7 +10,7 @@
 
 
 @implementation Game
-@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, targetID, syncTime, winningCondition;
+@synthesize myself = profileData, heroes, sessionID, host, waiting, sessionController, timer, order, news, turnFinished, whoseTurn,targetID, syncTime, winningCondition;
 
 
 static Game* _sharedGame = nil;
@@ -41,6 +41,7 @@ static Game* _sharedGame = nil;
         syncTime = 0;
         targetID = 100;
         winningCondition = 0;
+        whoseTurn = -1;
     }
     return self;
 }
@@ -55,6 +56,7 @@ static Game* _sharedGame = nil;
     syncTime = 0;
     targetID = 100;
     winningCondition = 0;
+    whoseTurn = -1;
 }
 
 - (void) endGame{
@@ -62,7 +64,8 @@ static Game* _sharedGame = nil;
     syncTime = 0;
     targetID = 100;
     winningCondition = 0;
-//    [timer invalidate];
+    whoseTurn = -1;
+   [timer invalidate];
 }
 
 #define kFileName @"Profile.data"
@@ -170,6 +173,7 @@ NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
     i = 0;
     targetID = 100;
     [self setTurnFinished:FALSE];
+    [self setWhoseTurn:-1];
     
     //countDone preparation time for a turn
     [self startTimer: prepareTime]; //TODO change to syncTime
@@ -183,17 +187,30 @@ NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 int i = 0, turn = 0;
 - (void)takeTurn{
     if(i < [[self order] count]){
-        turn = [[[self order] objectAtIndex: i] intValue];
-        news = [NSString stringWithFormat:@"%@'s turn", [[self heroAtIndex:turn] name]];
-
-        //speech time
-        [self startTimer: speechTime];
-        
+        while(1){
+            turn = [[[self order] objectAtIndex: i] intValue];
+            
+            
+            //TOTEST: skip the died person
+            if ([[self heroAtIndex:turn] isAlive]) {
+                [self setWhoseTurn:turn];
+                
+                news = [NSString stringWithFormat:@"%@'s turn", [[self heroAtIndex:turn] name]];
+                
+                //speech time
+                [self startTimer: speechTime];
+                break;
+            }
+            else{
+                i++;
+            }
+        }
         i++;
     }
     else{
         news = @"Select a target to act"; //TODO should be specified with the roles
         [self setTurnFinished:TRUE]; //TODO check this to show action button
+        [self setWhoseTurn:-1];
         
         //if no action commited, get status and start new turn
         [self performSelector:@selector(commitcommit:) withObject: nil afterDelay:actionTime];

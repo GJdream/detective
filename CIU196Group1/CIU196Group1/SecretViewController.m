@@ -10,6 +10,9 @@
 #import "Game.h"
 
 @interface SecretViewController ()
+
+@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
+
 @property (strong, nonatomic) IBOutlet UILabel *roleLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *clueLabel;
@@ -45,6 +48,8 @@
         default:
             break;
     }
+    
+    [self.profileImage setImage: [[[Game sharedGame] myself] image]];
     
     self.roleLabel.text = [NSString stringWithFormat:@"Role: %@", role];
     

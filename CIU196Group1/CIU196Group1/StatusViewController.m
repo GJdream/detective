@@ -8,6 +8,7 @@
 
 #import "StatusViewController.h"
 #import "Game.h"
+#import "MyMarker.h"
 @interface StatusViewController ()
 
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
@@ -32,13 +33,15 @@
 @property (strong, nonatomic) IBOutlet UIImageView *player10;
 @property (strong, nonatomic) IBOutlet UIImageView *player11;
 @property (strong, nonatomic) IBOutlet UIImageView *player12;
-@property (strong, nonatomic) IBOutlet UIImageView *player13;
+
+@property (strong, nonatomic) IBOutlet MyMarker *turnMarker;
+
 
 @end
 
 @implementation StatusViewController
 
-@synthesize timerLabel, infoLabel, actionView, targetLable, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13;
+@synthesize timerLabel, infoLabel, actionView, targetLable, skipButton, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, turnMarker;
 
 
 
@@ -59,7 +62,7 @@ NSTimer *loopTimer;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    players = [NSMutableArray arrayWithObjects: player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player12, player13,nil];
+    players = [NSMutableArray arrayWithObjects: player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player12 ,nil];
     
     
     UIImageView *tempIV;
@@ -72,6 +75,8 @@ NSTimer *loopTimer;
     [skipButton setHidden:TRUE];
     [skipButton setEnabled:FALSE];
     [actionView setHidden:TRUE];
+    
+   
     
     loopTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
                                    selector:@selector(loop) userInfo:nil repeats:YES];
@@ -99,7 +104,21 @@ NSInteger count;
         }
     }
     
-    if ([[Game sharedGame] turnFinished]) {
+    //visilize the turn
+    if ([[Game sharedGame] whoseTurn] >= 0) {
+        UIImageView *tempIV = (UIImageView*)[players objectAtIndex:[[Game sharedGame] whoseTurn]];;
+        
+        turnMarker.frame = CGRectMake(tempIV.frame.origin.x, tempIV.frame.origin.y, tempIV.frame.size.width, tempIV.frame.size.height); // position in the parent view and set the size of the button
+        
+        // add to a view
+        [self.view addSubview: turnMarker];
+    }
+    else{
+        [turnMarker removeFromSuperview];
+    }
+    
+    // TOTEST: seems we are not updating the myself.isalive, so need to check this
+    if ([[Game sharedGame] turnFinished] && [[[Game sharedGame] heroAtIndex:[[[Game sharedGame] myself] inGameID]] isAlive]) {
         //only case we show the action buttons
         [actionView setHidden:FALSE];
         UIImageView* tempIV;
