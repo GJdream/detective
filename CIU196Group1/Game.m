@@ -163,10 +163,10 @@ NSInteger length;
 
 
 
-//NSInteger prepareTime = 15, speechTime = 5, actionTime = 10;
+NSInteger prepareTime = 30, speechTime = 35, actionTime = 20;
 
 //short timer test
-NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
 
 - (void) startATurn{
     
@@ -217,7 +217,7 @@ int i = 0, turn = 0;
         //after 1 sec, refresh the data
         
         [self startTimer: actionTime];
-        [self performSelector:@selector(refreshStatus:) withObject:nil afterDelay:(actionTime + 1)];
+        [self performSelector:@selector(refreshStatus:) withObject:nil afterDelay:(actionTime + 2)];
     }
 }
 
