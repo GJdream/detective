@@ -64,7 +64,7 @@ BOOL timerActive = TRUE;
     [[[Game sharedGame] sessionController] changeCleared];
     
     
-    counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
+    counterLabel.text =  [NSString stringWithFormat:@"%d player(s) joined", [[Game sharedGame] count]];
     // start polling from the server
     [self startUpdating];
     
