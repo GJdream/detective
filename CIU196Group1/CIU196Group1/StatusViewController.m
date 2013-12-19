@@ -118,7 +118,7 @@ NSInteger count;
     }
     
     // TOTEST: seems we are not updating the myself.isalive, so need to check this
-    if ([[Game sharedGame] turnFinished] && [[[Game sharedGame] heroAtIndex:[[[Game sharedGame] myself] inGameID]] isAlive]) {
+    if ([[Game sharedGame] turnFinished] && [[[Game sharedGame] myself] isAlive]) {
         //only case we show the action buttons
         [actionView setHidden:FALSE];
         UIImageView* tempIV;
@@ -155,13 +155,13 @@ NSInteger count;
         }
         
         [loopTimer invalidate];
-        [[Game sharedGame] endGame];
     }
 }
 
 -(void)autoDismiss:(UIAlertView*)x{
 	[x dismissWithClickedButtonIndex:-1 animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
+    [[Game sharedGame] endGame];
 }
 
 - (void)didReceiveMemoryWarning

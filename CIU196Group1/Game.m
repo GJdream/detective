@@ -65,6 +65,7 @@ static Game* _sharedGame = nil;
     targetID = 100;
     winningCondition = 0;
     whoseTurn = -1;
+    [self.myself setIsAlive:TRUE];
    [timer invalidate];
 }
 
@@ -163,10 +164,10 @@ NSInteger length;
 
 
 
-NSInteger prepareTime = 20, speechTime = 15, actionTime = 20;
+//NSInteger prepareTime = 20, speechTime = 15, actionTime = 20;
 
 //short timer test
-//NSInteger prepareTime = 2, speechTime = 3, actionTime = 5;
+NSInteger prepareTime = 5, speechTime = 5, actionTime = 5;
 
 - (void) startATurn{
     
@@ -248,8 +249,8 @@ int i = 0, turn = 0;
     int deathFlag = 0;
     
     for (int i =0; i < heroes.count; i++) {
-        NSLog(@"the hero is Alive:%d", [[self heroAtIndex:i] isAlive]);
-        NSLog(@"the hero is Alive:%d", [(NSNumber*)[heroStatus objectAtIndex:i] integerValue]);
+//        NSLog(@"the hero is Alive:%d", [[self heroAtIndex:i] isAlive]);
+//        NSLog(@"the hero is Alive:%d", [(NSNumber*)[heroStatus objectAtIndex:i] integerValue]);
         
         if ([[self heroAtIndex:i] isAlive] && ![(NSNumber*)[heroStatus objectAtIndex:i] integerValue]) {
             deathFlag++;
@@ -259,7 +260,9 @@ int i = 0, turn = 0;
                 news= [NSString stringWithFormat:@"%@ and %@", news, [[self heroAtIndex:i] name]];
             [[self heroAtIndex:i] setIsAlive: FALSE];
             
-            
+            if ([[self heroAtIndex:i] inGameID] == [self.myself inGameID]) {
+                [self.myself setIsAlive:FALSE];
+            }
         }
     }
     
