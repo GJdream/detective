@@ -61,7 +61,7 @@
 
 - (IBAction)imageClicked:(id)sender {
     
-    NSLog(@"image clicked");
+//    NSLog(@"image clicked");
     
     imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;

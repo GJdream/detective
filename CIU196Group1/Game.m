@@ -160,8 +160,6 @@ NSInteger length;
         if(!turnFinished)
             [self takeTurn];
     }
-    
-    NSLog(@"am I alive: %d", [self.myself isAlive]);
 }
 
 
@@ -227,7 +225,7 @@ int i = 0, turn = 0;
 - (void)commitcommit : (id) sender{
     [sessionController commitAction: [[Game sharedGame] targetID]];
     
-    news = @"calculating...";
+    news = @"tallying...";
 }
 
 

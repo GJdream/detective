@@ -129,7 +129,7 @@ BOOL timerActive = TRUE;
         }
         
         
-        counterLabel.text =  [NSString stringWithFormat:@"%d player joined the game", [[Game sharedGame] count]];
+        counterLabel.text =  [NSString stringWithFormat:@"%d player(s) joined the game", [[Game sharedGame] count]];
         
         [self.playerTable reloadData];
 
